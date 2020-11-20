@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "528451767481",
+    "firebase_url": "https://sheheroes-d45f8.firebaseio.com",
+    "project_id": "sheheroes-d45f8",
+    "storage_bucket": "sheheroes-d45f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528451767481:android:cd02bf28a726b304475f68",
+        "android_client_info": {
+          "package_name": "shagungoyal.safety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528451767481-3r2nms7jl6t7jisherin07ggjbgeagf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZPaWqH9HcrSQuG0E58DhcEHST6vNcQ30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528451767481-3r2nms7jl6t7jisherin07ggjbgeagf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
