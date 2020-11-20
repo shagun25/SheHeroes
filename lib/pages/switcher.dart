@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flash_animation/flash_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:safety/pages/emergency_dashboard.dart';
 import 'package:safety/shared/widgets/sos_button.dart';
 import 'package:blobs/blobs.dart';
 import 'package:avatar_glow/avatar_glow.dart';
@@ -124,8 +125,8 @@ class Switcher extends StatelessWidget {
               FlatButton(
                 autofocus: false,
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed('Emergency_Dashboard');
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Hom()));
                 },
                 child: Stack(
                   children: [

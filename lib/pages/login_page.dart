@@ -65,15 +65,10 @@ class _LoginPageState extends State<LoginPage>
       print(e);
     }
     print("signin successfully!!");
+
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => loginEmailController.text == "user" &&
-                  loginPasswordController.text == "123"
-              ? Switcher()
-              : Dialog(
-                  child: Text("Authentication Details didn't match"),
-                )),
+      MaterialPageRoute(builder: (context) => Switcher()),
     );
   }
 
@@ -373,10 +368,31 @@ class _LoginPageState extends State<LoginPage>
                       ),
                     ),
                     onPressed: () {
-                      showInSnackBar("Signing In.. please wait");
-                      Future.delayed(Duration(seconds: 1)).then((value) =>
-                          Navigator.of(context)
-                              .pushReplacementNamed('Switcher'));
+                      if (loginEmailController.text != "user") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dialog(
+                                      child: Text(
+                                          "Authentication Details didn't match\nEmain didn't match!"),
+                                    )));
+                      }
+                      if (loginPasswordController.text != '123') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dialog(
+                                      child: Text(
+                                          "Authentication Details didn't match\nPassword didn't match!"),
+                                    )));
+                      }
+                      if (loginEmailController.text == "user" &&
+                          loginPasswordController.text == "123") {
+                        showInSnackBar("Signing In.. please wait");
+                        Future.delayed(Duration(seconds: 1)).then((value) =>
+                            Navigator.of(context)
+                                .pushReplacementNamed('Switcher'));
+                      }
                     }),
               ),
             ],
@@ -396,101 +412,6 @@ class _LoginPageState extends State<LoginPage>
                       fontSize: 16.0,
                       fontFamily: "WorkSansMedium"),
                 )),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: new LinearGradient(
-                        colors: [
-                          bg,
-                          Colors.pink,
-                        ],
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 1.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                  ),
-                  width: 100.0,
-                  height: 2.0,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                  child: Text(
-                    "Or",
-                    style: TextStyle(
-                        color: Colors.pink,
-                        fontSize: 16.0,
-                        fontFamily: "WorkSansMedium"),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: new LinearGradient(
-                        colors: [
-                          Colors.pink,
-                          bg,
-                        ],
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 1.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                  ),
-                  width: 100.0,
-                  height: 2.0,
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 10.0, right: 40.0),
-                child: GestureDetector(
-                  onTap: () => showInSnackBar("Facebook button pressed"),
-                  child: AvatarGlow(
-                    endRadius: 50.0,
-                    glowColor: Colors.blueAccent,
-                    child: Container(
-                      padding: const EdgeInsets.all(15.0),
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: new Icon(
-                        FontAwesomeIcons.facebookF,
-                        color: Color(0xFF0084ff),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  onTap: () => showInSnackBar("Google button pressed"),
-                  child: AvatarGlow(
-                    endRadius: 50.0,
-                    glowColor: Colors.red,
-                    child: Container(
-                      padding: const EdgeInsets.all(15.0),
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: new Icon(
-                        FontAwesomeIcons.google,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),

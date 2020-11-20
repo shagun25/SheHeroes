@@ -156,7 +156,10 @@ class _SpeechScreenState extends State<SpeechScreen> {
         );
       }
     } else {
-      setState(() => _isListening = false);
+      setState(() {
+        _isListening = false;
+        Navigator.of(context).pop(Homes());
+      });
       _speech.stop();
     }
   }

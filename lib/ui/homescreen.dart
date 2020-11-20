@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -7,12 +6,13 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:animated_widgets/animated_widgets.dart';
-import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/center_map.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:safety/pages/self_defence.dart';
 
 class Homes extends StatefulWidget {
   // static AudioCache player = AudioCache();
@@ -61,13 +61,22 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      'Dashboard',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 50,
-                          color: HexColor("#ea6a88")),
-                    ),
+                    ScaleAnimatedTextKit(
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                        text: [
+                          "Dashboard",
+                        ],
+                        textStyle: TextStyle(
+                            fontSize: 50.0,
+                            fontFamily: "Canterbury",
+                            color: HexColor("#ea6a88"),
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.start,
+                        alignment: AlignmentDirectional
+                            .topStart // or Alignment.topLeft
+                        ),
                   ],
                 ),
               ),
@@ -111,7 +120,31 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                           outerCircleColor: Colors.white30,
                           origin: Offset(0, 0),
                           rotateMode: RotateMode.onlyChildrenRotate,
-                          centerWidget: HomePage(),
+                          centerWidget: InkWell(
+                            onDoubleTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyHomePage()));
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  // gradient: but,
+                                  borderRadius: BorderRadius.circular(1000),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white70,
+                                      blurRadius: 10.0, // soften the shadow
+                                      spreadRadius: 10.0, //extend the shadow
+                                      offset: Offset(
+                                        0.0, // Move to right 10  horizontally
+                                        0.0, // Move to bottom 5 Vertically
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                child: HomePage()),
+                          ),
                           children: [
                             // AvatarGlow(
                             //   endRadius: 70.0,
@@ -635,7 +668,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                   color: Colors.white70,
                                   onPressed: () => Navigator.push(
                                     context,
-                                    CupertinoPageRoute(
+                                    MaterialPageRoute(
                                         builder: (context) => Ho()),
                                   ),
                                   shape: RoundedRectangleBorder(
@@ -764,10 +797,10 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
         child: Icon(
           Icons.keyboard_voice,
           size: 40,
-          color: Colors.blue,
+          color: HexColor("#b72334"),
           // hoverColor: Colors.white,
         ),
-        backgroundColor: HexColor("#b72334"),
+        backgroundColor: Colors.white70,
       ),
     );
   }
