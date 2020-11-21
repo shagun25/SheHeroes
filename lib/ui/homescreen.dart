@@ -6,6 +6,8 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:safety/pages/cameraswitcher.dart';
+import 'package:safety/providers/camera_provider.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
@@ -44,6 +46,8 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
     return Scaffold(
       // backgroundColor: HexColor('#FFC3CF'),
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             gradient: RadialGradient(
                 colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')],
@@ -779,13 +783,58 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ), //(shake)
+                            AvatarGlow(
+                              endRadius: 70.0,
+                              glowColor: Colors.pink,
+                              child: Container(
+                                padding: EdgeInsets.all(0),
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    // color: Colors.transparent,
+                                    border: Border.all(
+                                        color: HexColor("#ea6a88"), width: 3)),
+                                child: RaisedButton(
+                                  elevation: 1,
+                                  color: Colors.white70,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CameraSwitcher()));
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.camera_alt,
+                                        size: 40,
+                                        color: HexColor("#b72334"),
+                                      ),
+                                      Text(
+                                        'Camera',
+                                        style: TextStyle(
+                                            color: HexColor("#b72334"),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
