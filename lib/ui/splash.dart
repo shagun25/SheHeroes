@@ -40,7 +40,7 @@ class _SplashState extends State<Splash> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(1000)),
                   child: new Image(
-                      width: 250.0,
+                      width: 251.0, //250
                       height: 191.0,
                       fit: BoxFit.fill,
                       image: new AssetImage('assets/SheHeroes.png')),
