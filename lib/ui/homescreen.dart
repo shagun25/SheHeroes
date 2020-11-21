@@ -187,55 +187,55 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                             //     ),
                             //   ),
                             // ), //(voice)
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: Hero(
-                                  tag: 'MAP',
-                                  child: RaisedButton(
-                                    elevation: 1,
-                                    color: Colors.white70,
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyHomePage(),
-                                          ));
-                                    },
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(
-                                          Icons.map,
-                                          size: 40,
-                                          color: HexColor("#b72334"),
-                                        ),
-                                        Text(
-                                          'Map',
-                                          style: TextStyle(
-                                              color: HexColor("#b72334"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ), //(Map)//
+                            // AvatarGlow(
+                            //   endRadius: 70.0,
+                            //   glowColor: Colors.pink,
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(0),
+                            //     width: 80,
+                            //     height: 80,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //         // color: Colors.transparent,
+                            //         border: Border.all(
+                            //             color: HexColor("#ea6a88"), width: 3)),
+                            //     child: Hero(
+                            //       tag: 'MAP',
+                            //       child: RaisedButton(
+                            //         elevation: 1,
+                            //         color: Colors.white70,
+                            //         onPressed: () {
+                            //           Navigator.push(
+                            //               context,
+                            //               MaterialPageRoute(
+                            //                 builder: (context) => MyHomePage(),
+                            //               ));
+                            //         },
+                            //         shape: RoundedRectangleBorder(
+                            //             borderRadius:
+                            //                 BorderRadius.circular(100)),
+                            //         child: Column(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.spaceEvenly,
+                            //           children: [
+                            //             Icon(
+                            //               Icons.map,
+                            //               size: 40,
+                            //               color: HexColor("#b72334"),
+                            //             ),
+                            //             Text(
+                            //               'Map',
+                            //               style: TextStyle(
+                            //                   color: HexColor("#b72334"),
+                            //                   fontSize: 12,
+                            //                   fontWeight: FontWeight.bold),
+                            //             )
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ), //(Map)//
                             AvatarGlow(
                               endRadius: 70.0,
                               glowColor: Colors.pink,
