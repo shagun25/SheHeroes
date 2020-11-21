@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:safety/shared/theme.dart' as Theme;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:safety/shared/bubble_indication_painter.dart';
@@ -9,6 +8,8 @@ import 'notes.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:safety/pages/switcher.dart';
+import 'dart:async';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -98,24 +99,48 @@ class _LoginPageState extends State<LoginPage>
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 75.0),
-                  child: AvatarGlow(
-                    endRadius: 100.0,
-                    glowColor: Colors.green,
-                    child: Container(
-                      height: 120,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(1000)),
-                      child: new Image(
-                          width: 250.0,
-                          height: 191.0,
-                          fit: BoxFit.fill,
-                          image: new AssetImage('assets/she-safe.png')),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 75.0),
+                      child: AvatarGlow(
+                        endRadius: 100.0,
+                        glowColor: HexColor("#ea6a88"),
+                        child: Container(
+                          height: 120,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(1000)),
+                          child: new Image(
+                              width: 250.0,
+                              height: 191.0,
+                              fit: BoxFit.fill,
+                              image: new AssetImage('assets/SheHeroes.png')),
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: ScaleAnimatedTextKit(
+                          onTap: () {
+                            print("Tap Event");
+                          },
+                          text: [
+                            "SheHeroes",
+                          ],
+                          textStyle: TextStyle(
+                              fontSize: 30.0,
+                              fontFamily: "Canterbury",
+                              color: HexColor("#ea6a88"),
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.start,
+                          alignment: AlignmentDirectional
+                              .topStart // or Alignment.topLeft
+                          ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
@@ -286,7 +311,7 @@ class _LoginPageState extends State<LoginPage>
                               color: Colors.black,
                               size: 22.0,
                             ),
-                            hintText: "Email Address",
+                            hintText: "Username",
                             hintStyle: TextStyle(
                                 fontFamily: "WorkSansSemiBold", fontSize: 17.0),
                           ),
@@ -456,7 +481,7 @@ class _LoginPageState extends State<LoginPage>
                               FontAwesomeIcons.user,
                               color: Colors.black,
                             ),
-                            hintText: "Name",
+                            hintText: "Username",
                             hintStyle: TextStyle(
                                 fontFamily: "WorkSansSemiBold", fontSize: 16.0),
                           ),
