@@ -15,6 +15,8 @@ import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/center_map.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:safety/pages/self_defence.dart';
+import 'package:safety/pages/center_map.dart';
+import 'package:location/location.dart';
 
 class Homes extends StatefulWidget {
   // static AudioCache player = AudioCache();
@@ -23,6 +25,8 @@ class Homes extends StatefulWidget {
 }
 
 class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
+  Location _location = Location();
+  LocationData l;
   final CallsAndMessagesService service = locator<CallsAndMessagesService>();
   final String number = "123456789";
   AnimationController _animationController;
@@ -473,6 +477,49 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ), //(Police)
+                            AvatarGlow(
+                              endRadius: 70.0,
+                              glowColor: Colors.pink,
+                              child: Container(
+                                padding: EdgeInsets.all(0),
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    // color: Colors.transparent,
+                                    border: Border.all(
+                                        color: HexColor("#ea6a88"), width: 3)),
+                                child: RaisedButton(
+                                  elevation: 1,
+                                  color: Colors.white70,
+                                  onPressed: () {
+                                    setState(() {
+                                      _location.onLocationChanged.listen;
+                                    });
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.local_parking,
+                                        size: 40,
+                                        color: HexColor("#b72334"),
+                                      ),
+                                      Text(
+                                        lat.toString(),
+                                        style: TextStyle(
+                                            color: HexColor("#b72334"),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                             AvatarGlow(
                               endRadius: 70.0,
                               glowColor: Colors.pink,
