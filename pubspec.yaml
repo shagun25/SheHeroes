@@ -59,11 +59,9 @@ dev_dependencies:
 
   flutter_open_whatsapp: ^0.1.2
 
-  youtube_player_flutter: ^7.0.0+7
-
+  google_maps_cluster_manager: ^0.2.0
   camera: ^0.5.8+5
   path: ^1.7.0
-  path_provider: ^1.6.11
 
   auto_size_text: ^2.1.0
 
@@ -80,7 +78,6 @@ dev_dependencies:
 #  flutter_facebook_login: ^3.0.0
   hexcolor: ^1.0.6
   flutter_zoom_drawer: ^1.0.4
-  avatar_glow: ^1.2.0
   blobs: ^1.2.0
   circular_reveal_animation: ^1.1.5
   circle_list: ^1.0.4
