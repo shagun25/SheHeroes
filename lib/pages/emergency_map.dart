@@ -1,113 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
+import 'dart:ui';
+import 'dart:async';
+
+class Place {
+  final String name;
+  final bool isClosed;
+
+  const Place({this.name, this.isClosed = false});
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return 'Place $name (closed : $isClosed)';
+  }
+}
 
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
-  GoogleMapController _controller;
-  Location _location = Location();
+class MyHomePageState extends State<MyHomePage> {
+  ClusterManager _manager;
 
-  MapType _defaultMapType = MapType.normal;
+  Completer<GoogleMapController> _controller = Completer();
 
-  void _changeMapType() {
-    setState(() {
-      _defaultMapType = _defaultMapType == MapType.normal
-          ? MapType.satellite
-          : MapType.normal;
-    });
-  }
+  Set<Marker> markers = Set();
 
-  void _onMapCreated(GoogleMapController _cntlr) {
-    getmarker();
-    _controller = _cntlr;
-    _location.onLocationChanged.listen((l) {
-      _controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(l.latitude, l.longitude),
-            zoom: 15,
-          ),
-        ),
-      );
-    });
-  }
+  final CameraPosition _parisCameraPosition =
+      CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12.0);
 
-  Set<Marker> _markers = {};
+  List<ClusterItem<Place>> items = [];
+
   @override
   void initState() {
+    print('${incidentdata['incidents'].length} dfghjnbvfgyhukmnbgh');
+    items = [
+      for (int i = 0; i < incidentdata['incidents'].length; i++)
+        ClusterItem<Place>(
+            LatLng(incidentdata['incidents'][i]['lat'],
+                incidentdata['incidents'][i]['lng']),
+            item: Place(name: 'New Place ${DateTime.now()}'))
+    ];
+    _manager = _initClusterManager();
     super.initState();
-
-    getmarker();
-    // getData();
   }
 
-  BitmapDescriptor markerimage;
+  ClusterManager _initClusterManager() {
+    return ClusterManager<Place>(items, _updateMarkers,
+        markerBuilder: _markerBuilder,
+        initialZoom: _parisCameraPosition.zoom,
+        stopClusteringZoom: 17.0);
+  }
 
-  void getmarker() {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(devicePixelRatio: 0.5), 'assets/markericon.jpg')
-        .then((onValue) {
-      markerimage = onValue;
+  void _updateMarkers(Set<Marker> markers) {
+    print('Updated ${markers.length} markers');
+    setState(() {
+      this.markers = markers;
     });
-    for (int i = 0; i < incidentdata['incidents'].length; i++) {
-      LatLng point = LatLng(incidentdata['incidents'][i]['lat'],
-          incidentdata['incidents'][i]['lng']);
-
-      _markers.add(Marker(
-          markerId: MarkerId(incidentdata['incidents'][i]['id']),
-          position: point,
-          icon: markerimage));
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    getmarker();
-    print('${_markers.length.toString()} jdfkjsdbjfdsbflsdbfl');
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            GoogleMap(
-              markers: _markers,
-              initialCameraPosition:
-                  CameraPosition(target: _initialcameraposition),
-              trafficEnabled: true,
-              onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-              compassEnabled: true,
-              mapToolbarEnabled: true,
-              rotateGesturesEnabled: true,
-              scrollGesturesEnabled: true,
-              zoomGesturesEnabled: true,
-              tiltGesturesEnabled: true,
-              mapType: _defaultMapType,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 80, right: 10),
-              alignment: Alignment.topRight,
-              child: Column(children: <Widget>[
-                FloatingActionButton(
-                    child: Icon(Icons.layers),
-                    elevation: 5,
-                    backgroundColor: Colors.teal[200],
-                    onPressed: () {
-                      _changeMapType();
-                      print('Changing the Map Type');
-                    }),
-              ]),
-            ),
-          ],
-        ),
+    return new Scaffold(
+      body: GoogleMap(
+          mapType: MapType.normal,
+          initialCameraPosition: _parisCameraPosition,
+          markers: markers,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+            _manager.setMapController(controller);
+          },
+          onCameraMove: _manager.onCameraMove,
+          onCameraIdle: _manager.updateMap),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('${incidentdata.length} qwertyuioplkjhgfdsazxcvbnm');
+          _manager.setItems(<ClusterItem<Place>>[
+            for (int i = 0; i < 150; i++)
+              ClusterItem<Place>(
+                  LatLng(incidentdata['incidents'][i]['lat'],
+                      incidentdata['incidents'][i]['lng']),
+                  item: Place(name: 'New Place ${DateTime.now()}'))
+          ]);
+        },
+        child: Icon(Icons.update),
       ),
     );
+  }
+
+  Future<Marker> Function(Cluster<Place>) get _markerBuilder =>
+      (cluster) async {
+        return Marker(
+          markerId: MarkerId(cluster.getId()),
+          position: cluster.location,
+          onTap: () {
+            print('---- $cluster');
+            cluster.items.forEach((p) => print(p));
+          },
+          icon: await _getMarkerBitmap(cluster.isMultiple ? 125 : 75,
+              text: cluster.isMultiple ? cluster.count.toString() : null),
+        );
+      };
+
+  Future<BitmapDescriptor> _getMarkerBitmap(int size, {String text}) async {
+    assert(size != null);
+
+    final PictureRecorder pictureRecorder = PictureRecorder();
+    final Canvas canvas = Canvas(pictureRecorder);
+    final Paint paint1 = Paint()..color = Colors.orange;
+    final Paint paint2 = Paint()..color = Colors.white;
+
+    canvas.drawCircle(Offset(size / 2, size / 2), size / 2.0, paint1);
+    canvas.drawCircle(Offset(size / 2, size / 2), size / 2.2, paint2);
+    canvas.drawCircle(Offset(size / 2, size / 2), size / 2.8, paint1);
+
+    if (text != null) {
+      TextPainter painter = TextPainter(textDirection: TextDirection.ltr);
+      painter.text = TextSpan(
+        text: text,
+        style: TextStyle(
+            fontSize: size / 3,
+            color: Colors.white,
+            fontWeight: FontWeight.normal),
+      );
+      painter.layout();
+      painter.paint(
+        canvas,
+        Offset(size / 2 - painter.width / 2, size / 2 - painter.height / 2),
+      );
+    }
+
+    final img = await pictureRecorder.endRecording().toImage(size, size);
+    final data = await img.toByteData(format: ImageByteFormat.png);
+
+    return BitmapDescriptor.fromBytes(data.buffer.asUint8List());
   }
 
   Map incidentdata = {
