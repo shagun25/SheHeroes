@@ -68,31 +68,58 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: CameraPosition(
-              target: LatLng(incidentdata['incidents'][0]['lat'],
-                  incidentdata['incidents'][0]['lng']),
-              zoom: 12.0),
-          markers: markers,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-            _manager.setMapController(controller);
-          },
-          onCameraMove: _manager.onCameraMove,
-          onCameraIdle: _manager.updateMap),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('${incidentdata.length} qwertyuioplkjhgfdsazxcvbnm');
-          _manager.setItems(<ClusterItem<Place>>[
-            for (int i = 0; i < 150; i++)
-              ClusterItem<Place>(
-                  LatLng(incidentdata['incidents'][i]['lat'],
-                      incidentdata['incidents'][i]['lng']),
-                  item: Place(name: 'New Place ${DateTime.now()}'))
-          ]);
-        },
-        child: Icon(Icons.update),
+      body: Stack(
+        children: [
+          GoogleMap(
+              buildingsEnabled: true,
+              compassEnabled: true,
+              mapToolbarEnabled: true,
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
+              rotateGesturesEnabled: true,
+              scrollGesturesEnabled: true,
+              tiltGesturesEnabled: true,
+              trafficEnabled: true,
+              zoomControlsEnabled: true,
+              zoomGesturesEnabled: true,
+              mapType: MapType.terrain,
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(incidentdata['incidents'][0]['lat'],
+                      incidentdata['incidents'][0]['lng']),
+                  zoom: 18.0),
+              markers: markers,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+                _manager.setMapController(controller);
+              },
+              onCameraMove: _manager.onCameraMove,
+              onCameraIdle: _manager.updateMap),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: FloatingActionButton(
+                    tooltip: "Tap to Refresh",
+                    onPressed: () {
+                      print(
+                          '${incidentdata.length} qwertyuioplkjhgfdsazxcvbnm');
+                      _manager.setItems(<ClusterItem<Place>>[
+                        for (int i = 0; i < 150; i++)
+                          ClusterItem<Place>(
+                              LatLng(incidentdata['incidents'][i]['lat'],
+                                  incidentdata['incidents'][i]['lng']),
+                              item: Place(name: 'New Place ${DateTime.now()}'))
+                      ]);
+                    },
+                    child: Icon(Icons.update),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
