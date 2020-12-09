@@ -43,11 +43,11 @@ Looking at the recent trends and the most powerful weapon with the humanity - te
   :email: Arsh22sahni@gmail.com<br/>
   :email: Sharma14001@gmail.com<br/>
   
-|ScreenShots|
-|---|
-|<img width="1440" alt="Screen Shot 2020-11-21 at 10 00 58 PM" src="https://user-images.githubusercontent.com/56549294/99883797-aa87d800-2c4f-11eb-9bdf-fe080280d319.png">|
-|<img width="1440" alt="Screen Shot 2020-11-21 at 10 00 45 PM" src="https://user-images.githubusercontent.com/56549294/99883798-abb90500-2c4f-11eb-881a-af84d9c75f1e.png">|
-|<img width="1440" alt="Screen Shot 2020-11-21 at 10 00 32 PM" src="https://user-images.githubusercontent.com/56549294/99883799-ac519b80-2c4f-11eb-8521-ebd283ce16a0.png">|
-|<img width="1440" alt="Screen Shot 2020-11-21 at 10 00 20 PM" src="https://user-images.githubusercontent.com/56549294/99883801-acea3200-2c4f-11eb-96b1-aea436439ede.png">|
-|<img width="1440" alt="Screen Shot 2020-11-21 at 10 00 06 PM" src="https://user-images.githubusercontent.com/56549294/99883803-ae1b5f00-2c4f-11eb-8a8e-85493ebd6aaf.png">|
+## :label: ScreenShots
+
+|||
+|---|---|
+|<h3 align="center">Authentication</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 58 PM" src="https://user-images.githubusercontent.com/56549294/99883797-aa87d800-2c4f-11eb-9bdf-fe080280d319.png">|<h3 align="center">Voice Assistant</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 45 PM" src="https://user-images.githubusercontent.com/56549294/99883798-abb90500-2c4f-11eb-881a-af84d9c75f1e.png">|
+|<h3 align="center">Emergency Dashboard</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 32 PM" src="https://user-images.githubusercontent.com/56549294/99883799-ac519b80-2c4f-11eb-8521-ebd283ce16a0.png">|<h3 align="center">Safe Dashboard</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 20 PM" src="https://user-images.githubusercontent.com/56549294/99883801-acea3200-2c4f-11eb-96b1-aea436439ede.png">|
+|<h3 align="center">Switcher</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 06 PM" src="https://user-images.githubusercontent.com/56549294/99883803-ae1b5f00-2c4f-11eb-8a8e-85493ebd6aaf.png">||
 
