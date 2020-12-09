@@ -1,22 +1,22 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:circle_list/circle_list.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'dart:math';
-import 'package:assets_audio_player/assets_audio_player.dart';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:avatar_glow/avatar_glow.dart';
+import 'package:circle_list/circle_list.dart';
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:location/location.dart';
 import 'package:safety/pages/cameraswitcher.dart';
-import 'package:safety/providers/camera_provider.dart';
+import 'package:safety/pages/center_map.dart';
+import 'package:safety/pages/emergency_map.dart';
+import 'package:safety/pages/nearby.dart';
+import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
-import 'package:safety/pages/emergency_map.dart';
-import 'package:safety/pages/center_map.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:safety/pages/self_defence.dart';
-import 'package:safety/pages/center_map.dart';
-import 'package:location/location.dart';
 
 class Homes extends StatefulWidget {
   // static AudioCache player = AudioCache();
@@ -460,45 +460,163 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ), //(sos)
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: RaisedButton(
-                                  elevation: 1,
-                                  color: Colors.white70,
-                                  onPressed: Constants.policeStaionFunction,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.local_parking,
-                                        size: 40,
-                                        color: HexColor("#b72334"),
-                                      ),
-                                      Text(
-                                        'Police',
-                                        style: TextStyle(
-                                            color: HexColor("#b72334"),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ), //(Police)
+                            // AvatarGlow(
+                            //   endRadius: 70.0,
+                            //   glowColor: Colors.pink,
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(0),
+                            //     width: 80,
+                            //     height: 80,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //         // color: Colors.transparent,
+                            //         border: Border.all(
+                            //             color: HexColor("#ea6a88"), width: 3)),
+                            //     child: RaisedButton(
+                            //       elevation: 1,
+                            //       color: Colors.white70,
+                            //       onPressed: Constants.hospitalFunction,
+                            //       shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(100)),
+                            //       child: Column(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceEvenly,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.local_parking,
+                            //             size: 40,
+                            //             color: HexColor("#b72334"),
+                            //           ),
+                            //           Text(
+                            //             'Hospital',
+                            //             style: TextStyle(
+                            //                 color: HexColor("#b72334"),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.bold),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ), //(hospital)
+                            // AvatarGlow(
+                            //   endRadius: 70.0,
+                            //   glowColor: Colors.pink,
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(0),
+                            //     width: 80,
+                            //     height: 80,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //         // color: Colors.transparent,
+                            //         border: Border.all(
+                            //             color: HexColor("#ea6a88"), width: 3)),
+                            //     child: RaisedButton(
+                            //       elevation: 1,
+                            //       color: Colors.white70,
+                            //       onPressed: Constants.ngoFunction,
+                            //       shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(100)),
+                            //       child: Column(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceEvenly,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.local_parking,
+                            //             size: 40,
+                            //             color: HexColor("#b72334"),
+                            //           ),
+                            //           Text(
+                            //             'NGO',
+                            //             style: TextStyle(
+                            //                 color: HexColor("#b72334"),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.bold),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ), //(NGO)
+                            // AvatarGlow(
+                            //   endRadius: 70.0,
+                            //   glowColor: Colors.pink,
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(0),
+                            //     width: 80,
+                            //     height: 80,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //         // color: Colors.transparent,
+                            //         border: Border.all(
+                            //             color: HexColor("#ea6a88"), width: 3)),
+                            //     child: RaisedButton(
+                            //       elevation: 1,
+                            //       color: Colors.white70,
+                            //       onPressed:
+                            //           Constants.publicParkingAreasFunction,
+                            //       shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(100)),
+                            //       child: Column(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceEvenly,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.local_parking,
+                            //             size: 40,
+                            //             color: HexColor("#b72334"),
+                            //           ),
+                            //           Text(
+                            //             'Public Parking Areas',
+                            //             style: TextStyle(
+                            //                 color: HexColor("#b72334"),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.bold),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ), //(Public Parking Areas)
+                            // AvatarGlow(
+                            //   endRadius: 70.0,
+                            //   glowColor: Colors.pink,
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(0),
+                            //     width: 80,
+                            //     height: 80,
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(100),
+                            //         // color: Colors.transparent,
+                            //         border: Border.all(
+                            //             color: HexColor("#ea6a88"), width: 3)),
+                            //     child: RaisedButton(
+                            //       elevation: 1,
+                            //       color: Colors.white70,
+                            //       onPressed: Constants.policeStaionFunction,
+                            //       shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(100)),
+                            //       child: Column(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceEvenly,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.local_parking,
+                            //             size: 40,
+                            //             color: HexColor("#b72334"),
+                            //           ),
+                            //           Text(
+                            //             'Police',
+                            //             style: TextStyle(
+                            //                 color: HexColor("#b72334"),
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.bold),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ), //(Police)
                             AvatarGlow(
                               endRadius: 70.0,
                               glowColor: Colors.pink,
@@ -872,6 +990,50 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
+                                            builder: (context) => NearBy()));
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.place,
+                                        size: 40,
+                                        color: HexColor("#b72334"),
+                                      ),
+                                      Text(
+                                        'NearBy',
+                                        style: TextStyle(
+                                            color: HexColor("#b72334"),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ), //(nearby)
+                            AvatarGlow(
+                              endRadius: 70.0,
+                              glowColor: Colors.pink,
+                              child: Container(
+                                padding: EdgeInsets.all(0),
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    // color: Colors.transparent,
+                                    border: Border.all(
+                                        color: HexColor("#ea6a88"), width: 3)),
+                                child: RaisedButton(
+                                  elevation: 1,
+                                  color: Colors.white70,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
                                             builder: (context) =>
                                                 CameraSwitcher()));
                                   },
@@ -897,7 +1059,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                               ),
-                            ),
+                            ), //(camera)
                           ],
                         ),
                       ),

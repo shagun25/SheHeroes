@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:safety/services/shake.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:geocoder/geocoder.dart';
 
 class Gradients {
   static ShakeDetector detector;
@@ -144,7 +144,39 @@ class Constants {
     // MapsLauncher.launchQuery(
     //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
   };
+  static Function hospitalFunction = () async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('hospital');
 
+    // MapsLauncher.launchQuery(
+    //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
+  };
+  static Function ngoFunction = () async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('women ngo');
+
+    // MapsLauncher.launchQuery(
+    //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
+  };
+  static Function publicParkingAreasFunction = () async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position);
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('Public Parking Areas');
+
+    // MapsLauncher.launchQuery(
+    //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
+  };
   static Function listenShake = () {
     Gradients.detector = ShakeDetector.autoStart(
       shakeThresholdGravity: 4.0,
