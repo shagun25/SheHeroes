@@ -170,7 +170,6 @@ class _HomePageState extends State<HomePage> {
   var url =
       'https://private-anon-c41e4e8ae7-crimeometer.apiary-mock.com/v1/incidents/crowdsourced-raw-data?lat=lat&lon=lon&distance=distance&datetime_ini=datetime_ini&datetime_end=datetime_end&page=page';
   var data;
-  Set<Marker> _markers = {};
   @override
   void initState() {
     super.initState();
@@ -179,27 +178,10 @@ class _HomePageState extends State<HomePage> {
         .then((onValue) {
       markerimage = onValue;
     });
-    getmarker();
     // getData();
   }
 
   BitmapDescriptor markerimage;
-
-  void getmarker() {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(devicePixelRatio: 5), 'assets/markericon.jpg')
-        .then((onValue) {
-      markerimage = onValue;
-    });
-    for (int i = 0; i < incidentdata['incidents'].length; i++) {
-      LatLng point = LatLng(incidentdata['incidents'][i]['lat'],
-          incidentdata['incidents'][i]['lng']);
-      _markers.add(Marker(
-          markerId: MarkerId(incidentdata['incidents'][i]['id']),
-          position: point,
-          icon: markerimage));
-    }
-  }
 
   CityData cd;
   getData() async {
@@ -231,21 +213,12 @@ class _HomePageState extends State<HomePage> {
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
     _location.onLocationChanged.listen((l) {
-      getmarker();
-      setState(() {
-        getmarker();
-        lat = l.latitude + random.nextInt(100) / 1000000;
-        lon = l.longitude + random.nextInt(100) / 1000000;
-        _markers.add(Marker(
-            markerId: MarkerId('my location'),
-            position: LatLng(lat, lon),
-            icon: markerimage));
-      });
       _controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            target: LatLng(l.latitude, l.longitude),
-            zoom: 15,
+            target: LatLng(incidentdata['incidents'][0]['lat'],
+                incidentdata['incidents'][0]['lng']),
+            zoom: 12,
           ),
         ),
       );
@@ -278,7 +251,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    getmarker();
     return FutureBuilder(
       future: getData(),
       builder: (context, snapshot) {
@@ -297,16 +269,17 @@ class _HomePageState extends State<HomePage> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(115),
                 child: GoogleMap(
-                    initialCameraPosition:
-                        CameraPosition(target: _initialcameraposition),
-                    trafficEnabled: true,
-                    onMapCreated: _onMapCreated,
-                    myLocationButtonEnabled: false,
-                    mapToolbarEnabled: false,
-                    myLocationEnabled: true,
-                    mapType: _defaultMapType,
-                    zoomControlsEnabled: false,
-                    markers: _markers),
+                  initialCameraPosition: CameraPosition(
+                      target: LatLng(incidentdata['incidents'][0]['lat'],
+                          incidentdata['incidents'][0]['lng'])),
+                  trafficEnabled: true,
+                  onMapCreated: _onMapCreated,
+                  myLocationButtonEnabled: false,
+                  mapToolbarEnabled: false,
+                  myLocationEnabled: false,
+                  mapType: _defaultMapType,
+                  zoomControlsEnabled: false,
+                ),
               ),
             ],
           ),

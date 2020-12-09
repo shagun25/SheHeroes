@@ -30,9 +30,6 @@ class MyHomePageState extends State<MyHomePage> {
 
   Set<Marker> markers = Set();
 
-  final CameraPosition _parisCameraPosition =
-      CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12.0);
-
   List<ClusterItem<Place>> items = [];
 
   @override
@@ -49,10 +46,15 @@ class MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  CameraPosition cameraPosition;
   ClusterManager _initClusterManager() {
+    cameraPosition = CameraPosition(
+        target: LatLng(incidentdata['incidents'][0]['lat'],
+            incidentdata['incidents'][0]['lng']),
+        zoom: 12.0);
     return ClusterManager<Place>(items, _updateMarkers,
         markerBuilder: _markerBuilder,
-        initialZoom: _parisCameraPosition.zoom,
+        initialZoom: cameraPosition.zoom,
         stopClusteringZoom: 17.0);
   }
 
@@ -68,7 +70,10 @@ class MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
       body: GoogleMap(
           mapType: MapType.normal,
-          initialCameraPosition: _parisCameraPosition,
+          initialCameraPosition: CameraPosition(
+              target: LatLng(incidentdata['incidents'][0]['lat'],
+                  incidentdata['incidents'][0]['lng']),
+              zoom: 12.0),
           markers: markers,
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
