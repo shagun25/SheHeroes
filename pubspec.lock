@@ -443,6 +443,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  hardware_buttons:
+    dependency: "direct dev"
+    description:
+      name: hardware_buttons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   hexcolor:
     dependency: "direct dev"
     description:
@@ -484,7 +491,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.7+14"
+    version: "0.6.7+15"
   image_picker_platform_interface:
     dependency: transitive
     description:

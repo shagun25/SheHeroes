@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:circle_list/circle_list.dart';
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sms/flutter_sms.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:location/location.dart';
 import 'package:safety/pages/cameraswitcher.dart';
@@ -26,9 +30,9 @@ class Homes extends StatefulWidget {
 
 class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
   Location _location = Location();
-  int currentPage=0;
+  int currentPage = 0;
   GlobalKey bottomNavigationKey = GlobalKey();
-  
+
   final CallsAndMessagesService service = locator<CallsAndMessagesService>();
   final String number = "123456789";
   AnimationController _animationController;
@@ -39,6 +43,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
   }
+
   // void _onTapped(int index){
   //   setState((){
   //     _currentIndex=index;
@@ -57,7 +62,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
   //    Navigator.push(
   //          context,
   //           MaterialPageRoute(
-  //            builder: (context) => NearBy())); 
+  //            builder: (context) => NearBy()));
   //   }
   // }
   void _runAnimation() async {
@@ -65,6 +70,14 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
       await _animationController.forward();
       await _animationController.reverse();
     }
+  }
+
+  static void _sendSMS(String message, List<String> recipents) async {
+    String _result = await sendSMS(message: message, recipients: recipents)
+        .catchError((onError) {
+      print(onError);
+    });
+    print(_result);
   }
 
   int incidentcount = 0;
@@ -406,8 +419,33 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                                                 BorderRadius
                                                                     .circular(
                                                                         2000.0)),
-                                                    onPressed: () =>
-                                                        service.sendSms(number),
+                                                    onPressed: () async {
+                                                      Position position =
+                                                          await Geolocator()
+                                                              .getCurrentPosition();
+
+                                                      final coordinates =
+                                                          new Coordinates(
+                                                              position.latitude,
+                                                              position
+                                                                  .longitude);
+                                                      var addresses = await Geocoder
+                                                          .local
+                                                          .findAddressesFromCoordinates(
+                                                              coordinates);
+                                                      var first =
+                                                          addresses.first;
+                                                      print(
+                                                          "${first.featureName} : ${first.addressLine}");
+                                                      String message =
+                                                          "Help! I'm in an emergency. I'm at (${first.featureName}, ${first.addressLine}).";
+                                                      List<String> recipents = [
+                                                        "8920532416"
+                                                      ];
+
+                                                      _sendSMS(
+                                                          message, recipents);
+                                                    },
                                                     child: Container(
                                                       padding: EdgeInsets.only(
                                                           left: 55, right: 55),
@@ -993,7 +1031,6 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ), //(shake)
-                        
                           ],
                         ),
                       ),
@@ -1005,8 +1042,11 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-       bottomNavigationBar: FancyBottomNavigation(
-         activeIconColor:Color(0xffb72334) ,
+      bottomNavigationBar: FancyBottomNavigation(
+        // activeIconColor: Color(0xffb72334),
+        inactiveIconColor: Color(0xffb72334),
+        barBackgroundColor: Colors.white70,
+        circleColor: Color(0xffb72334),
         tabs: [
           TabData(
               iconData: Icons.camera,
@@ -1015,22 +1055,18 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                 final FancyBottomNavigationState fState =
                     bottomNavigationKey.currentState;
                 fState.setPage(2);
-                 Navigator.push(
-        context,
-         MaterialPageRoute(
-        builder: (context) =>
-        CameraSwitcher()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CameraSwitcher()));
               }),
           TabData(
               iconData: Icons.keyboard_voice,
               title: "Voice",
-              onclick: () =>  Navigator.pushNamed(context, 'voice')),
+              onclick: () => Navigator.pushNamed(context, 'voice')),
           TabData(
               iconData: Icons.place,
               title: "Nearby",
               onclick: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => NearBy()))),
-          TabData(iconData: Icons.place, title: "Nearby")
         ],
         initialSelection: 1,
         key: bottomNavigationKey,
@@ -1040,26 +1076,26 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
           });
         },
       ),
-    //  bottomNavigationBar: BottomNavigationBar(
-    //    currentIndex: _currentIndex,
-    //   //  decoration: BoxDecoration(
-    //   //       gradient: RadialGradient(
-    //   //           colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')],
-    //   //           // begin: Alignment.topLeft,
-    //   //           // end: Alignment.bottomRight
-    //   //           radius: 1.5)),
-    //    onTap:_onTapped,
-    //   backgroundColor:Color(0xfff7bcb3),
-    //    iconSize: 35.0,
-    //    selectedItemColor: Color(0xffb72334),
-    //    unselectedItemColor:Color(0xffb72334),
-    //    items: [
-    //    BottomNavigationBarItem(icon: Icon(Icons.camera),label:""),
-    //    BottomNavigationBarItem(icon: Icon(Icons.keyboard_voice),label:""),
-    //    BottomNavigationBarItem(icon: Icon(Icons.place),label:"")
-    //  ],),
+      //  bottomNavigationBar: BottomNavigationBar(
+      //    currentIndex: _currentIndex,
+      //   //  decoration: BoxDecoration(
+      //   //       gradient: RadialGradient(
+      //   //           colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')],
+      //   //           // begin: Alignment.topLeft,
+      //   //           // end: Alignment.bottomRight
+      //   //           radius: 1.5)),
+      //    onTap:_onTapped,
+      //   backgroundColor:Color(0xfff7bcb3),
+      //    iconSize: 35.0,
+      //    selectedItemColor: Color(0xffb72334),
+      //    unselectedItemColor:Color(0xffb72334),
+      //    items: [
+      //    BottomNavigationBarItem(icon: Icon(Icons.camera),label:""),
+      //    BottomNavigationBarItem(icon: Icon(Icons.keyboard_voice),label:""),
+      //    BottomNavigationBarItem(icon: Icon(Icons.place),label:"")
+      //  ],),
       // bottomNavigationBar:Row(
-        
+
       //   children: [
       //     Expanded(
       //                 child: FloatingActionButton(
