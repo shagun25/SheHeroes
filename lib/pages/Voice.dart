@@ -1,16 +1,17 @@
 // import 'dart:html';
 import 'dart:async';
+
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:safety/pages/self_defence.dart';
-import 'package:safety/ui/homescreen.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:safety/services/calls_and_messages_service.dart';
+import 'package:safety/ui/homescreen.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class SpeechScreen extends StatefulWidget {
   @override
@@ -74,16 +75,19 @@ class _SpeechScreenState extends State<SpeechScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
+        backgroundColor: Color(0xffb72334),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
         animate: _isListening,
-        glowColor: Theme.of(context).primaryColor,
+        glowColor: Color(0xfffcbeac),
         endRadius: 75.0,
         duration: const Duration(milliseconds: 2000),
         repeatPauseDuration: const Duration(milliseconds: 100),
         repeat: true,
         child: FloatingActionButton(
+          backgroundColor: Color(0xffb72334),
+          foregroundColor: Colors.white70,
           onPressed: _listen,
           child: Icon(_isListening ? Icons.mic : Icons.mic_none),
         ),

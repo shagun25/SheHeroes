@@ -73,7 +73,7 @@ class _CameraScreenState extends State<PhotoCapture> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Click To Share'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color(0xffb72334),
       ),
       body: Container(
         child: SafeArea(
@@ -131,7 +131,7 @@ class _CameraScreenState extends State<PhotoCapture> {
           children: [
             FloatingActionButton(
                 child: Icon(Icons.camera),
-                backgroundColor: Colors.blueGrey,
+                backgroundColor: Color(0xffb72334),
                 onPressed: () {
                   _onCapturePressed(context);
                 })

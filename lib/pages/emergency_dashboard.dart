@@ -1,17 +1,21 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:circle_list/circle_list.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'dart:math';
-import 'package:assets_audio_player/assets_audio_player.dart';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_widgets/animated_widgets.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:avatar_glow/avatar_glow.dart';
+import 'package:circle_list/circle_list.dart';
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_map.dart';
+import 'package:safety/pages/nearby_places.dart';
+import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
-import 'package:safety/pages/center_map.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Hom extends StatefulWidget {
   // static AudioCache player = AudioCache();
@@ -23,7 +27,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   final String number = "123456789";
   final String email = "dancamdev@example.com";
-
+  int currentPage = 0;
+  GlobalKey bottomNavigationKey = GlobalKey();
   AnimationController _animationController;
   final assetsAudioPlayer = AssetsAudioPlayer();
   @override
@@ -701,17 +706,39 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, 'voice');
+        bottomNavigationBar: FancyBottomNavigation(
+          //activeIconColor:Color(0xffb72334) ,
+          inactiveIconColor: Color(0xffb72334),
+          barBackgroundColor: Colors.white70,
+          circleColor: Color(0xffb72334),
+          tabs: [
+            TabData(
+                iconData: Icons.camera,
+                title: "Camera",
+                onclick: () {
+                  final FancyBottomNavigationState fState =
+                      bottomNavigationKey.currentState;
+                  fState.setPage(2);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PhotoCapture()));
+                }),
+            TabData(
+                iconData: Icons.keyboard_voice,
+                title: "Voice",
+                onclick: () => Navigator.pushNamed(context, 'voice')),
+            TabData(
+                iconData: Icons.place,
+                title: "Nearby",
+                onclick: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => NearbyPlaces()))),
+          ],
+          initialSelection: 1,
+          key: bottomNavigationKey,
+          onTabChangedListener: (position) {
+            setState(() {
+              currentPage = position;
+            });
           },
-          child: Icon(
-            Icons.keyboard_voice,
-            size: 40,
-            color: HexColor("#b72334"),
-            // hoverColor: Colors.white,
-          ),
-          backgroundColor: Colors.white70,
         ),
       ),
     );
