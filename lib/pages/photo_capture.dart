@@ -1,38 +1,53 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:safety/pages/preview_screen.dart';
 
 class PhotoCapture extends StatefulWidget {
   PhotoCapture();
 
   @override
-  _PhotoCaptureState createState() => _PhotoCaptureState();
+  _CameraScreenState createState() => _CameraScreenState();
 }
 
-class _PhotoCaptureState extends State<PhotoCapture> {
+class _CameraScreenState extends State<PhotoCapture> {
   CameraController controller;
   List cameras;
   int selectedCameraIdx;
   String imagePath;
+  String albumName = 'Media';
 
-  // 1, 2
+  @override
+  void initState() {
+    super.initState();
+    availableCameras().then((availableCameras) {
+      cameras = availableCameras;
+
+      if (cameras.length > 0) {
+        setState(() {
+          selectedCameraIdx = 0;
+        });
+
+        _initCameraController(cameras[selectedCameraIdx]).then((void v) {});
+      } else {
+        print("No camera available");
+      }
+    }).catchError((err) {
+      print('Error: $err.code\nError Message: $err.message');
+    });
+  }
+
   Future _initCameraController(CameraDescription cameraDescription) async {
     if (controller != null) {
       await controller.dispose();
     }
 
-    // 3
     controller = CameraController(cameraDescription, ResolutionPreset.high);
 
     // If the controller is updated then update the UI.
-    // 4
     controller.addListener(() {
-      // 5
       if (mounted) {
         setState(() {});
       }
@@ -42,11 +57,10 @@ class _PhotoCaptureState extends State<PhotoCapture> {
       }
     });
 
-    // 6
     try {
       await controller.initialize();
     } on CameraException catch (e) {
-      // _showCameraException(e);
+      _showCameraException(e);
     }
 
     if (mounted) {
@@ -55,34 +69,39 @@ class _PhotoCaptureState extends State<PhotoCapture> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    availableCameras().then((availableCameras) {
-      cameras = availableCameras;
-      if (cameras.length > 0) {
-        // setState(() {
-        // 2
-        selectedCameraIdx = 0;
-        // });
-
-        _initCameraController(cameras[selectedCameraIdx]).then((void v) {
-          _onCapturePressed(context);
-        });
-      } else {
-        print("No camera available");
-      }
-    }).catchError((err) {
-      // 3
-      print('Error: $err.code\nError Message: $err.message');
-    });
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Click To Share'),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: Container(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: _cameraPreviewWidget(),
+              ),
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _cameraTogglesRowWidget(),
+                  _captureControlRowWidget(context),
+                  Spacer()
+                ],
+              ),
+              SizedBox(height: 20.0)
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    controller?.dispose();
-  }
-
+  /// Display Camera preview.
   Widget _cameraPreviewWidget() {
     if (controller == null || !controller.value.isInitialized) {
       return const Text(
@@ -101,6 +120,28 @@ class _PhotoCaptureState extends State<PhotoCapture> {
     );
   }
 
+  /// Display the control bar with buttons to take pictures
+  Widget _captureControlRowWidget(context) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            FloatingActionButton(
+                child: Icon(Icons.camera),
+                backgroundColor: Colors.blueGrey,
+                onPressed: () {
+                  _onCapturePressed(context);
+                })
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Display a row of toggle to select the camera (or a message if no camera is available).
   Widget _cameraTogglesRowWidget() {
     if (cameras == null || cameras.isEmpty) {
       return Spacer();
@@ -142,53 +183,42 @@ class _PhotoCaptureState extends State<PhotoCapture> {
   }
 
   void _onCapturePressed(context) async {
+    // Take the Picture in a try / catch block. If anything goes wrong,
+    // catch the error.
     try {
-      // 1
+      // Attempt to take a picture and log where it's been saved
       final path = join(
+        // In this example, store the picture in the temp directory. Find
+        // the temp directory using the `path_provider` plugin.
         (await getTemporaryDirectory()).path,
         '${DateTime.now()}.png',
       );
-      // 2
+      print(path);
       await controller.takePicture(path);
-      // 3
 
-      //get file here
-      setState(() {
-        imagePath = path;
-        //  launch(
-        //  "https://wa.me/${number}?text=Hello")
+      GallerySaver.saveImage(path, albumName: albumName).then((bool success) {
+        setState(() {
+          // firstButtonText = 'image saved!';
+        });
       });
 
-      // getBytesFromFile(path).then((bytes) {
-      //   // Share.file('Share via:', basename(widget.imagePath),
-      //   //     bytes.buffer.asUint8List(), 'image/png');
-      // });
+      // If the picture was taken, display it on a new screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PreviewImageScreen(imagePath: path),
+        ),
+      );
     } catch (e) {
+      // If an error occurs, log the error to the console.
       print(e);
     }
   }
 
-  Future<ByteData> getBytesFromFile(path) async {
-    Uint8List bytes = File(path).readAsBytesSync();
-    return ByteData.view(bytes.buffer);
-  }
+  void _showCameraException(CameraException e) {
+    String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
+    print(errorText);
 
-  // AssetImage getImage() {}
-  @override
-  Widget build(BuildContext context) {
-    return imagePath == null
-        ? Center(
-            child: Text('Loading'),
-          )
-        : Scaffold(
-            body: SafeArea(
-              child: Image(
-                image: FileImage(
-                  File(imagePath),
-                ),
-                fit: BoxFit.fill,
-              ),
-            ),
-          );
+    print('Error: ${e.code}\n${e.description}');
   }
 }

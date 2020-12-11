@@ -13,10 +13,10 @@ import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:location/location.dart';
-import 'package:safety/pages/cameraswitcher.dart';
 import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/nearby.dart';
+import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
@@ -1049,14 +1049,14 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
         circleColor: Color(0xffb72334),
         tabs: [
           TabData(
-              iconData: Icons.camera,
+              iconData: Icons.camera_alt,
               title: "Camera",
               onclick: () {
                 final FancyBottomNavigationState fState =
                     bottomNavigationKey.currentState;
                 fState.setPage(2);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CameraSwitcher()));
+                    MaterialPageRoute(builder: (context) => PhotoCapture()));
               }),
           TabData(
               iconData: Icons.keyboard_voice,
