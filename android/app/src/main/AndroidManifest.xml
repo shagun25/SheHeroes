@@ -16,6 +16,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="safety"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.here.sdk.access_key_id" android:value="4rWm4luuBYdrARK8IlJiSA"/>
+        <meta-data android:name="com.here.sdk.access_key_secret" android:value="mztNelP7ZZlX95Aq-cG2ZcBqkIgs1b_S4ynNC8DPJCLltuuW3H2pOgq5cAicX3Jf3yfnGBjBkpkeU_B24yda0w"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

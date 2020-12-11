@@ -218,6 +218,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.1"
+  fancy_bottom_navigation:
+    dependency: "direct dev"
+    description:
+      name: fancy_bottom_navigation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   ffi:
     dependency: transitive
     description:

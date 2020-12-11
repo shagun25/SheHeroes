@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -26,7 +26,9 @@ class Homes extends StatefulWidget {
 
 class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
   Location _location = Location();
-
+  int currentPage=0;
+  GlobalKey bottomNavigationKey = GlobalKey();
+  
   final CallsAndMessagesService service = locator<CallsAndMessagesService>();
   final String number = "123456789";
   AnimationController _animationController;
@@ -37,7 +39,27 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
   }
-
+  // void _onTapped(int index){
+  //   setState((){
+  //     _currentIndex=index;
+  //   });
+  //   if(_currentIndex==0){
+  //     Navigator.push(
+  //       context,
+  //        MaterialPageRoute(
+  //       builder: (context) =>
+  //       CameraSwitcher()));
+  //   }
+  //   else if(_currentIndex==1){
+  //     Navigator.pushNamed(context, 'voice');
+  //   }
+  //   else if(_currentIndex==2){
+  //    Navigator.push(
+  //          context,
+  //           MaterialPageRoute(
+  //            builder: (context) => NearBy())); 
+  //   }
+  // }
   void _runAnimation() async {
     while (true) {
       await _animationController.forward();
@@ -971,95 +993,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ), //(shake)
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: RaisedButton(
-                                  elevation: 1,
-                                  color: Colors.white70,
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => NearBy()));
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.place,
-                                        size: 40,
-                                        color: HexColor("#b72334"),
-                                      ),
-                                      Text(
-                                        'NearBy',
-                                        style: TextStyle(
-                                            color: HexColor("#b72334"),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ), //(nearby)
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: RaisedButton(
-                                  elevation: 1,
-                                  color: Colors.white70,
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CameraSwitcher()));
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.camera_alt,
-                                        size: 40,
-                                        color: HexColor("#b72334"),
-                                      ),
-                                      Text(
-                                        'Camera',
-                                        style: TextStyle(
-                                            color: HexColor("#b72334"),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ), //(camera)
+                        
                           ],
                         ),
                       ),
@@ -1071,18 +1005,106 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, 'voice');
+       bottomNavigationBar: FancyBottomNavigation(
+         activeIconColor:Color(0xffb72334) ,
+        tabs: [
+          TabData(
+              iconData: Icons.camera,
+              title: "Camera",
+              onclick: () {
+                final FancyBottomNavigationState fState =
+                    bottomNavigationKey.currentState;
+                fState.setPage(2);
+                 Navigator.push(
+        context,
+         MaterialPageRoute(
+        builder: (context) =>
+        CameraSwitcher()));
+              }),
+          TabData(
+              iconData: Icons.keyboard_voice,
+              title: "Voice",
+              onclick: () =>  Navigator.pushNamed(context, 'voice')),
+          TabData(
+              iconData: Icons.place,
+              title: "Nearby",
+              onclick: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => NearBy()))),
+          TabData(iconData: Icons.place, title: "Nearby")
+        ],
+        initialSelection: 1,
+        key: bottomNavigationKey,
+        onTabChangedListener: (position) {
+          setState(() {
+            currentPage = position;
+          });
         },
-        child: Icon(
-          Icons.keyboard_voice,
-          size: 40,
-          color: HexColor("#b72334"),
-          // hoverColor: Colors.white,
-        ),
-        backgroundColor: Colors.white70,
       ),
+    //  bottomNavigationBar: BottomNavigationBar(
+    //    currentIndex: _currentIndex,
+    //   //  decoration: BoxDecoration(
+    //   //       gradient: RadialGradient(
+    //   //           colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')],
+    //   //           // begin: Alignment.topLeft,
+    //   //           // end: Alignment.bottomRight
+    //   //           radius: 1.5)),
+    //    onTap:_onTapped,
+    //   backgroundColor:Color(0xfff7bcb3),
+    //    iconSize: 35.0,
+    //    selectedItemColor: Color(0xffb72334),
+    //    unselectedItemColor:Color(0xffb72334),
+    //    items: [
+    //    BottomNavigationBarItem(icon: Icon(Icons.camera),label:""),
+    //    BottomNavigationBarItem(icon: Icon(Icons.keyboard_voice),label:""),
+    //    BottomNavigationBarItem(icon: Icon(Icons.place),label:"")
+    //  ],),
+      // bottomNavigationBar:Row(
+        
+      //   children: [
+      //     Expanded(
+      //                 child: FloatingActionButton(
+      //         onPressed: () {
+      //           Navigator.pushNamed(context, 'voice');
+      //         },
+      //         child: Icon(
+      //           Icons.keyboard_voice,
+      //           size: 40,
+      //           color: HexColor("#b72334"),
+      //           // hoverColor: Colors.white,
+      //         ),
+      //         backgroundColor: Colors.white70,
+      //       ),
+      //     ),
+      //     Expanded(
+      //                 child: FloatingActionButton(
+      //         onPressed: () {
+      //           Navigator.pushNamed(context, 'voice');
+      //         },
+      //         child: Icon(
+      //           Icons.keyboard_voice,
+      //           size: 40,
+      //           color: HexColor("#b72334"),
+      //           // hoverColor: Colors.white,
+      //         ),
+      //         backgroundColor: Colors.white70,
+      //       ),
+      //     ),
+      //     Expanded(
+      //                 child: FloatingActionButton(
+      //         onPressed: () {
+      //           Navigator.pushNamed(context, 'voice');
+      //         },
+      //         child: Icon(
+      //           Icons.keyboard_voice,
+      //           size: 40,
+      //           color: HexColor("#b72334"),
+      //           // hoverColor: Colors.white,
+      //         ),
+      //         backgroundColor: Colors.white70,
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 
