@@ -226,6 +226,234 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 child: RaisedButton(
                                   elevation: 1,
                                   color: Colors.white70,
+                                  onPressed: () {
+                                    Future.delayed(
+                                        const Duration(milliseconds: 5000), () {
+                                      // Here you can write your code
+                                      Navigator.pop(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Homes()));
+                                      print('stop');
+                                    });
+                                    Gradients.showMyDialog(
+                                      context,
+                                      Column(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+                                          ShakeAnimatedWidget(
+                                            enabled: true,
+                                            duration:
+                                            Duration(milliseconds: 100),
+                                            shakeAngle: Rotation.deg(z: 5),
+                                            curve: Curves.linear,
+                                            child: Transform.rotate(
+                                              angle: (pi / 180) * -35,
+                                              child: Icon(Constants.shakeIcon,
+                                                  size: 70,
+                                                  color: Color(0xffffc400)),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            'Shake to capture and activate emergency',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.orange,
+                                              fontSize: 20,
+                                              // fontWeight:
+                                              // FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                          () {},
+                                    );
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.vibration,
+                                        size: 40,
+                                        color: HexColor("#b72334"),
+                                      ),
+                                      Text(
+                                        'Shake',
+                                        style: TextStyle(
+                                            color: HexColor("#b72334"),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ), //(shake)
+                            AvatarGlow(
+                              endRadius: 70.0,
+                              glowColor: Colors.pink,
+                              child: Container(
+                                padding: EdgeInsets.all(0),
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    // color: Colors.transparent,
+                                    border: Border.all(
+                                        color: HexColor("#ea6a88"), width: 3)),
+                                child: RaisedButton(
+                                  elevation: 1,
+                                  color: Colors.white70,
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Dialog(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        1200)),
+                                                //this right here
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        width: 20.0,
+                                                        color:
+                                                        Colors.orange[800]),
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        3000.0),
+                                                  ),
+                                                  child: RaisedButton(
+                                                    color: Colors.white,
+                                                    shape:
+                                                    RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            2000.0)),
+                                                    onPressed: () => {
+                                                      setState(() {
+                                                        Timer(
+                                                            Duration(
+                                                                seconds: 10),
+                                                                () {
+                                                              assetsAudioPlayer
+                                                                  .stop();
+                                                              Navigator.pop(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                          Homes()));
+                                                              print('stop');
+                                                            });
+                                                        assetsAudioPlayer.open(
+                                                          Audio(
+                                                              "music/police.mp3"),
+                                                        );
+                                                      }),
+                                                    },
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 35, right: 35),
+                                                      height: 250,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          RotationTransition(
+                                                            turns: Tween(
+                                                                begin: 0.0,
+                                                                end: -.1)
+                                                                .chain(CurveTween(
+                                                                curve: Curves
+                                                                    .elasticIn))
+                                                                .animate(
+                                                                _animationController),
+                                                            child: Icon(
+                                                                Icons
+                                                                    .notifications_active,
+                                                                size: 70,
+                                                                color: Color(
+                                                                    0xffffc400)),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text(
+                                                            'Playing Siren\n\n Tap to play again',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              color:
+                                                              Colors.orange,
+                                                              fontSize: 20,
+                                                              // fontWeight:
+                                                              // FontWeight.w300,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        });
+                                    _runAnimation();
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.speaker_phone,
+                                        size: 40,
+                                        color: HexColor("#b72334"),
+                                      ),
+                                      Text(
+                                        'Siren',
+                                        style: TextStyle(
+                                            color: HexColor("#b72334"),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ), //(siren)
+                            AvatarGlow(
+                              endRadius: 70.0,
+                              glowColor: Colors.pink,
+                              child: Container(
+                                padding: EdgeInsets.all(0),
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    // color: Colors.transparent,
+                                    border: Border.all(
+                                        color: HexColor("#ea6a88"), width: 3)),
+                                child: RaisedButton(
+                                  elevation: 1,
+                                  color: Colors.white70,
                                   onPressed: () => {
                                     showDialog(
                                         context: context,
@@ -445,56 +673,12 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 child: RaisedButton(
                                   elevation: 1,
                                   color: Colors.white70,
-                                  onPressed: () {
-                                    countincident();
-                                    setState(() {
-                                      _location.onLocationChanged.listen;
-                                    });
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.local_parking,
-                                        size: 40,
-                                        color: HexColor("#b72334"),
-                                      ),
-                                      Text(
-                                        message,
-                                        style: TextStyle(
-                                            color: HexColor("#b72334"),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: RaisedButton(
-                                  elevation: 1,
-                                  color: Colors.white70,
                                   onPressed: Constants.taxiButton,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)),
                                   child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
                                         Icons.local_taxi,
@@ -528,149 +712,6 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                 child: RaisedButton(
                                   elevation: 1,
                                   color: Colors.white70,
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Dialog(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            1200)),
-                                                //this right here
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        width: 20.0,
-                                                        color:
-                                                            Colors.orange[800]),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            3000.0),
-                                                  ),
-                                                  child: RaisedButton(
-                                                    color: Colors.white,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2000.0)),
-                                                    onPressed: () => {
-                                                      setState(() {
-                                                        Timer(
-                                                            Duration(
-                                                                seconds: 10),
-                                                            () {
-                                                          assetsAudioPlayer
-                                                              .stop();
-                                                          Navigator.pop(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          Homes()));
-                                                          print('stop');
-                                                        });
-                                                        assetsAudioPlayer.open(
-                                                          Audio(
-                                                              "music/police.mp3"),
-                                                        );
-                                                      }),
-                                                    },
-                                                    child: Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 35, right: 35),
-                                                      height: 250,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          RotationTransition(
-                                                            turns: Tween(
-                                                                    begin: 0.0,
-                                                                    end: -.1)
-                                                                .chain(CurveTween(
-                                                                    curve: Curves
-                                                                        .elasticIn))
-                                                                .animate(
-                                                                    _animationController),
-                                                            child: Icon(
-                                                                Icons
-                                                                    .notifications_active,
-                                                                size: 70,
-                                                                color: Color(
-                                                                    0xffffc400)),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Text(
-                                                            'Playing Siren\n\n Tap to play again',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.orange,
-                                                              fontSize: 20,
-                                                              // fontWeight:
-                                                              // FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        });
-                                    _runAnimation();
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.speaker_phone,
-                                        size: 40,
-                                        color: HexColor("#b72334"),
-                                      ),
-                                      Text(
-                                        'Siren',
-                                        style: TextStyle(
-                                            color: HexColor("#b72334"),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ), //(siren)
-                            AvatarGlow(
-                              endRadius: 70.0,
-                              glowColor: Colors.pink,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    // color: Colors.transparent,
-                                    border: Border.all(
-                                        color: HexColor("#ea6a88"), width: 3)),
-                                child: RaisedButton(
-                                  elevation: 1,
-                                  color: Colors.white70,
                                   onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -680,7 +721,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100)),
                                   child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
                                         Icons.live_tv,
@@ -715,51 +756,10 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                   elevation: 1,
                                   color: Colors.white70,
                                   onPressed: () {
-                                    Future.delayed(
-                                        const Duration(milliseconds: 5000), () {
-                                      // Here you can write your code
-                                      Navigator.pop(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Homes()));
-                                      print('stop');
+                                    countincident();
+                                    setState(() {
+                                      _location.onLocationChanged.listen;
                                     });
-                                    Gradients.showMyDialog(
-                                      context,
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ShakeAnimatedWidget(
-                                            enabled: true,
-                                            duration:
-                                                Duration(milliseconds: 100),
-                                            shakeAngle: Rotation.deg(z: 5),
-                                            curve: Curves.linear,
-                                            child: Transform.rotate(
-                                              angle: (pi / 180) * -35,
-                                              child: Icon(Constants.shakeIcon,
-                                                  size: 70,
-                                                  color: Color(0xffffc400)),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            'Shake to capture and activate emergency',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.orange,
-                                              fontSize: 20,
-                                              // fontWeight:
-                                              // FontWeight.w300,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      () {},
-                                    );
                                   },
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)),
@@ -768,12 +768,12 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
-                                        Icons.vibration,
+                                        Icons.local_parking,
                                         size: 40,
                                         color: HexColor("#b72334"),
                                       ),
                                       Text(
-                                        'Shake',
+                                        message,
                                         style: TextStyle(
                                             color: HexColor("#b72334"),
                                             fontSize: 12,
@@ -783,7 +783,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                               ),
-                            ), //(shake)
+                            ), //(Psafe)
                           ],
                         ),
                       ),
