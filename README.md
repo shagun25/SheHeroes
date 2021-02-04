@@ -96,8 +96,8 @@ Run the following commands to see that *your local copy* has a reference to *you
 
 ```sh
 $ git remote -v
-origin  https://github.com/Your_Username/Learning-Made-Easy.git (fetch)
-origin  https://github.com/Your_Username/Learning-Made-Easy.git (push)
+origin  https://github.com/Your_Username/SheHeroes.git (fetch)
+origin  https://github.com/Your_Username/SheHeroes.git (push)
 ```
 Now, lets add a reference to the original [SheHeroes](https://github.com/shagun25/SheHeroes) repository using
 
@@ -150,21 +150,7 @@ Once you have completed these steps, you are ready to start contributing by chec
 
 <br>
 
-### 6️⃣ Running the work on your local machine :computer:
-
-To run the code and play with the app on your local machine, do:
-* `if os == 'Windows'`:
-  * We have tested the code in **Dev C++ IDE** and **Code Blocks IDE** **(Both running MINGW)**.
-  * To run the code in any IDE, simply open the file, click `Execute > Run` [Click here for more instructions](http://cs.uno.edu/~jaime/Courses/2025/devCpp2025Instructions.html)
-*  `if os == 'Linux or Unix or Mac'`:
-   * You need to have `GCC` installed:
-   * Go to the folder having the code(.cpp file).
-   * Open the terminal, and type : `g++ -o test_prep test-prep.cpp`
-   * Then run the script by typing : `./test_prep` 
-
-<br>
-
-### 7️⃣ Create a new branch :bangbang:
+### 6️⃣ Create a new branch :bangbang:
 
 Whenever you are going to make contribution. Please create seperate branch using command and keep your `master` branch clean (i.e. synced with remote branch).
 
@@ -213,7 +199,7 @@ Then add a title and description to your pull request that explains your preciou
 
 <br>
 
-## :label: Team Members
+## :label: Developed By
    - [Shagun Goyal](https://github.com/shagun25) 
    - [Charu Sachdeva](https://github.com/Charu271)
    - [Arshdeep Singh](https://github.com/ArshdeepSahni)
