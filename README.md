@@ -206,7 +206,7 @@ Then add a title and description to your pull request that explains your preciou
 # Note:
 Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob/main/.github/contributing.md) for contributing to this repository.
 - Don't make PR directly, make issues first, once you are assigned, start working and then create a PR
-
+**Kindly join the Project Channel for discussions related to this project from** [here](https://discord.gg/rSAVU6XA)
 ## :label: ScreenShots
 
 |||
