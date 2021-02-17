@@ -20,15 +20,15 @@
 ```diff
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ```
-> `+` :label: [Cross WinterOfCode 21](#CrossWinterOfCode21)<br>
->> `+` :label: [Inspiration](#Inspiration)<br>
->>> `+` :label: [Tech Stack](#TechStack)<br>
->>>> `+` :label: [Features](#Features)<br>
->>>>> `+` :label: [How to get started](#Howtogetstarted?)<br>
->>>>>> `+` :label: [Steps to follow ](#Stepstofollow)<br>
->>>>>>> `+` :label: [Developed By](#DevelopedBy)<br>
->>>>>>>> `+` :label: [ScreenShots](#ScreenShots)<br>
->>>>>>>>> `+` :label: [Features We Demand](#FeaturesWeDemand)<br>
+> `📌` [Cross WinterOfCode 21](#CrossWinterOfCode21)<br>
+>> `📌` [Inspiration](#Inspiration)<br>
+>>> `📌` [Tech Stack](#TechStack)<br>
+>>>> `📌` [Features](#Features)<br>
+>>>>> `📌` [How to get started](#Howtogetstarted?)<br>
+>>>>>> `📌` [Steps to follow ](#Stepstofollow)<br>
+>>>>>>> `📌` [Developed By](#DevelopedBy)<br>
+>>>>>>>> `📌` [ScreenShots](#ScreenShots)<br>
+>>>>>>>>> `📌` [Features We Demand](#FeaturesWeDemand)<br>
 ```diff
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ```
