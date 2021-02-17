@@ -1,5 +1,13 @@
-<h1 align="center"><img width="464" alt="Screen Shot 2020-11-21 at 10 28 41 PM" src="https://user-images.githubusercontent.com/56549294/99883790-a6f45100-2c4f-11eb-925b-7c155f3772d1.png">
-<h1 align="center">SheHeroes - Women Safety App</h1>
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
+
+
+<h1 align="center"><img width=50% height=50% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"></h1>
+<h1 align="center">🅂🄷🄴🄷🄴🅁🄾🄴🅂 - Women Safety App</h1>
 
 <!--[![All Contributors](https://img.shields.io/badge/all_contributors-04-orange.svg?style=flat-square)](#contributors-)-->
 
@@ -10,21 +18,35 @@
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)
 
-## CONTENT:
 
 
->:label: [Inspiration](#Inspiration)<br>
->>:label: [Tech Stack](#TechStack)<br>
->>>:label: [Features](#Features)<br>
->>>>:label: [How to get started](#Howtogetstarted?)<br>
->>>>>:label: [Steps to follow ](#Stepstofollow)<br>
->>>>>>:label: [Developed By](#DevelopedBy)<br>
->>>>>>>:label: [ScreenShots](#ScreenShots)<br>
->>>>>>>>:label: [Cross WinterOfCode 21](#CrossWinterOfCode21)<br>
->>>>>>>>>:label: [Features We Demand](#FeaturesWeDemand)<br>
 
+<h2 align="center" id="content"> 🗂 CONTENT:</h2>
 
-<h2 id="Inspiration"> :label: Inspiration</h2>
+```diff
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+```
+> `+` :label: [Cross WinterOfCode 21](#CrossWinterOfCode21)<br>
+>> `+` :label: [Inspiration](#Inspiration)<br>
+>>> `+` :label: [Tech Stack](#TechStack)<br>
+>>>> `+` :label: [Features](#Features)<br>
+>>>>> `+` :label: [How to get started](#Howtogetstarted?)<br>
+>>>>>> `+` :label: [Steps to follow ](#Stepstofollow)<br>
+>>>>>>> `+` :label: [Developed By](#DevelopedBy)<br>
+>>>>>>>> `+` :label: [ScreenShots](#ScreenShots)<br>
+>>>>>>>>> `+` :label: [Features We Demand](#FeaturesWeDemand)<br>
+```diff
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+```
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="CrossWinterOfCode21"> :trophy: We are a part of Cross WinterOfCode 21'</h2>
+
+<img align="center" src="cross.png" width=100%>
+
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="Inspiration"> :label: Inspiration</h2>
 
 Considering the safety and security of women in India in the recent times, We wanted to give a try from our end to address the issue in a simpler and safer way.
 
@@ -33,15 +55,25 @@ Looking at the recent trends and the most powerful weapon with the humanity - te
 
  [Video Description](https://drive.google.com/file/d/1IqV4nTDAD8PjvhigO-51IQvEWMNxjqUw)
 
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
 
-<h2 id="TechStack"> :label: Tech Stack</h2>
+<br><br><br><br><br><br><br><br>
 
-   * Flutter
-   * Firestore
-   * Google Map Api
-   * Crimometer Api 
-   
-<h2 id="Features"> :label: Features</h2>
+<h2 align="center" id="TechStack"> :label: Tech Stack
+
+```diff
++ Flutter +
++ Firestore +
++ Google Map Api +
++ Crimometer Api +
+```
+</h2>
+
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
+
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="Features"> :label: Features</h2>
 
   #### Main Features
   
@@ -57,8 +89,12 @@ Looking at the recent trends and the most powerful weapon with the humanity - te
    :point_right: Police siren - Rings the police siren<br/>
    :point_right: Taxi - One touch ola cab facility to books cabs for user<br/>
    :point_right: News - To guide the users about self defense techniques<br/>
-   
-<h2 id="Howtogetstarted?"> ⭐ How to get started?</h2>
+
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
+
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="Howtogetstarted?"> ⭐ How to get started?</h2>
 
 [![forthebadge](https://forthebadge.com/images/badges/not-a-bug-a-feature.svg)](https://forthebadge.com) <br>
 You can refer to the following articles on the basics of Git and Github and also contact the Project Mentors, in case you are stuck:
@@ -69,9 +105,11 @@ You can refer to the following articles on the basics of Git and Github and also
 - [How to create a Pull Request](https://opensource.com/article/19/7/create-pull-request-github)
 - [Getting started with Git and GitHub](https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6)
 
-<br>
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
 
-<h2 id="Stepstofollow"> ⭐ Steps to follow :scroll:</h2>
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="Stepstofollow"> ⭐ Steps to follow :scroll:</h2>
 
 <br>
 
@@ -213,9 +251,11 @@ $ git push -u origin Folder_Name
 Then, go to your repository in browser and click on `compare and pull requests`.
 Then add a title and description to your pull request that explains your precious effort.
 
-<br>
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
 
-<h2 id="DevelopedBy"> :label: Developed By</h2>
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="DevelopedBy"> :label: Developed By</h2>
 
    - [Shagun Goyal](https://github.com/shagun25) 
    - [Charu Sachdeva](https://github.com/Charu271)
@@ -226,7 +266,11 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 - Don't make PR directly, make issues first, once you are assigned, start working and then create a PR
 -**Kindly join the Project Channel for discussions related to this project from** [here](https://discord.gg/rSAVU6XA)
 
-<h2 id="ScreenShots"> :label: ScreenShots</h2>
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
+
+<br><br><br><br><br><br><br><br>
+
+<h2 align="center" id="ScreenShots"> :label: ScreenShots</h2>
 
 |||
 |---|---|
@@ -234,12 +278,11 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 |<h3 align="center">Emergency Dashboard</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 32 PM" src="https://user-images.githubusercontent.com/56549294/99883799-ac519b80-2c4f-11eb-8521-ebd283ce16a0.png">|<h3 align="center">Safe Dashboard</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 20 PM" src="https://user-images.githubusercontent.com/56549294/99883801-acea3200-2c4f-11eb-96b1-aea436439ede.png">|
 |<h3 align="center">Switcher</h3><img width="1440" alt="Screen Shot 2020-11-21 at 10 00 06 PM" src="https://user-images.githubusercontent.com/56549294/99883803-ae1b5f00-2c4f-11eb-8a8e-85493ebd6aaf.png">||
 
-<h2 id="CrossWinterOfCode21"> :trophy: We are a part of Cross WinterOfCode 21'</h2>
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
 
-<img src="cross.png">
+<br><br><br><br><br><br><br><br>
 
-
-<h2 id="FeaturesWeDemand"> :star: Features We Demand</h2>
+<h2 align="center" id="FeaturesWeDemand"> :star: Features We Demand</h2>
 
 |<h2> 1️⃣ AUTOMATION : Perform Tasks In Background</h2>|
 |---|
@@ -250,3 +293,9 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 |🔘 **`Auto share sms & mails & WhatsApp messages & live location`** to saved contacts while in emergency|
 |🔘 While the emergency detected **`record the path of the user until situation gets safe`** afterwards and **`keep sharing the location checkpoints in that timespan with the saved contacts`**(like within 5 mins refresh location to generate checkpoint and share automatically)|
 |🔘 **`Auto image capture`** while in emergency and share and save too.|
+
+<i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
+
+<br><br><br><br><br><br><br><br>
+
+<h1 align="center"><img width=2% height=2% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"> 🅂🄷🄴🄷🄴🅁🄾🄴🅂</h1>
