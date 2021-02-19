@@ -59,7 +59,7 @@ Looking at the recent trends and the most powerful weapon with the humanity - te
 + Flutter +
 + Firestore +
 + Google Map Api +
-+ Crimometer Api +
++ CrimeoMeter Api +
 ```
 </h2>
 
