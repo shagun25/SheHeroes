@@ -9,6 +9,7 @@ import 'package:circle_list/circle_list.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:safety/pages/Voice.dart';
 import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/nearby_places.dart';
@@ -18,6 +19,8 @@ import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 
 class Hom extends StatefulWidget {
+  static final String route = '/hom';
+
   // static AudioCache player = AudioCache();
   @override
   _HomState createState() => _HomState();
@@ -31,10 +34,10 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
   GlobalKey bottomNavigationKey = GlobalKey();
   AnimationController _animationController;
   final assetsAudioPlayer = AssetsAudioPlayer();
+
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
   }
 
@@ -79,13 +82,9 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                             "Emergency",
                           ],
                           textStyle: TextStyle(
-                              fontSize: 50.0,
-                              fontFamily: "Canterbury",
-                              color: HexColor("#ea6a88"),
-                              fontWeight: FontWeight.bold),
+                              fontSize: 50.0, fontFamily: "Canterbury", color: HexColor("#ea6a88"), fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
-                          alignment: AlignmentDirectional
-                              .topStart // or Alignment.topLeft
+                          alignment: AlignmentDirectional.topStart // or Alignment.topLeft
                           ),
                       // TypewriterAnimatedTextKit(
                       //   text: ['Emergency'],
@@ -133,16 +132,14 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                               HexColor("#DD5E89"),
                               HexColor("#F7BB97"),
                             ]),
-                            border: Border.all(
-                                color: HexColor("#ea6a88"), width: 2)),
+                            border: Border.all(color: HexColor("#ea6a88"), width: 2)),
                         child: AvatarGlow(
                           endRadius: 200.0,
                           startDelay: Duration(seconds: 1),
                           glowColor: Colors.blueAccent,
                           child: CircleList(
                             initialAngle: 55,
-                            outerRadius:
-                                MediaQuery.of(context).size.width / 2.2,
+                            outerRadius: MediaQuery.of(context).size.width / 2.2,
                             innerRadius: MediaQuery.of(context).size.width / 5,
                             showInitialAnimation: true,
                             innerCircleColor: Colors.white54,
@@ -151,10 +148,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                             rotateMode: RotateMode.onlyChildrenRotate,
                             centerWidget: InkWell(
                               onDoubleTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyHomePage()));
+                                Navigator.pushNamed(context, MyHomePage.route);
                               },
                               child: Container(
                                   decoration: BoxDecoration(
@@ -185,9 +179,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
-                                      border: Border.all(
-                                          color: HexColor("#ea6a88"),
-                                          width: 3)),
+                                      border: Border.all(color: HexColor("#ea6a88"), width: 3)),
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -196,72 +188,40 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              1200)),
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1200)),
                                                   //this right here
                                                   child: Container(
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 20.0,
-                                                          color: Colors
-                                                              .orange[800]),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3000.0),
+                                                      border: Border.all(width: 20.0, color: Colors.orange[800]),
+                                                      borderRadius: BorderRadius.circular(3000.0),
                                                     ),
                                                     child: RaisedButton(
                                                       color: Colors.white,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      2000.0)),
-                                                      onPressed: () =>
-                                                          _service.call(number),
+                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2000.0)),
+                                                      onPressed: () => _service.call(number),
                                                       child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 55,
-                                                                right: 55),
+                                                        padding: EdgeInsets.only(left: 55, right: 55),
                                                         height: 250,
                                                         child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
                                                             RotationTransition(
-                                                              turns: Tween(
-                                                                      begin:
-                                                                          0.0,
-                                                                      end: -.1)
-                                                                  .chain(CurveTween(
-                                                                      curve: Curves
-                                                                          .elasticIn))
-                                                                  .animate(
-                                                                      _animationController),
-                                                              child: Icon(
-                                                                  Icons.call,
-                                                                  size: 70,
-                                                                  color: Color(
-                                                                      0xffffc400)),
+                                                              turns: Tween(begin: 0.0, end: -.1)
+                                                                  .chain(CurveTween(curve: Curves.elasticIn))
+                                                                  .animate(_animationController),
+                                                              child: Icon(Icons.call, size: 70, color: Color(0xffffc400)),
                                                             ),
                                                             SizedBox(
                                                               height: 20,
                                                             ),
                                                             Text(
                                                               'Call',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
+                                                              textAlign: TextAlign.center,
                                                               style: TextStyle(
-                                                                color: Colors
-                                                                    .orange,
+                                                                color: Colors.orange,
                                                                 fontSize: 20,
                                                                 // fontWeight:
                                                                 // FontWeight.w300,
@@ -274,68 +234,37 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                                   ),
                                                 ),
                                                 Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              1200)),
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1200)),
                                                   //this right here
                                                   child: Container(
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 20.0,
-                                                          color: Colors
-                                                              .orange[800]),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3000.0),
+                                                      border: Border.all(width: 20.0, color: Colors.orange[800]),
+                                                      borderRadius: BorderRadius.circular(3000.0),
                                                     ),
                                                     child: RaisedButton(
                                                       color: Colors.white,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      2000.0)),
-                                                      onPressed: () => _service
-                                                          .sendSms(number),
+                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2000.0)),
+                                                      onPressed: () => _service.sendSms(number),
                                                       child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 55,
-                                                                right: 55),
+                                                        padding: EdgeInsets.only(left: 55, right: 55),
                                                         height: 250,
                                                         child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
                                                             RotationTransition(
-                                                              turns: Tween(
-                                                                      begin:
-                                                                          0.0,
-                                                                      end: -.1)
-                                                                  .chain(CurveTween(
-                                                                      curve: Curves
-                                                                          .elasticIn))
-                                                                  .animate(
-                                                                      _animationController),
-                                                              child: Icon(
-                                                                  Icons.message,
-                                                                  size: 70,
-                                                                  color: Color(
-                                                                      0xffffc400)),
+                                                              turns: Tween(begin: 0.0, end: -.1)
+                                                                  .chain(CurveTween(curve: Curves.elasticIn))
+                                                                  .animate(_animationController),
+                                                              child: Icon(Icons.message, size: 70, color: Color(0xffffc400)),
                                                             ),
                                                             SizedBox(
                                                               height: 20,
                                                             ),
                                                             Text(
                                                               'Message',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
+                                                              textAlign: TextAlign.center,
                                                               style: TextStyle(
-                                                                color: Colors
-                                                                    .orange,
+                                                                color: Colors.orange,
                                                                 fontSize: 20,
                                                                 // fontWeight:
                                                                 // FontWeight.w300,
@@ -356,8 +285,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.call,
@@ -366,10 +294,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         ),
                                         Text(
                                           'SOS',
-                                          style: TextStyle(
-                                              color: HexColor("#b72334"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(color: HexColor("#b72334"), fontSize: 12, fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -386,19 +311,14 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
-                                      border: Border.all(
-                                          color: HexColor("#ea6a88"),
-                                          width: 3)),
+                                      border: Border.all(color: HexColor("#ea6a88"), width: 3)),
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
                                     onPressed: Constants.policeStaionFunction,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.local_parking,
@@ -407,10 +327,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         ),
                                         Text(
                                           'Police',
-                                          style: TextStyle(
-                                              color: HexColor("#b72334"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(color: HexColor("#b72334"), fontSize: 12, fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -468,9 +385,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
-                                      border: Border.all(
-                                          color: HexColor("#ea6a88"),
-                                          width: 3)),
+                                      border: Border.all(color: HexColor("#ea6a88"), width: 3)),
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -479,94 +394,53 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              1200)),
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1200)),
                                                   //this right here
                                                   child: Container(
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 20.0,
-                                                          color: Colors
-                                                              .orange[800]),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3000.0),
+                                                      border: Border.all(width: 20.0, color: Colors.orange[800]),
+                                                      borderRadius: BorderRadius.circular(3000.0),
                                                     ),
                                                     child: RaisedButton(
                                                       color: Colors.white,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      2000.0)),
+                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2000.0)),
                                                       onPressed: () => {
                                                         setState(() {
-                                                          Timer(
-                                                              Duration(
-                                                                  seconds: 10),
-                                                              () {
-                                                            assetsAudioPlayer
-                                                                .stop();
+                                                          Timer(Duration(seconds: 10), () {
+                                                            assetsAudioPlayer.stop();
                                                             Navigator.pop(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            Hom()));
+                                                                context, MaterialPageRoute(builder: (context) => Hom()));
                                                             print('stop');
                                                           });
-                                                          assetsAudioPlayer
-                                                              .open(
-                                                            Audio(
-                                                                "music/police.mp3"),
+                                                          assetsAudioPlayer.open(
+                                                            Audio("music/police.mp3"),
                                                           );
                                                         }),
                                                       },
                                                       child: Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 35,
-                                                                right: 35),
+                                                        padding: EdgeInsets.only(left: 35, right: 35),
                                                         height: 250,
                                                         child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
                                                             RotationTransition(
-                                                              turns: Tween(
-                                                                      begin:
-                                                                          0.0,
-                                                                      end: -.1)
-                                                                  .chain(CurveTween(
-                                                                      curve: Curves
-                                                                          .elasticIn))
-                                                                  .animate(
-                                                                      _animationController),
-                                                              child: Icon(
-                                                                  Icons
-                                                                      .notifications_active,
-                                                                  size: 70,
-                                                                  color: Color(
-                                                                      0xffffc400)),
+                                                              turns: Tween(begin: 0.0, end: -.1)
+                                                                  .chain(CurveTween(curve: Curves.elasticIn))
+                                                                  .animate(_animationController),
+                                                              child: Icon(Icons.notifications_active,
+                                                                  size: 70, color: Color(0xffffc400)),
                                                             ),
                                                             SizedBox(
                                                               height: 20,
                                                             ),
                                                             Text(
                                                               'Playing Siren\n\n Tap to play again',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
+                                                              textAlign: TextAlign.center,
                                                               style: TextStyle(
-                                                                color: Colors
-                                                                    .orange,
+                                                                color: Colors.orange,
                                                                 fontSize: 20,
                                                                 // fontWeight:
                                                                 // FontWeight.w300,
@@ -583,12 +457,9 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                           });
                                       _runAnimation();
                                     },
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.speaker_phone,
@@ -597,10 +468,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         ),
                                         Text(
                                           'Siren',
-                                          style: TextStyle(
-                                              color: HexColor("#b72334"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(color: HexColor("#b72334"), fontSize: 12, fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -617,40 +485,29 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
-                                      border: Border.all(
-                                          color: HexColor("#ea6a88"),
-                                          width: 3)),
+                                      border: Border.all(color: HexColor("#ea6a88"), width: 3)),
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
                                     onPressed: () {
-                                      Future.delayed(
-                                          const Duration(milliseconds: 5000),
-                                          () {
+                                      Future.delayed(const Duration(milliseconds: 5000), () {
                                         // Here you can write your code
-                                        Navigator.pop(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Hom()));
+                                        Navigator.pop(context, MaterialPageRoute(builder: (context) => Hom()));
                                         print('stop');
                                       });
                                       Gradients.showMyDialog(
                                         context,
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             ShakeAnimatedWidget(
                                               enabled: true,
-                                              duration:
-                                                  Duration(milliseconds: 100),
+                                              duration: Duration(milliseconds: 100),
                                               shakeAngle: Rotation.deg(z: 5),
                                               curve: Curves.linear,
                                               child: Transform.rotate(
                                                 angle: (pi / 180) * -35,
-                                                child: Icon(Constants.shakeIcon,
-                                                    size: 70,
-                                                    color: Color(0xffffc400)),
+                                                child: Icon(Constants.shakeIcon, size: 70, color: Color(0xffffc400)),
                                               ),
                                             ),
                                             SizedBox(
@@ -671,12 +528,9 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         () {},
                                       );
                                     },
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Icon(
                                           Icons.vibration,
@@ -685,10 +539,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         ),
                                         Text(
                                           'Shake',
-                                          style: TextStyle(
-                                              color: HexColor("#b72334"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(color: HexColor("#b72334"), fontSize: 12, fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -716,21 +567,20 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                 iconData: Icons.camera,
                 title: "Camera",
                 onclick: () {
-                  final FancyBottomNavigationState fState =
-                      bottomNavigationKey.currentState;
+                  final FancyBottomNavigationState fState = bottomNavigationKey.currentState;
                   fState.setPage(2);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PhotoCapture()));
+                  Navigator.pushNamed(context, PhotoCapture.route);
                 }),
             TabData(
-                iconData: Icons.keyboard_voice,
-                title: "Voice",
-                onclick: () => Navigator.pushNamed(context, 'voice')),
+              iconData: Icons.keyboard_voice,
+              title: "Voice",
+              onclick: () => Navigator.pushNamed(context, SpeechScreen.route),
+            ),
             TabData(
-                iconData: Icons.place,
-                title: "Nearby",
-                onclick: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => NearbyPlaces()))),
+              iconData: Icons.place,
+              title: "Nearby",
+              onclick: () => Navigator.pushNamed(context, NearbyPlaces.route),
+            ),
           ],
           initialSelection: 1,
           key: bottomNavigationKey,

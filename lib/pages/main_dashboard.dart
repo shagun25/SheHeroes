@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:animated_widgets/animated_widgets.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safety/pages/emergency_people_list.dart';
@@ -16,19 +14,18 @@ import 'package:safety/shared/widgets/profile_card.dart';
 import 'package:safety/shared/widgets/round_app_bar.dart';
 
 class MainDashboard extends StatefulWidget {
+  static final String route = '/mainDashboard';
   // static AudioCache player = AudioCache();
 
   @override
   _MainDashboardState createState() => _MainDashboardState();
 }
 
-class _MainDashboardState extends State<MainDashboard>
-    with SingleTickerProviderStateMixin {
+class _MainDashboardState extends State<MainDashboard> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
   }
 
@@ -64,10 +61,7 @@ class _MainDashboardState extends State<MainDashboard>
                 child: GradientWidget(
                   child: Text(
                     'SELECT AN OPTION',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   gradient: Gradients.dashboardButtonGradient,
                 ),
@@ -105,8 +99,7 @@ class _MainDashboardState extends State<MainDashboard>
                       CircularButtonDashboard(
                         icon: Constants.selfDefenseIcon,
                         text: 'Self Defense',
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed('Defense'),
+                        onPressed: () => Navigator.of(context).pushNamed('Defense'),
                       ),
                       CircularButtonDashboard(
                         icon: Constants.arIcon,
@@ -128,11 +121,9 @@ class _MainDashboardState extends State<MainDashboard>
                               children: [
                                 RotationTransition(
                                   turns: Tween(begin: 0.0, end: -.1)
-                                      .chain(
-                                          CurveTween(curve: Curves.elasticIn))
+                                      .chain(CurveTween(curve: Curves.elasticIn))
                                       .animate(_animationController),
-                                  child: Icon(Icons.notifications_active,
-                                      size: 70, color: Color(0xffffc400)),
+                                  child: Icon(Icons.notifications_active, size: 70, color: Color(0xffffc400)),
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -185,8 +176,7 @@ class _MainDashboardState extends State<MainDashboard>
                                   curve: Curves.linear,
                                   child: Transform.rotate(
                                     angle: (pi / 180) * -35,
-                                    child: Icon(Constants.shakeIcon,
-                                        size: 70, color: Color(0xffffc400)),
+                                    child: Icon(Constants.shakeIcon, size: 70, color: Color(0xffffc400)),
                                   ),
                                 ),
                                 SizedBox(
@@ -274,9 +264,7 @@ class _MainDashboardState extends State<MainDashboard>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text('5 min 10 s',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 24)),
+                          Text('5 min 10 s', style: TextStyle(color: Colors.white, fontSize: 24)),
                           Text('Time to reach',
                               style: TextStyle(
                                 color: Colors.white,
@@ -297,9 +285,7 @@ class _MainDashboardState extends State<MainDashboard>
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('252m',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 24)),
+                                Text('252m', style: TextStyle(color: Colors.white, fontSize: 24)),
                                 Icon(
                                   Icons.pin_drop,
                                   color: Colors.white,
@@ -317,13 +303,8 @@ class _MainDashboardState extends State<MainDashboard>
                         ),
                       ),
                       decoration: BoxDecoration(
-                          gradient: LinearGradient(stops: [
-                            0.6,
-                            1
-                          ], colors: [
-                            Color.fromRGBO(244, 102, 65, 1),
-                            Color.fromRGBO(253, 137, 1, 1)
-                          ]),
+                          gradient: LinearGradient(
+                              stops: [0.6, 1], colors: [Color.fromRGBO(244, 102, 65, 1), Color.fromRGBO(253, 137, 1, 1)]),
                           color: Colors.red),
                     ),
                   ),

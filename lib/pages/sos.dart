@@ -7,6 +7,7 @@ import 'package:safety/shared/widgets/round_app_bar.dart';
 import 'package:safety/shared/widgets/sos_button.dart';
 
 class SOSPage extends StatelessWidget {
+  static final String route = '/sosPage';
   @override
   Widget build(BuildContext context) {
     // final profileProvider = Provider.of<ProfileProvider>(context);
@@ -36,10 +37,7 @@ class SOSPage extends StatelessWidget {
                     gradient: Gradients.sosGradient,
                     child: Text(
                       'KEEP CALM!',
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -69,19 +67,14 @@ class SOSPage extends StatelessWidget {
                     endColor: Gradients.endColor,
                     fromEmergency: false,
                     onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          'Emergency_Dashboard',
-                          (Route<dynamic> route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil('Emergency_Dashboard', (Route<dynamic> route) => false);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'SOS',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 55,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 55, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Press to notify others for help',

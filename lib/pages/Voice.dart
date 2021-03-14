@@ -14,6 +14,8 @@ import 'package:safety/ui/homescreen.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class SpeechScreen extends StatefulWidget {
+  static final String route = '/speechScreen';
+
   @override
   _SpeechScreenState createState() => _SpeechScreenState();
 }
@@ -64,6 +66,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   final CallsAndMessagesService service = locator<CallsAndMessagesService>();
   final String number = "123456789";
   final assetsAudioPlayer = AssetsAudioPlayer();
+
   @override
   void initState() {
     super.initState();
@@ -140,8 +143,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
               setState(() {
                 Timer(Duration(seconds: 10), () {
                   assetsAudioPlayer.stop();
-                  Navigator.pop(context,
-                      MaterialPageRoute(builder: (context) => Homes()));
+                  Navigator.pop(context, MaterialPageRoute(builder: (context) => Homes()));
                   print('stop');
                 });
                 assetsAudioPlayer.open(

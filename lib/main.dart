@@ -3,20 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
-import 'package:safety/pages/AR.dart';
-import 'package:safety/pages/Voice.dart';
-import 'package:safety/pages/center_map.dart';
-import 'package:safety/pages/emergency_dashboard.dart';
-import 'package:safety/pages/emergency_map.dart';
-import 'package:safety/pages/emergency_people_list.dart';
-import 'package:safety/pages/main_dashboard.dart';
 import 'package:safety/pages/photo_capture.dart';
-import 'package:safety/pages/sos.dart';
-import 'package:safety/pages/switcher.dart';
 import 'package:safety/providers/profile_provider.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
+import 'package:safety/utils/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,8 +25,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _latestHardwareButtonEvent;
 
-  StreamSubscription<HardwareButtons.VolumeButtonEvent>
-      _volumeButtonSubscription;
+  StreamSubscription<HardwareButtons.VolumeButtonEvent> _volumeButtonSubscription;
 
   StreamSubscription<HardwareButtons.HomeButtonEvent> _homeButtonSubscription;
 
@@ -43,8 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _volumeButtonSubscription =
-        HardwareButtons.volumeButtonEvents.listen((event) {
+    _volumeButtonSubscription = HardwareButtons.volumeButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = event.toString();
         Constants.sendMessage();
@@ -61,8 +51,7 @@ class _MyAppState extends State<MyApp> {
     _lockButtonSubscription = HardwareButtons.lockButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = 'LOCK_BUTTON';
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PhotoCapture()));
+        Navigator.pushNamed(context, PhotoCapture.route);
       });
     });
   }
@@ -88,21 +77,9 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        routes: {
-          '/': (context) => Splash(),
-          'Switcher': (context) => Switcher(),
-          'sos': (context) => SOSPage(),
-          'Safe_Dashboard': (context) => MainDashboard(),
-          'Emergency_Dashboard': (context) => Hom(),
-          // 'Defense': (context) => self(),
-          // 'Strategy': (context) => EmergencyInfoPage(),
-          'AR': (context) => ARDetectionPage(),
-          'Shake': (context) => PhotoCapture(),
-          'Emergency_List': (_) => EmergencyPeopleList(),
-          'Emergency_Map': (_) => MyHomePage(),
-          'center_map': (_) => HomePage(),
-          'voice': (_) => SpeechScreen(),
-        },
+        routes: Routes().getRoutes(),
+        navigatorKey: appNavigator.navigatorKey,
+        home: Splash(),
       ),
     );
   }
