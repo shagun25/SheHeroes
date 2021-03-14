@@ -1,19 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flash_animation/flash_animation.dart';
-import 'package:flutter/material.dart';
-import 'package:safety/pages/emergency_dashboard.dart';
-import 'package:safety/providers/camera_provider.dart';
-import 'package:safety/shared/widgets/sos_button.dart';
-import 'package:blobs/blobs.dart';
-import 'package:avatar_glow/avatar_glow.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:safety/ui/homescreen.dart';
-import 'camera.dart';
 import 'dart:io';
 
+import 'package:avatar_glow/avatar_glow.dart';
+import 'package:blobs/blobs.dart';
+import 'package:flash_animation/flash_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:safety/pages/emergency_dashboard.dart';
 
 class CameraSwitcher extends StatefulWidget {
   @override
@@ -38,9 +32,7 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
+                begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,15 +43,12 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
 
               FlatButton(
                 onPressed: () {
-                  ImagePicker.pickImage(source: ImageSource.camera)
-                      .then((File recordedImage) {
+                  ImagePicker.pickImage(source: ImageSource.camera).then((File recordedImage) {
                     if (recordedImage != null && recordedImage.path != null) {
                       setState(() {
                         firstButtonText = 'saving in progress...';
                       });
-                      GallerySaver.saveImage(recordedImage.path,
-                              albumName: albumName)
-                          .then((bool success) {
+                      GallerySaver.saveImage(recordedImage.path, albumName: albumName).then((bool success) {
                         setState(() {
                           firstButtonText = 'image saved!';
                         });
@@ -71,8 +60,7 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
                   children: [
                     Center(
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(
-                            0, MediaQuery.of(context).size.width / 15, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 15, 0, 0),
                         child: AvatarGlow(
                           endRadius: 130.0,
                           glowColor: Colors.blueAccent,
@@ -98,8 +86,7 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
                     Center(
                         child: Container(
                             padding: EdgeInsets.all(20),
-                            margin: EdgeInsets.fromLTRB(0,
-                                MediaQuery.of(context).size.width / 3.5, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 3.5, 0, 0),
                             child: Icon(Icons.camera_alt))),
                   ],
                 ),
@@ -151,15 +138,13 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
               FlatButton(
                 autofocus: false,
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Hom()));
+                  Navigator.pushNamed(context, Hom.route);
                 },
                 child: Stack(
                   children: [
                     Center(
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(
-                            0, MediaQuery.of(context).size.width / 15, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 15, 0, 0),
                         child: AvatarGlow(
                           endRadius: 130.0,
                           glowColor: Colors.deepOrange,
@@ -184,8 +169,7 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
                     ),
                     Center(
                         child: Container(
-                            margin: EdgeInsets.fromLTRB(0,
-                                MediaQuery.of(context).size.width / 3.5, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 3.5, 0, 0),
                             child: Icon(Icons.video_call))),
                   ],
                 ),

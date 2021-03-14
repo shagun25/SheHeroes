@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:safety/pages/login_page.dart';
 import 'dart:async';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:safety/pages/login_page.dart';
 
 class Splash extends StatefulWidget {
+  static final String route = '/splash';
+
   @override
   _SplashState createState() => _SplashState();
 }
@@ -15,8 +18,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
     });
   }
 
@@ -36,9 +38,7 @@ class _SplashState extends State<Splash> {
                 child: Container(
                   height: 200,
                   width: 200,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(1000)),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(1000)),
                   child: new Image(
                       width: 251.0, //250
                       height: 191.0,
@@ -57,13 +57,9 @@ class _SplashState extends State<Splash> {
                     "SheHeroes",
                   ],
                   textStyle: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: "Canterbury",
-                      color: HexColor("#ea6a88"),
-                      fontWeight: FontWeight.bold),
+                      fontSize: 30.0, fontFamily: "Canterbury", color: HexColor("#ea6a88"), fontWeight: FontWeight.bold),
                   textAlign: TextAlign.start,
-                  alignment:
-                      AlignmentDirectional.topStart // or Alignment.topLeft
+                  alignment: AlignmentDirectional.topStart // or Alignment.topLeft
                   ),
             ),
           ],

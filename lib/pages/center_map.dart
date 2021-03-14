@@ -9,62 +9,18 @@
 //   _HomePageState createState() => _HomePageState();
 // }
 
+import 'dart:convert';
 // class _HomePageState extends State<HomePage> {
 //   LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
 //   GoogleMapController _controller;
 //   Location _location = Location();
 import 'dart:math';
-//   MapType _defaultMapType = MapType.normal;
-
-//   void _onMapCreated(GoogleMapController _cntlr) {
-//     _controller = _cntlr;
-//     _location.onLocationChanged.listen((l) {
-//       _controller.animateCamera(
-//         CameraUpdate.newCameraPosition(
-//           CameraPosition(
-//             target: LatLng(l.latitude, l.longitude),
-//             zoom: 15,
-//           ),
-//         ),
-//       );
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: MediaQuery.of(context).size.height,
-//       width: MediaQuery.of(context).size.width,
-//       child: Stack(
-//         children: [
-//           ClipRRect(
-//             borderRadius: BorderRadius.circular(115),
-//             child: GoogleMap(
-//               initialCameraPosition:
-//                   CameraPosition(target: _initialcameraposition),
-//               trafficEnabled: true,
-//               onMapCreated: _onMapCreated,
-//               myLocationButtonEnabled: false,
-//               mapToolbarEnabled: false,
-//               myLocationEnabled: true,
-//               mapType: _defaultMapType,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
-import 'package:safety/pages/emergency_map.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:location/location.dart';
 
 //---------------------------------API-----------------------------------------
 
@@ -132,8 +88,7 @@ class Incidents {
     incidentOffense = json['incident_offense'];
     incidentOffenseCode = json['incident_offense_code'];
     incidentOffenseDescription = json['incident_offense_description'];
-    incidentOffenseDetailDescription =
-        json['incident_offense_detail_description'];
+    incidentOffenseDetailDescription = json['incident_offense_detail_description'];
     incidentOffenseCrimeAgainst = json['incident_offense_crime_against'];
     incidentOffenseAction = json['incident_offense_action'];
     incidentSourceName = json['incident_source_name'];
@@ -148,8 +103,7 @@ class Incidents {
     data['incident_offense'] = this.incidentOffense;
     data['incident_offense_code'] = this.incidentOffenseCode;
     data['incident_offense_description'] = this.incidentOffenseDescription;
-    data['incident_offense_detail_description'] =
-        this.incidentOffenseDetailDescription;
+    data['incident_offense_detail_description'] = this.incidentOffenseDetailDescription;
     data['incident_offense_crime_against'] = this.incidentOffenseCrimeAgainst;
     data['incident_offense_action'] = this.incidentOffenseAction;
     data['incident_source_name'] = this.incidentSourceName;
@@ -162,6 +116,8 @@ class Incidents {
 //-------------------GoogleMap Widget----------------------------------------
 
 class HomePage extends StatefulWidget {
+  static final String route = '/homePage';
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -170,12 +126,11 @@ class _HomePageState extends State<HomePage> {
   var url =
       'https://private-anon-c41e4e8ae7-crimeometer.apiary-mock.com/v1/incidents/crowdsourced-raw-data?lat=lat&lon=lon&distance=distance&datetime_ini=datetime_ini&datetime_end=datetime_end&page=page';
   var data;
+
   @override
   void initState() {
     super.initState();
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(devicePixelRatio: 1), 'assets/markericon.jpg')
-        .then((onValue) {
+    BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 1), 'assets/markericon.jpg').then((onValue) {
       markerimage = onValue;
     });
     // getData();
@@ -184,6 +139,7 @@ class _HomePageState extends State<HomePage> {
   BitmapDescriptor markerimage;
 
   CityData cd;
+
   getData() async {
     var res = await http.get(url);
     //log(res.statusCode.toString());
@@ -191,13 +147,11 @@ class _HomePageState extends State<HomePage> {
     //log(res.body.toString());
     data = jsonDecode(res.body);
     //data = json.decode(res.body).cast<Map<String, dynamic>>();
-    print(
-        '\nhello: ' + data[0]['incidents'][0]['incident_longitude'].toString());
+    print('\nhello: ' + data[0]['incidents'][0]['incident_longitude'].toString());
     Iterable markers = Iterable.generate(10, (index) {
       //Map result = data[index];
       // Map location = ;
-      LatLng latLngMarker = LatLng(data["incidents"]["incident_latitude"],
-          data["incidents"]["incident_longitude"]);
+      LatLng latLngMarker = LatLng(data["incidents"]["incident_latitude"], data["incidents"]["incident_longitude"]);
 
       return Marker(markerId: MarkerId("marker$index"), position: latLngMarker);
     });
@@ -210,14 +164,14 @@ class _HomePageState extends State<HomePage> {
 
   MapType _defaultMapType = MapType.normal;
   Random random = new Random();
+
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
     _location.onLocationChanged.listen((l) {
       _controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            target: LatLng(incidentdata['incidents'][0]['lat'],
-                incidentdata['incidents'][0]['lng']),
+            target: LatLng(incidentdata['incidents'][0]['lat'], incidentdata['incidents'][0]['lng']),
             zoom: 12,
           ),
         ),
@@ -279,9 +233,8 @@ class _HomePageState extends State<HomePage> {
                   tiltGesturesEnabled: true,
                   trafficEnabled: true,
                   zoomGesturesEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                      target: LatLng(incidentdata['incidents'][0]['lat'],
-                          incidentdata['incidents'][0]['lng'])),
+                  initialCameraPosition:
+                      CameraPosition(target: LatLng(incidentdata['incidents'][0]['lat'], incidentdata['incidents'][0]['lng'])),
                   // trafficEnabled: true,
                   onMapCreated: _onMapCreated,
                   myLocationButtonEnabled: false,
@@ -310,8 +263,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-06-01T08:00:00",
         "endTime": "2021-06-01T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "US-85 Santa Fe Dr: intermittent lane closures from CO-470 to Highlands Ranch Pkwy",
+        "shortDesc": "US-85 Santa Fe Dr: intermittent lane closures from CO-470 to Highlands Ranch Pkwy",
         "fullDesc":
             "Intermittent lane closures due to maintenance work on US-85 Santa Fe Dr both ways from CO-470 / US-85 Santa Fe Dr / County Line Rd to Highlands Ranch Pkwy.",
         "delayFromFreeFlow": 0.0,
@@ -338,8 +290,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T06:00:00",
         "endTime": "2020-12-07T18:01:00",
         "impacting": false,
-        "shortDesc":
-            "CO-121 Wadsworth Blvd: shoulder closed between CR-59 Chatfield Ave and CO-470",
+        "shortDesc": "CO-121 Wadsworth Blvd: shoulder closed between CR-59 Chatfield Ave and CO-470",
         "fullDesc":
             "Shoulder closed due to maintenance work on CO-121 Wadsworth Blvd both ways between CR-59 Chatfield Ave and CO-470.",
         "delayFromFreeFlow": 0.0,
@@ -348,8 +299,7 @@ class _HomePageState extends State<HomePage> {
         "iconURL": "http://content.mqcdn.com/mqtraffic/const_min.png",
         "parameterizedDescription": {
           "crossRoad2": "CO-470 / CO-121 Wadsworth Blvd",
-          "crossRoad1":
-              "CO-121 Wadsworth Blvd / CR-59 Chatfield Ave / Chatfield Ave",
+          "crossRoad1": "CO-121 Wadsworth Blvd / CR-59 Chatfield Ave / Chatfield Ave",
           "position2": "and",
           "direction": "both ways",
           "position1": "between",
@@ -396,8 +346,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-11-17T05:31:11",
         "endTime": "2020-12-14T06:00:00",
         "impacting": false,
-        "shortDesc":
-            "County Line Rd W/B: roadway reduced to two lanes from Holly St to Colorado Blvd",
+        "shortDesc": "County Line Rd W/B: roadway reduced to two lanes from Holly St to Colorado Blvd",
         "fullDesc":
             "Roadway reduced to two lanes due to construction work on County Line Rd Westbound from Holly St to Colorado Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -410,8 +359,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "Westbound",
           "position1": "from",
-          "eventText":
-              "Roadway reduced from n lanes to two lanes, construction work",
+          "eventText": "Roadway reduced from n lanes to two lanes, construction work",
           "roadName": "County Line Rd"
         }
       },
@@ -425,8 +373,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-11-17T05:31:11",
         "endTime": "2020-12-14T06:00:00",
         "impacting": false,
-        "shortDesc":
-            "County Line Rd E/B: construction work from Colorado Blvd to Holly St",
+        "shortDesc": "County Line Rd E/B: construction work from Colorado Blvd to Holly St",
         "fullDesc":
             "Roadway reduced to one lane due to construction work on County Line Rd Eastbound from Colorado Blvd to Holly St.",
         "delayFromFreeFlow": 0.0,
@@ -439,8 +386,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "Eastbound",
           "position1": "from",
-          "eventText":
-              "Construction work, roadway reduced from n lanes to one lane",
+          "eventText": "Construction work, roadway reduced from n lanes to one lane",
           "roadName": "County Line Rd"
         }
       },
@@ -454,8 +400,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T06:00:00",
         "endTime": "2020-12-07T18:01:00",
         "impacting": false,
-        "shortDesc":
-            "CO-121 Wadsworth Blvd: intermittent lane closures between Coal Mine Ave and CR-59",
+        "shortDesc": "CO-121 Wadsworth Blvd: intermittent lane closures between Coal Mine Ave and CR-59",
         "fullDesc":
             "Intermittent lane closures due to maintenance work on CO-121 Wadsworth Blvd both ways between Coal Mine Ave and CR-59 Chatfield Ave.",
         "delayFromFreeFlow": 0.0,
@@ -463,8 +408,7 @@ class _HomePageState extends State<HomePage> {
         "distance": 3.190000057220459,
         "iconURL": "http://content.mqcdn.com/mqtraffic/const_mod.png",
         "parameterizedDescription": {
-          "crossRoad2":
-              "CO-121 Wadsworth Blvd / CR-59 Chatfield Ave / Chatfield Ave",
+          "crossRoad2": "CO-121 Wadsworth Blvd / CR-59 Chatfield Ave / Chatfield Ave",
           "crossRoad1": "CO-121 Wadsworth Blvd / Coal Mine Ave",
           "position2": "and",
           "direction": "both ways",
@@ -485,8 +429,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T09:00:00",
         "endTime": "2020-12-07T15:01:00",
         "impacting": false,
-        "shortDesc":
-            "CO-177 N/B: construction during off-peak periods between CO-470 and Jamison Ave",
+        "shortDesc": "CO-177 N/B: construction during off-peak periods between CO-470 and Jamison Ave",
         "fullDesc":
             "Right lane closed due to construction during off-peak periods on CO-177 University Blvd Northbound between CO-470 and Jamison Ave.",
         "delayFromFreeFlow": 0.0,
@@ -499,8 +442,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "and",
           "direction": "Northbound",
           "position1": "between",
-          "eventText":
-              "Construction During Off-Peak Periods, (Named) Lane Closed",
+          "eventText": "Construction During Off-Peak Periods, (Named) Lane Closed",
           "roadName": "CO-177"
         }
       },
@@ -515,8 +457,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-07T18:01:00",
         "impacting": false,
         "shortDesc": "CO-88 Arapahoe Rd: maintenance work at Revere Pkwy",
-        "fullDesc":
-            "Right turn lane closed due to maintenance work on CO-88 Arapahoe Rd both ways at Revere Pkwy.",
+        "fullDesc": "Right turn lane closed due to maintenance work on CO-88 Arapahoe Rd both ways at Revere Pkwy.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -540,10 +481,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T09:00:00",
         "endTime": "2020-12-07T15:00:00",
         "impacting": false,
-        "shortDesc":
-            "CO-88 Federal Blvd S/B: right lane closed near Belleview Ave",
-        "fullDesc":
-            "Right lane closed due to construction work on CO-88 Federal Blvd Southbound near Belleview Ave.",
+        "shortDesc": "CO-88 Federal Blvd S/B: right lane closed near Belleview Ave",
+        "fullDesc": "Right lane closed due to construction work on CO-88 Federal Blvd Southbound near Belleview Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -568,8 +507,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-12T07:00:00",
         "impacting": false,
         "shortDesc": "I-225: shoulder closed at I-25",
-        "fullDesc":
-            "Shoulder closed due to construction work on I-225 both ways at I-25.",
+        "fullDesc": "Shoulder closed due to construction work on I-225 both ways at I-25.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -593,8 +531,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-11-01T07:00:00",
         "endTime": "2021-02-28T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "CO-30 Gun Club Rd: intermittent lane closures at Quincy Ave",
+        "shortDesc": "CO-30 Gun Club Rd: intermittent lane closures at Quincy Ave",
         "fullDesc":
             "Intermittent lane closures due to construction on CO-30 Gun Club Rd both ways at CO-30 Gun Club Rd / CO-30 Quincy Ave / CR-43 Gun Club Rd.",
         "delayFromFreeFlow": 0.0,
@@ -602,8 +539,7 @@ class _HomePageState extends State<HomePage> {
         "distance": 0.0,
         "iconURL": "http://content.mqcdn.com/mqtraffic/const_mod.png",
         "parameterizedDescription": {
-          "crossRoad2":
-              "CO-30 Gun Club Rd / CO-30 Quincy Ave / CR-43 Gun Club Rd",
+          "crossRoad2": "CO-30 Gun Club Rd / CO-30 Quincy Ave / CR-43 Gun Club Rd",
           "direction": "both ways",
           "position1": "at",
           "eventText": "Intermittent Lane Closures, construction",
@@ -629,8 +565,7 @@ class _HomePageState extends State<HomePage> {
         "distance": 0.0,
         "iconURL": "http://content.mqcdn.com/mqtraffic/const_mod.png",
         "parameterizedDescription": {
-          "crossRoad2":
-              "CO-30 Gun Club Rd / CO-30 Quincy Ave / CR-43 Gun Club Rd",
+          "crossRoad2": "CO-30 Gun Club Rd / CO-30 Quincy Ave / CR-43 Gun Club Rd",
           "direction": "both ways",
           "position1": "at",
           "eventText": "Intermittent Lane Closures, construction",
@@ -648,10 +583,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T05:18:46",
         "endTime": "2020-12-12T07:00:00",
         "impacting": false,
-        "shortDesc":
-            "CO-2 Colorado Blvd: right lane closed near US-285 Hampden Ave",
-        "fullDesc":
-            "Right lane closed due to construction work on CO-2 Colorado Blvd both ways near US-285 Hampden Ave.",
+        "shortDesc": "CO-2 Colorado Blvd: right lane closed near US-285 Hampden Ave",
+        "fullDesc": "Right lane closed due to construction work on CO-2 Colorado Blvd both ways near US-285 Hampden Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -675,10 +608,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T05:18:46",
         "endTime": "2020-12-12T07:00:00",
         "impacting": false,
-        "shortDesc":
-            "US-285 Hampden Ave W/B: right lane closed near Colorado Blvd",
-        "fullDesc":
-            "Right lane closed due to construction work on US-285 Hampden Ave Westbound near Colorado Blvd.",
+        "shortDesc": "US-285 Hampden Ave W/B: right lane closed near Colorado Blvd",
+        "fullDesc": "Right lane closed due to construction work on US-285 Hampden Ave Westbound near Colorado Blvd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -702,8 +633,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T04:30:00",
         "endTime": "2020-12-07T16:31:00",
         "impacting": true,
-        "shortDesc":
-            "CO-74 Bear Creek Rd: road closed between CO-8 Bear Creek Ave and Shady Ln",
+        "shortDesc": "CO-74 Bear Creek Rd: road closed between CO-8 Bear Creek Ave and Shady Ln",
         "fullDesc":
             "Road closed due to construction during the day time on CO-74 Bear Creek Rd both ways between CO-8 Bear Creek Ave and Shady Ln.",
         "delayFromFreeFlow": 0.0,
@@ -732,8 +662,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-12T07:00:00",
         "impacting": false,
-        "shortDesc":
-            "I-225 S/B: right lane closed from Iliff Ave to CO-83 Parker Rd",
+        "shortDesc": "I-225 S/B: right lane closed from Iliff Ave to CO-83 Parker Rd",
         "fullDesc":
             "Right lane closed and right hand shoulder closed due to construction work on I-225 Southbound from Iliff Ave to CO-83 Parker Rd.",
         "delayFromFreeFlow": 0.07000000029802322,
@@ -746,8 +675,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "Southbound",
           "position1": "from",
-          "eventText":
-              "(Named) Lane Closed, right Hand Shoulder Closed, construction work",
+          "eventText": "(Named) Lane Closed, right Hand Shoulder Closed, construction work",
           "fromLocation": "Southeast Crossing",
           "toLocation": "Dam East/West",
           "roadName": "I-225"
@@ -764,8 +692,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-18T00:00:00",
         "impacting": false,
         "shortDesc": "I-225: construction at Exit 4 CO-83 Parker Rd",
-        "fullDesc":
-            "Right hand shoulder closed due to construction on I-225 both ways at Exit 4 CO-83 Parker Rd.",
+        "fullDesc": "Right hand shoulder closed due to construction on I-225 both ways at Exit 4 CO-83 Parker Rd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -789,10 +716,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-12T07:00:00",
         "impacting": true,
-        "shortDesc":
-            "CO-83 Parker Rd W/B: turning lane closed at Mississippi Ave",
-        "fullDesc":
-            "Turning lane closed due to construction work on CO-83 Parker Rd Westbound at Mississippi Ave.",
+        "shortDesc": "CO-83 Parker Rd W/B: turning lane closed at Mississippi Ave",
+        "fullDesc": "Turning lane closed due to construction work on CO-83 Parker Rd Westbound at Mississippi Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -817,8 +742,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-07T19:01:00",
         "impacting": false,
         "shortDesc": "Alameda Dr: restrictions near Chambers Rd",
-        "fullDesc":
-            "Restrictions due to Holiday Tree Lighting on Alameda Dr both ways near Chambers Rd.",
+        "fullDesc": "Restrictions due to Holiday Tree Lighting on Alameda Dr both ways near Chambers Rd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -843,8 +767,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-01-04T17:01:00",
         "impacting": false,
         "shortDesc": "US-6: intermittent lane closures at CR-93 Heritage Rd",
-        "fullDesc":
-            "Intermittent lane closures due to construction on US-6 both ways at CR-93 Heritage Rd.",
+        "fullDesc": "Intermittent lane closures due to construction on US-6 both ways at CR-93 Heritage Rd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -868,10 +791,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-01T07:00:00",
         "endTime": "2021-06-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Peoria St: intermittent lane closures from I-70-BL Colfax Ave to Quari Ct",
-        "fullDesc":
-            "Intermittent lane closures due to construction on Peoria St both ways from I-70-BL Colfax Ave to Quari Ct.",
+        "shortDesc": "Peoria St: intermittent lane closures from I-70-BL Colfax Ave to Quari Ct",
+        "fullDesc": "Intermittent lane closures due to construction on Peoria St both ways from I-70-BL Colfax Ave to Quari Ct.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 2.0799999237060547,
@@ -896,10 +817,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-26T01:40:12",
         "endTime": "2021-06-14T06:01:00",
         "impacting": true,
-        "shortDesc":
-            "11th Ave: no through traffic allowed from Lincoln St to Humboldt St",
-        "fullDesc":
-            "No through traffic allowed due to shared streets on 11th Ave both ways from Lincoln St to Humboldt St.",
+        "shortDesc": "11th Ave: no through traffic allowed from Lincoln St to Humboldt St",
+        "fullDesc": "No through traffic allowed due to shared streets on 11th Ave both ways from Lincoln St to Humboldt St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 1.4299999475479126,
@@ -926,10 +845,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-01T07:00:00",
         "endTime": "2021-06-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "13th Ave: intermittent lane closures from Peoria St to Revere St",
-        "fullDesc":
-            "Intermittent lane closures due to construction on 13th Ave both ways from Peoria St to Revere St.",
+        "shortDesc": "13th Ave: intermittent lane closures from Peoria St to Revere St",
+        "fullDesc": "Intermittent lane closures due to construction on 13th Ave both ways from Peoria St to Revere St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -954,8 +871,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-04-21T05:00:00",
         "endTime": "2020-12-31T23:59:00",
         "impacting": true,
-        "shortDesc":
-            "Bannock St S/B: road permanently closed from I-70-BL Colfax Ave to 14th Ave",
+        "shortDesc": "Bannock St S/B: road permanently closed from I-70-BL Colfax Ave to 14th Ave",
         "fullDesc":
             "Road permanently closed due to conversion to a pedestrian area on Bannock St Southbound from I-70-BL Colfax Ave to 14th Ave.",
         "delayFromFreeFlow": 0.0,
@@ -995,8 +911,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, construction During Off-Peak Periods",
+          "eventText": "Intermittent Lane Closures, construction During Off-Peak Periods",
           "fromLocation": "Conservatory",
           "toLocation": "Tower Triangle",
           "roadName": "E-470"
@@ -1012,8 +927,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-12-31T07:00:00",
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Broadway S/B: construction from 16th Ave to I-70-BL Colfax Ave",
+        "shortDesc": "Broadway S/B: construction from 16th Ave to I-70-BL Colfax Ave",
         "fullDesc":
             "Parking restrictions in force due to construction on Broadway Southbound from 16th Ave to I-70-BL Colfax Ave.",
         "delayFromFreeFlow": 0.0,
@@ -1041,8 +955,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-22T17:01:00",
         "impacting": false,
         "shortDesc": "14th St S/B: construction from Glenarm Pl to Tremont Pl",
-        "fullDesc":
-            "Parking restrictions in force due to construction on 14th St Southbound from Glenarm Pl to Tremont Pl.",
+        "fullDesc": "Parking restrictions in force due to construction on 14th St Southbound from Glenarm Pl to Tremont Pl.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.10999999940395355,
@@ -1068,8 +981,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
         "shortDesc": "16th St Mall: construction from Wynkoop St to Broadway",
-        "fullDesc":
-            "Construction on 16th St Mall both ways from Wynkoop St to Broadway.",
+        "fullDesc": "Construction on 16th St Mall both ways from Wynkoop St to Broadway.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1096,8 +1008,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-26T01:40:12",
         "endTime": "2021-06-14T06:01:00",
         "impacting": true,
-        "shortDesc":
-            "16th Ave: no through traffic allowed from Lincoln St to City Park Esplanade",
+        "shortDesc": "16th Ave: no through traffic allowed from Lincoln St to City Park Esplanade",
         "fullDesc":
             "No through traffic allowed due to shared streets on 16th Ave both ways from Lincoln St to City Park Esplanade.",
         "delayFromFreeFlow": 0.0,
@@ -1126,8 +1037,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-12-31T07:00:00",
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Lincoln St N/B: construction from I-70-BL Colfax Ave to 16th Ave",
+        "shortDesc": "Lincoln St N/B: construction from I-70-BL Colfax Ave to 16th Ave",
         "fullDesc":
             "Parking restrictions in force due to construction on Lincoln St Northbound from I-70-BL Colfax Ave to 16th Ave.",
         "delayFromFreeFlow": 0.0,
@@ -1154,8 +1064,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T00:00:00",
         "endTime": "2020-12-07T23:59:59",
         "impacting": false,
-        "shortDesc":
-            "I-70: intermittent lane closures between Exit 292 CO-36 Colfax Ave and E-470",
+        "shortDesc": "I-70: intermittent lane closures between Exit 292 CO-36 Colfax Ave and E-470",
         "fullDesc":
             "Intermittent lane closures due to construction on I-70 both ways between Exit 292 CO-36 Colfax Ave and E-470.",
         "delayFromFreeFlow": 0.0,
@@ -1184,8 +1093,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-06-30T07:00:00",
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Marion St: construction from Marion St / 18th Ave to 17th Ave",
+        "shortDesc": "Marion St: construction from Marion St / 18th Ave to 17th Ave",
         "fullDesc":
             "Parking restrictions in force due to construction on Marion St both ways from Marion St / 18th Ave to 17th Ave.",
         "delayFromFreeFlow": 0.0,
@@ -1213,8 +1121,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-07-24T17:01:00",
         "impacting": false,
         "shortDesc": "Grant St S/B: construction from 18th Ave to 17th Ave",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Grant St Southbound from 18th Ave to 17th Ave.",
+        "fullDesc": "Parking restrictions in force due to construction on Grant St Southbound from 18th Ave to 17th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.17000000178813934,
@@ -1240,8 +1147,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-07-25T17:01:00",
         "impacting": false,
         "shortDesc": "17th St E/B: construction from Tremont Pl to Broadway",
-        "fullDesc":
-            "Parking restrictions in force due to construction on 17th St Eastbound from Tremont Pl to Broadway.",
+        "fullDesc": "Parking restrictions in force due to construction on 17th St Eastbound from Tremont Pl to Broadway.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.10999999940395355,
@@ -1266,10 +1172,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-07-31T07:00:00",
         "endTime": "2021-07-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "California St S/B: construction from 16th St Mall to 15th St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on California St Southbound from 16th St Mall to 15th St.",
+        "shortDesc": "California St S/B: construction from 16th St Mall to 15th St",
+        "fullDesc": "Parking restrictions in force due to construction on California St Southbound from 16th St Mall to 15th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.15000000596046448,
@@ -1294,10 +1198,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-06-18T07:39:38",
         "endTime": "2021-06-14T20:00:00",
         "impacting": true,
-        "shortDesc":
-            "Glenarm Pl: road closed from 15th St to Glenarm Pl / 17th St",
-        "fullDesc":
-            "Road closed due to outdoor dining on Glenarm Pl both ways from 15th St to Glenarm Pl / 17th St.",
+        "shortDesc": "Glenarm Pl: road closed from 15th St to Glenarm Pl / 17th St",
+        "fullDesc": "Road closed due to outdoor dining on Glenarm Pl both ways from 15th St to Glenarm Pl / 17th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.5899999737739563,
@@ -1323,8 +1225,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-19T17:01:00",
         "impacting": false,
         "shortDesc": "Sherman St: construction from 17th Ave to 18th Ave",
-        "fullDesc":
-            "Construction on Sherman St both ways from 17th Ave to 18th Ave.",
+        "fullDesc": "Construction on Sherman St both ways from 17th Ave to 18th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.3400000035762787,
@@ -1350,8 +1251,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-19T17:01:00",
         "impacting": false,
         "shortDesc": "18th Ave W/B: construction from Grant St to Sherman St",
-        "fullDesc":
-            "Construction on 18th Ave Westbound from Grant St to Sherman St.",
+        "fullDesc": "Construction on 18th Ave Westbound from Grant St to Sherman St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.10999999940395355,
@@ -1376,10 +1276,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-14T07:00:00",
         "endTime": "2021-08-13T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "14th St S/B: construction from Lawrence St to Arapahoe St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on 14th St Southbound from Lawrence St to Arapahoe St.",
+        "shortDesc": "14th St S/B: construction from Lawrence St to Arapahoe St",
+        "fullDesc": "Parking restrictions in force due to construction on 14th St Southbound from Lawrence St to Arapahoe St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.10999999940395355,
@@ -1404,8 +1302,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-01-11T07:00:00",
         "endTime": "2021-01-10T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Broadway S/B: construction from Broadway / 20th St / California St to 19th St",
+        "shortDesc": "Broadway S/B: construction from Broadway / 20th St / California St to 19th St",
         "fullDesc":
             "Parking restrictions in force due to construction on Broadway Southbound from Broadway / 20th St / California St to 19th St.",
         "delayFromFreeFlow": 0.0,
@@ -1433,8 +1330,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-06-14T06:01:00",
         "impacting": true,
         "shortDesc": "Larimer St W/B: road closed from 15th St to 14th St",
-        "fullDesc":
-            "Road closed due to outdoor seating on Larimer St Westbound from 15th St to 14th St.",
+        "fullDesc": "Road closed due to outdoor seating on Larimer St Westbound from 15th St to 14th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.14000000059604645,
@@ -1460,8 +1356,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
         "shortDesc": "Larimer St W/B: construction from 15th St to 14th St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Larimer St Westbound from 15th St to 14th St.",
+        "fullDesc": "Parking restrictions in force due to construction on Larimer St Westbound from 15th St to 14th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.14000000059604645,
@@ -1486,10 +1381,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-26T01:40:12",
         "endTime": "2021-06-14T06:01:00",
         "impacting": true,
-        "shortDesc":
-            "Stuart St S/B: no through traffic allowed from 24th Ave to 21st Ave",
-        "fullDesc":
-            "No through traffic allowed due to shared streets on Stuart St Southbound from 24th Ave to 21st Ave.",
+        "shortDesc": "Stuart St S/B: no through traffic allowed from 24th Ave to 21st Ave",
+        "fullDesc": "No through traffic allowed due to shared streets on Stuart St Southbound from 24th Ave to 21st Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1515,8 +1408,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-02-11T17:01:00",
         "impacting": false,
         "shortDesc": "Downing St N/B: construction from 21st Ave to 22nd Ave",
-        "fullDesc":
-            "Construction on Downing St Northbound from 21st Ave to 22nd Ave.",
+        "fullDesc": "Construction on Downing St Northbound from 21st Ave to 22nd Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.15000000596046448,
@@ -1541,10 +1433,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-26T01:40:12",
         "endTime": "2021-06-14T06:01:00",
         "impacting": true,
-        "shortDesc":
-            "Byron Pl: no through traffic allowed from Zenobia St to Stuart St",
-        "fullDesc":
-            "No through traffic allowed due to shared streets on Byron Pl both ways from Zenobia St to Stuart St.",
+        "shortDesc": "Byron Pl: no through traffic allowed from Zenobia St to Stuart St",
+        "fullDesc": "No through traffic allowed due to shared streets on Byron Pl both ways from Zenobia St to Stuart St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1570,8 +1460,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
         "shortDesc": "16th St : construction from Wewatta St to Wynkoop St",
-        "fullDesc":
-            "Construction on 16th St both ways from Wewatta St to Wynkoop St.",
+        "fullDesc": "Construction on 16th St both ways from Wewatta St to Wynkoop St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1597,8 +1486,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-01-28T17:01:00",
         "impacting": false,
         "shortDesc": "Wazee St: construction from 16th St Mall to 17th St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Wazee St both ways from 16th St Mall to 17th St.",
+        "fullDesc": "Parking restrictions in force due to construction on Wazee St both ways from 16th St Mall to 17th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.28999999165534973,
@@ -1624,8 +1512,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-29T17:01:00",
         "impacting": false,
         "shortDesc": "24th St: construction from Stout St to California St",
-        "fullDesc":
-            "Construction on 24th St both ways from Stout St to California St.",
+        "fullDesc": "Construction on 24th St both ways from Stout St to California St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1650,10 +1537,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2018-03-20T07:00:00",
         "endTime": "2021-03-21T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Wazee St: construction from 17th St to Wazee St / 18th St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Wazee St both ways from 17th St to Wazee St / 18th St.",
+        "shortDesc": "Wazee St: construction from 17th St to Wazee St / 18th St",
+        "fullDesc": "Parking restrictions in force due to construction on Wazee St both ways from 17th St to Wazee St / 18th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.30000001192092896,
@@ -1678,10 +1563,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-12-31T07:00:00",
         "endTime": "2020-12-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Wewatta St: construction from 17th St / Wewatta St to 16th St",
-        "fullDesc":
-            "Construction on Wewatta St both ways from 17th St / Wewatta St to 16th St.",
+        "shortDesc": "Wewatta St: construction from 17th St / Wewatta St to 16th St",
+        "fullDesc": "Construction on Wewatta St both ways from 17th St / Wewatta St to 16th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.25999999046325684,
@@ -1706,10 +1589,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-06-22T07:00:00",
         "endTime": "2021-09-06T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Wazee St: construction from Wazee St / 18th St to 19th St",
-        "fullDesc":
-            "Construction on Wazee St both ways from Wazee St / 18th St to 19th St.",
+        "shortDesc": "Wazee St: construction from Wazee St / 18th St to 19th St",
+        "fullDesc": "Construction on Wazee St both ways from Wazee St / 18th St to 19th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.28999999165534973,
@@ -1735,8 +1616,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-29T17:01:00",
         "impacting": false,
         "shortDesc": "Stout St N/B: construction from 24th St to 25th St",
-        "fullDesc":
-            "Construction on Stout St Northbound from 24th St to 25th St.",
+        "fullDesc": "Construction on Stout St Northbound from 24th St to 25th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.15000000596046448,
@@ -1762,8 +1642,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-05-29T17:01:00",
         "impacting": false,
         "shortDesc": "Wynkoop St: construction from 18th St to 19th St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Wynkoop St both ways from 18th St to 19th St.",
+        "fullDesc": "Parking restrictions in force due to construction on Wynkoop St both ways from 18th St to 19th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.2800000011920929,
@@ -1789,8 +1668,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-05-23T17:01:00",
         "impacting": false,
         "shortDesc": "25th St: construction from Larimer St to Lawrence St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on 25th St both ways from Larimer St to Lawrence St.",
+        "fullDesc": "Parking restrictions in force due to construction on 25th St both ways from Larimer St to Lawrence St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1816,8 +1694,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-09-29T17:01:00",
         "impacting": false,
         "shortDesc": "Central St: construction from 16th St to 15th St",
-        "fullDesc":
-            "Construction on Central St both ways from 16th St to 15th St.",
+        "fullDesc": "Construction on Central St both ways from 16th St to 15th St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.28999999165534973,
@@ -1842,8 +1719,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-07T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "Martin Luther King Blvd: intermittent lane closures from Havana St to Moline St",
+        "shortDesc": "Martin Luther King Blvd: intermittent lane closures from Havana St to Moline St",
         "fullDesc":
             "Intermittent lane closures due to construction during the day time on Martin Luther King Blvd both ways from Havana St to Moline St.",
         "delayFromFreeFlow": 0.0,
@@ -1856,8 +1732,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, construction during the day time",
+          "eventText": "Intermittent Lane Closures, construction during the day time",
           "roadName": "Martin Luther King Blvd"
         }
       },
@@ -1871,10 +1746,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-11-01T07:00:00",
         "endTime": "2021-01-31T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "Lima St: construction from 28th Pl to Martin Luther King Blvd",
-        "fullDesc":
-            "Restrictions due to construction on Lima St both ways from 28th Pl to Martin Luther King Blvd.",
+        "shortDesc": "Lima St: construction from 28th Pl to Martin Luther King Blvd",
+        "fullDesc": "Restrictions due to construction on Lima St both ways from 28th Pl to Martin Luther King Blvd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1899,8 +1772,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T00:00:00",
         "endTime": "2020-12-09T23:59:00",
         "impacting": true,
-        "shortDesc":
-            "Kendrick St: road closed from CR-181 32nd Ave to 29th Ave",
+        "shortDesc": "Kendrick St: road closed from CR-181 32nd Ave to 29th Ave",
         "fullDesc":
             "Road closed due to construction work on Kendrick St both ways from CR-181 32nd Ave to 29th Ave. Detour in operation - Use W 29th St and Indiana St.",
         "delayFromFreeFlow": 0.0,
@@ -1928,8 +1800,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-02-13T17:01:00",
         "impacting": false,
         "shortDesc": "Inca St: construction at 29th Ave",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Inca St both ways at 29th Ave.",
+        "fullDesc": "Parking restrictions in force due to construction on Inca St both ways at 29th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -1953,10 +1824,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-11-01T07:00:00",
         "endTime": "2021-01-31T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "Ironton St: construction from 28th Pl to Martin Luther King Blvd",
-        "fullDesc":
-            "Restrictions due to construction on Ironton St both ways from 28th Pl to Martin Luther King Blvd.",
+        "shortDesc": "Ironton St: construction from 28th Pl to Martin Luther King Blvd",
+        "fullDesc": "Restrictions due to construction on Ironton St both ways from 28th Pl to Martin Luther King Blvd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2008,8 +1877,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-01-21T17:01:00",
         "impacting": false,
         "shortDesc": "Platte St: construction from 17th St to 19th St",
-        "fullDesc":
-            "Construction on Platte St both ways from 17th St to 19th St.",
+        "fullDesc": "Construction on Platte St both ways from 17th St to 19th St.",
         "delayFromFreeFlow": 0.10000000149011612,
         "delayFromTypical": 0.0,
         "distance": 0.6600000262260437,
@@ -2035,8 +1903,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-06-30T17:01:00",
         "impacting": false,
         "shortDesc": "Shoshone St: construction from 33rd Ave to 32nd Ave",
-        "fullDesc":
-            "Parking restrictions in force due to construction on Shoshone St both ways from 33rd Ave to 32nd Ave.",
+        "fullDesc": "Parking restrictions in force due to construction on Shoshone St both ways from 33rd Ave to 32nd Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2062,8 +1929,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-06-30T17:01:00",
         "impacting": false,
         "shortDesc": "32nd Ave: construction from Shoshone St to Pecos St",
-        "fullDesc":
-            "Parking restrictions in force due to construction on 32nd Ave both ways from Shoshone St to Pecos St.",
+        "fullDesc": "Parking restrictions in force due to construction on 32nd Ave both ways from Shoshone St to Pecos St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.5099999904632568,
@@ -2088,8 +1954,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-07-13T07:00:00",
         "endTime": "2021-03-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Marion St: intermittent lane closures from 27th Ave to Martin Luther King Blvd",
+        "shortDesc": "Marion St: intermittent lane closures from 27th Ave to Martin Luther King Blvd",
         "fullDesc":
             "Intermittent lane closures due to sewer works on Marion St both ways from 27th Ave to Martin Luther King Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -2117,8 +1982,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-31T17:01:00",
         "impacting": true,
         "shortDesc": "Arkins Ct: road closed from 35th St to 33rd St",
-        "fullDesc":
-            "Road closed due to construction on Arkins Ct both ways from 35th St to 33rd St.",
+        "fullDesc": "Road closed due to construction on Arkins Ct both ways from 35th St to 33rd St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.800000011920929,
@@ -2143,8 +2007,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T08:30:00",
         "endTime": "2020-12-07T15:31:00",
         "impacting": false,
-        "shortDesc":
-            "I-70: major construction between Exits 274,275A and Exits 284,285",
+        "shortDesc": "I-70: major construction between Exits 274,275A and Exits 284,285",
         "fullDesc":
             "Intermittent lane closures due to major construction on I-70 both ways between I-70 Exits 274,275A / US-6 / Washington St and I-70 Exits 282,283,284 / Chambers Rd.",
         "delayFromFreeFlow": 0.0,
@@ -2174,8 +2037,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-31T17:01:00",
         "impacting": false,
         "shortDesc": "39th Ave: road closed from High St to Franklin St",
-        "fullDesc":
-            "Road closed due to construction on 39th Ave both ways from High St to Franklin St.",
+        "fullDesc": "Road closed due to construction on 39th Ave both ways from High St to Franklin St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2200,10 +2062,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-08-30T07:00:00",
         "endTime": "2021-12-30T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "38th St: intermittent lane closures from Arkins Ct to Chestnut Pl",
-        "fullDesc":
-            "Intermittent lane closures due to construction on 38th St both ways from Arkins Ct to Chestnut Pl.",
+        "shortDesc": "38th St: intermittent lane closures from Arkins Ct to Chestnut Pl",
+        "fullDesc": "Intermittent lane closures due to construction on 38th St both ways from Arkins Ct to Chestnut Pl.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.20000000298023224,
@@ -2229,8 +2089,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-07T15:01:00",
         "impacting": true,
         "shortDesc": "I-70 E/B: entry ramp from CO-58 E/B closed.",
-        "fullDesc":
-            "Entry ramp to I-70 Eastbound from CO-58 Eastbound closed due to construction during off-peak periods.",
+        "fullDesc": "Entry ramp to I-70 Eastbound from CO-58 Eastbound closed due to construction during off-peak periods.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 1.7400000095367432,
@@ -2238,8 +2097,7 @@ class _HomePageState extends State<HomePage> {
         "parameterizedDescription": {
           "direction": "None",
           "position1": "at",
-          "eventText":
-              "Entry ramp closed, construction During Off-Peak Periods",
+          "eventText": "Entry ramp closed, construction During Off-Peak Periods",
           "toLocation": "Mt Olivet",
           "roadName": "CO-58"
         }
@@ -2255,8 +2113,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-07T12:00:00",
         "impacting": false,
         "shortDesc": "CO-391 Kipling St: one lane closed near CO-51 44th Ave",
-        "fullDesc":
-            "One lane closed due to construction work on CO-391 Kipling St both ways near CO-51 44th Ave.",
+        "fullDesc": "One lane closed due to construction work on CO-391 Kipling St both ways near CO-51 44th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2281,8 +2138,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-03-17T00:00:00",
         "impacting": true,
         "shortDesc": "York St: road closed from 47th Ave to 45th Ave",
-        "fullDesc":
-            "Road closed due to construction on York St both ways from 47th Ave to 45th Ave.",
+        "fullDesc": "Road closed due to construction on York St both ways from 47th Ave to 45th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.3700000047683716,
@@ -2307,8 +2163,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2018-09-17T04:47:41",
         "endTime": "2021-02-28T23:59:00",
         "impacting": true,
-        "shortDesc":
-            "46th Ave: major Central I-70 Project construction from York St to Brighton Blvd",
+        "shortDesc": "46th Ave: major Central I-70 Project construction from York St to Brighton Blvd",
         "fullDesc":
             "Road permanently closed due to major Central I-70 Project construction on 46th Ave both ways from York St to Brighton Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -2336,8 +2191,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-08-17T17:01:00",
         "impacting": false,
         "shortDesc": "Columbine St: road closed from 47th Ave to 46th Ave",
-        "fullDesc":
-            "Road closed due to construction on Columbine St both ways from 47th Ave to 46th Ave.",
+        "fullDesc": "Road closed due to construction on Columbine St both ways from 47th Ave to 46th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2363,8 +2217,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-03-30T00:00:00",
         "impacting": true,
         "shortDesc": "York St: road closed between 47th Ave and 46th Ave",
-        "fullDesc":
-            "Road closed due to construction on York St both ways between 47th Ave and 46th Ave.",
+        "fullDesc": "Road closed due to construction on York St both ways between 47th Ave and 46th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.20999999344348907,
@@ -2390,8 +2243,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-04-03T17:01:00",
         "impacting": true,
         "shortDesc": "York St S/B: road closed from 47th Ave to 46th Ave",
-        "fullDesc":
-            "Road closed due to construction on York St Southbound from 47th Ave to 46th Ave.",
+        "fullDesc": "Road closed due to construction on York St Southbound from 47th Ave to 46th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.20999999344348907,
@@ -2416,8 +2268,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-04-01T05:00:00",
         "endTime": "2020-12-31T23:59:00",
         "impacting": true,
-        "shortDesc":
-            "Vasquez Blvd Frontage Rd: construction from Milwaukee St to Clayton St",
+        "shortDesc": "Vasquez Blvd Frontage Rd: construction from Milwaukee St to Clayton St",
         "fullDesc":
             "Road permanently closed due to construction on Vasquez Blvd Frontage Rd both ways from Milwaukee St / Vasquez Blvd to Vasquez Blvd / Clayton St.",
         "delayFromFreeFlow": 0.0,
@@ -2444,8 +2295,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T04:13:32",
         "endTime": "2020-12-07T12:30:00",
         "impacting": false,
-        "shortDesc":
-            "I-70: intermittent lane closures from Chambers Rd to CO-265 Brighton Blvd",
+        "shortDesc": "I-70: intermittent lane closures from Chambers Rd to CO-265 Brighton Blvd",
         "fullDesc":
             "Intermittent lane closures due to construction work on I-70 both ways from Chambers Rd to CO-265 Brighton Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -2475,8 +2325,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-07-01T06:00:00",
         "impacting": true,
         "shortDesc": "I-70 W/B: exit ramp to Brighton Blvd closed.",
-        "fullDesc":
-            "Exit ramp from I-70 Westbound to Brighton Blvd closed due to long-term construction.",
+        "fullDesc": "Exit ramp from I-70 Westbound to Brighton Blvd closed due to long-term construction.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.8700000047683716,
@@ -2500,8 +2349,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-31T23:59:00",
         "impacting": true,
         "shortDesc": "I-70 W/B: entry ramp from Stapleton Dr W/B construction.",
-        "fullDesc":
-            "Construction and permanently closed on entry ramp to I-70 Westbound from Stapleton Dr Westbound.",
+        "fullDesc": "Construction and permanently closed on entry ramp to I-70 Westbound from Stapleton Dr Westbound.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.27000001072883606,
@@ -2551,8 +2399,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2019-08-21T07:00:00",
         "endTime": "2020-12-31T23:59:00",
         "impacting": true,
-        "shortDesc":
-            "46th Ave S/B: major I-70 Central Project from 48th Ave to Stapleton Dr N",
+        "shortDesc": "46th Ave S/B: major I-70 Central Project from 48th Ave to Stapleton Dr N",
         "fullDesc":
             "Road permanently closed due to major I-70 Central Project on 46th Ave Southbound from 48th Ave to Stapleton Dr N.",
         "delayFromFreeFlow": 0.0,
@@ -2580,8 +2427,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-31T23:59:00",
         "impacting": true,
         "shortDesc": "I-70 W/B: exit ramp to Steele St construction.",
-        "fullDesc":
-            "Construction and permanently closed on exit ramp from I-70 Westbound at Exit 276A to Steele St.",
+        "fullDesc": "Construction and permanently closed on exit ramp from I-70 Westbound at Exit 276A to Steele St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.4300000071525574,
@@ -2606,8 +2452,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2021-06-01T06:00:00",
         "impacting": true,
         "shortDesc": "I-70 W/B: entry ramp from Steele St closed.",
-        "fullDesc":
-            "Entry ramp to I-70 Westbound from Steele St closed due to long-term construction.",
+        "fullDesc": "Entry ramp to I-70 Westbound from Steele St closed due to long-term construction.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.8700000047683716,
@@ -2631,8 +2476,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-31T17:01:00",
         "impacting": false,
         "shortDesc": "48th Ave: construction from Colorado Blvd to 46th Ave",
-        "fullDesc":
-            "Road permanently closed due to construction on 48th Ave both ways from Colorado Blvd to 46th Ave.",
+        "fullDesc": "Road permanently closed due to construction on 48th Ave both ways from Colorado Blvd to 46th Ave.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.20000000298023224,
@@ -2657,10 +2501,8 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:30:00",
         "endTime": "2020-12-07T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "CO-391: construction during the day time at I-70 Exit 267",
-        "fullDesc":
-            "Construction during the day time on CO-391 both ways at I-70 Exit 267.",
+        "shortDesc": "CO-391: construction during the day time at I-70 Exit 267",
+        "fullDesc": "Construction during the day time on CO-391 both ways at I-70 Exit 267.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -2684,8 +2526,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-07T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "I-70 Frontage Rd: intermittent lane closures from CO-391 to Miller St",
+        "shortDesc": "I-70 Frontage Rd: intermittent lane closures from CO-391 to Miller St",
         "fullDesc":
             "Intermittent lane closures due to construction during the day time on I-70 Frontage Rd both ways from CO-391 Kipling St / I-70 Frontage Rd / 49th Ave to Miller St.",
         "delayFromFreeFlow": 0.0,
@@ -2698,8 +2539,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, construction during the day time",
+          "eventText": "Intermittent Lane Closures, construction during the day time",
           "roadName": "I-70 Frontage Rd"
         }
       },
@@ -2713,8 +2553,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-07T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "50th Ave: intermittent lane closures at CO-391 Kipling St",
+        "shortDesc": "50th Ave: intermittent lane closures at CO-391 Kipling St",
         "fullDesc":
             "Intermittent lane closures due to construction during the day time on 50th Ave both ways at CO-391 Kipling St.",
         "delayFromFreeFlow": 0.0,
@@ -2725,8 +2564,7 @@ class _HomePageState extends State<HomePage> {
           "crossRoad2": "CO-391 Kipling St / 50th Ave",
           "direction": "both ways",
           "position1": "at",
-          "eventText":
-              "Intermittent Lane Closures, construction during the day time",
+          "eventText": "Intermittent Lane Closures, construction during the day time",
           "toLocation": "Garrison Lakes",
           "roadName": "50th Ave"
         }
@@ -2741,8 +2579,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-12-07T07:00:00",
         "endTime": "2020-12-07T17:31:00",
         "impacting": false,
-        "shortDesc":
-            "CO-391 Kipling St: intermittent lane closures from I-70 Service Rd to 50th Ave",
+        "shortDesc": "CO-391 Kipling St: intermittent lane closures from I-70 Service Rd to 50th Ave",
         "fullDesc":
             "Intermittent lane closures due to construction during the day time on CO-391 Kipling St both ways from I-70 Service Rd to 50th Ave.",
         "delayFromFreeFlow": 0.0,
@@ -2755,8 +2592,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, construction during the day time",
+          "eventText": "Intermittent Lane Closures, construction during the day time",
           "fromLocation": "Kipling",
           "toLocation": "Garrison Lakes",
           "roadName": "CO-391"
@@ -2773,8 +2609,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-17T17:01:00",
         "impacting": false,
         "shortDesc": "52nd Ave: construction from Elm Ct to Eliot St",
-        "fullDesc":
-            "Construction on 52nd Ave both ways from Elm Ct to Eliot St.",
+        "fullDesc": "Construction on 52nd Ave both ways from Elm Ct to Eliot St.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.20000000298023224,
@@ -2799,8 +2634,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-11-02T06:00:00",
         "endTime": "2020-12-30T06:00:00",
         "impacting": false,
-        "shortDesc":
-            "CR-15 Mcintyre St N/B: Main roadway closed from CR-344 52nd Ave to 56th Pl",
+        "shortDesc": "CR-15 Mcintyre St N/B: Main roadway closed from CR-344 52nd Ave to 56th Pl",
         "fullDesc":
             "Main roadway closed and traffic shift on CR-15 Mcintyre St Northbound from CR-344 52nd Ave to 56th Pl. Detour in operation - All traffic moved to the SB lanes.",
         "delayFromFreeFlow": 0.11999999731779099,
@@ -2813,8 +2647,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "Northbound",
           "position1": "from",
-          "eventText":
-              "Main roadway closed, traffic Shift, detour in operation",
+          "eventText": "Main roadway closed, traffic Shift, detour in operation",
           "roadName": "CR-15"
         }
       },
@@ -2828,8 +2661,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-06-12T15:00:00",
         "endTime": "2021-06-14T20:00:00",
         "impacting": false,
-        "shortDesc":
-            "Grandview Ave: road closed from Webster St to Olde Wadsworth Blvd",
+        "shortDesc": "Grandview Ave: road closed from Webster St to Olde Wadsworth Blvd",
         "fullDesc":
             "Road closed due to Safe Streets on Grandview Ave both ways from Webster St / Grandview Ave to Grandview Ave / Olde Wadsworth Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -2856,8 +2688,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-06-12T15:00:00",
         "endTime": "2021-06-14T15:00:00",
         "impacting": true,
-        "shortDesc":
-            "Olde Wadsworth Blvd: road closed from Grandview Ave to Grant Pl",
+        "shortDesc": "Olde Wadsworth Blvd: road closed from Grandview Ave to Grant Pl",
         "fullDesc":
             "Road closed due to Safe Streets on Olde Wadsworth Blvd both ways from Grandview Ave / Olde Wadsworth Blvd to Grant Pl / Olde Wadsworth Blvd.",
         "delayFromFreeFlow": 0.0,
@@ -2884,8 +2715,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Brooks Dr E/B: intermittent lane closures from Johnson Way to Independence St",
+        "shortDesc": "Brooks Dr E/B: intermittent lane closures from Johnson Way to Independence St",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Brooks Dr Eastbound from Johnson Way to Independence St.",
         "delayFromFreeFlow": 0.0,
@@ -2898,8 +2728,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "Eastbound",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Brooks Dr"
         }
       },
@@ -2913,8 +2742,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Johnson Way: intermittent lane closures from Brooks Dr to Brooks Dr",
+        "shortDesc": "Johnson Way: intermittent lane closures from Brooks Dr to Brooks Dr",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Johnson Way both ways from Brooks Dr to Brooks Dr.",
         "delayFromFreeFlow": 0.0,
@@ -2927,8 +2755,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Johnson Way"
         }
       },
@@ -2942,8 +2769,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Ralston Rd: intermittent lane closures from Miller St to Brooks Dr",
+        "shortDesc": "Ralston Rd: intermittent lane closures from Miller St to Brooks Dr",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Ralston Rd both ways from Miller St to Brooks Dr.",
         "delayFromFreeFlow": 0.0,
@@ -2956,8 +2782,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Ralston Rd"
         }
       },
@@ -2971,8 +2796,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Brooks Dr: intermittent lane closures from Ralston Rd to Johnson Way",
+        "shortDesc": "Brooks Dr: intermittent lane closures from Ralston Rd to Johnson Way",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Brooks Dr both ways from Ralston Rd to Johnson Way.",
         "delayFromFreeFlow": 0.0,
@@ -2985,8 +2809,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Brooks Dr"
         }
       },
@@ -3000,8 +2823,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Miller St: intermittent lane closures from 65th Ave to Ralston Rd",
+        "shortDesc": "Miller St: intermittent lane closures from 65th Ave to Ralston Rd",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Miller St both ways from 65th Ave to Ralston Rd.",
         "delayFromFreeFlow": 0.0,
@@ -3014,8 +2836,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Miller St"
         }
       },
@@ -3029,8 +2850,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "Oak St: intermittent lane closures from 69th Ave to 65th Way",
+        "shortDesc": "Oak St: intermittent lane closures from 69th Ave to 65th Way",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on Oak St both ways from 69th Ave to 65th Way.",
         "delayFromFreeFlow": 0.0,
@@ -3043,8 +2863,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "Oak St"
         }
       },
@@ -3058,8 +2877,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "69th Ave: intermittent lane closures from Parfet St to Oak St",
+        "shortDesc": "69th Ave: intermittent lane closures from Parfet St to Oak St",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on 69th Ave both ways from Parfet St to Oak St.",
         "delayFromFreeFlow": 0.0,
@@ -3072,8 +2890,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "69th Ave"
         }
       },
@@ -3087,8 +2904,7 @@ class _HomePageState extends State<HomePage> {
         "startTime": "2020-01-27T07:00:00",
         "endTime": "2021-01-31T17:01:00",
         "impacting": false,
-        "shortDesc":
-            "CR-19 Simms St: intermittent lane closures from CR-194 72nd Ave to 71st Ave",
+        "shortDesc": "CR-19 Simms St: intermittent lane closures from CR-194 72nd Ave to 71st Ave",
         "fullDesc":
             "Intermittent lane closures and parking restrictions in force due to sewer works on CR-19 Simms St both ways from CR-194 72nd Ave to 71st Ave.",
         "delayFromFreeFlow": 0.0,
@@ -3101,8 +2917,7 @@ class _HomePageState extends State<HomePage> {
           "position2": "to",
           "direction": "both ways",
           "position1": "from",
-          "eventText":
-              "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
+          "eventText": "Intermittent Lane Closures, sewer Works, parking Restrictions In Force",
           "roadName": "CR-19 Simms St"
         }
       },
@@ -3117,8 +2932,7 @@ class _HomePageState extends State<HomePage> {
         "endTime": "2020-12-10T23:59:00",
         "impacting": false,
         "shortDesc": "Zuni St S/B: one lane closed before Midway Blvd",
-        "fullDesc":
-            "One lane closed due to utility work on Zuni St Southbound before Midway Blvd.",
+        "fullDesc": "One lane closed due to utility work on Zuni St Southbound before Midway Blvd.",
         "delayFromFreeFlow": 0.0,
         "delayFromTypical": 0.0,
         "distance": 0.0,
@@ -3133,8 +2947,7 @@ class _HomePageState extends State<HomePage> {
         }
       }
     ],
-    "mqUrl":
-        "http://www.mapquest.com/maps?traffic=1&latitude=39.735&longitude=-104.97999999999999",
+    "mqUrl": "http://www.mapquest.com/maps?traffic=1&latitude=39.735&longitude=-104.97999999999999",
     "info": {
       "copyright": {
         "text": "© 2020 MapQuest, Inc.",

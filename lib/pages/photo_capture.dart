@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:safety/pages/preview_screen.dart';
 
 class PhotoCapture extends StatefulWidget {
+  static final String route = '/photoCapture';
+
   PhotoCapture();
 
   @override
@@ -87,11 +89,7 @@ class _CameraScreenState extends State<PhotoCapture> {
               SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _cameraTogglesRowWidget(),
-                  _captureControlRowWidget(context),
-                  Spacer()
-                ],
+                children: [_cameraTogglesRowWidget(), _captureControlRowWidget(context), Spacer()],
               ),
               SizedBox(height: 20.0)
             ],
@@ -156,8 +154,7 @@ class _CameraScreenState extends State<PhotoCapture> {
         child: FlatButton.icon(
             onPressed: _onSwitchCamera,
             icon: Icon(_getCameraLensIcon(lensDirection)),
-            label: Text(
-                "${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
+            label: Text("${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
       ),
     );
   }
@@ -176,8 +173,7 @@ class _CameraScreenState extends State<PhotoCapture> {
   }
 
   void _onSwitchCamera() {
-    selectedCameraIdx =
-        selectedCameraIdx < cameras.length - 1 ? selectedCameraIdx + 1 : 0;
+    selectedCameraIdx = selectedCameraIdx < cameras.length - 1 ? selectedCameraIdx + 1 : 0;
     CameraDescription selectedCamera = cameras[selectedCameraIdx];
     _initCameraController(selectedCamera);
   }

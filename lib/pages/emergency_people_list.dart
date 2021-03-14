@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EmergencyPeopleList extends StatelessWidget {
+  static final String route = '/emergencyPeopleList';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

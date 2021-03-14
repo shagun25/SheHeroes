@@ -2,6 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class ARDetectionPage extends StatefulWidget {
+  static final String route = '/arDetectionPage';
+
   ARDetectionPage();
 
   @override

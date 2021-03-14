@@ -7,16 +7,14 @@ import 'package:safety/shared/constants.dart';
 import 'materialButton.dart';
 
 class NearbyPlaces extends StatelessWidget {
+  static final String route = '/nearbyPlaces';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xfffcbeac),
-        appBar: AppBar(
-            title: Text("Nearby Places"),
-            backgroundColor: Color(0xffb72334),
-            centerTitle: true),
+        appBar: AppBar(title: Text("Nearby Places"), backgroundColor: Color(0xffb72334), centerTitle: true),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
