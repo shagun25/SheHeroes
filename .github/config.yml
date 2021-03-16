@@ -1,21 +1,27 @@
-# Configuration for welcome - https://github.com/SheHeroes/welcome
+# Configuration for welcome - https://github.com/behaviorbot/welcome
 
-# Configuration for new-issue-welcome - https://github.com/SheHeroes/new-issue-welcome
-
+# Configuration for new-issue-welcome - https://github.com/behaviorbot/new-issue-welcome
 # Comment to be posted to on first time issues
+
 newIssueWelcomeComment: >
-  Thanks for opening your first issue here! Be sure to follow the issue template!
-
+  Hello there!👋 Welcome to the project!🚀⚡
+  
+  
+  Thank you and congrats🎉 for opening your very first issue in this project.
+  Please make sure not to start working on the issue, unless you get assigned to it.😄
+  
+  
 # Configuration for new-pr-welcome - https://github.com/behaviorbot/new-pr-welcome
-
 # Comment to be posted to on PRs from first time contributors in your repository
+
 newPRWelcomeComment: >
-  Thanks for opening this pull request! Please check out our contributing guidelines.
-
+  Hello there!👋 Welcome to the project!
+  Thank you and congrats🎉 for opening your first pull request.
+  
+  
+  
 # Configuration for first-pr-merge - https://github.com/behaviorbot/first-pr-merge
-
 # Comment to be posted to on pull requests merged by a first time user
-firstPRMergeComment: >
-  Congrats on merging your first pull request! 
 
-# It is recommended to include as many gifs and emojis as possible!
+firstPRMergeComment: >
+  Congrats on merging your first pull request! 🎉 All the best for your amazing open source journey ahead 🚀.
