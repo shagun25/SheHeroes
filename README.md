@@ -109,7 +109,7 @@ You can refer to the following articles on the basics of Git and Github and also
 
 ### 0️⃣ Code of conduct
 
-Please read our [Code of conduct](https://github.com/shagun25/SheHeroes/CODE_OF_CONDUCT.md) which stipulates explicitly that everyone must be gracious, respectful, and professional. This also documents our conflict resolution policy.
+Please read our [Code of conduct](./CODE_OF_CONDUCT.md) which stipulates explicitly that everyone must be gracious, respectful, and professional. This also documents our conflict resolution policy.
 
 ### 1️⃣ Fork it :fork_and_knife:
 
