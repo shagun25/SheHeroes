@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
@@ -9,10 +10,17 @@ import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as path;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
+
+  // Initialise HiveDB in the directory of the app
+  Directory appDocDir = await path.getApplicationDocumentsDirectory();
+  Hive.init(appDocDir.path);
+
   setupLocator();
   runApp(MyApp());
 }
@@ -25,7 +33,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _latestHardwareButtonEvent;
 
-  StreamSubscription<HardwareButtons.VolumeButtonEvent> _volumeButtonSubscription;
+  StreamSubscription<HardwareButtons.VolumeButtonEvent>
+      _volumeButtonSubscription;
 
   StreamSubscription<HardwareButtons.HomeButtonEvent> _homeButtonSubscription;
 
@@ -34,7 +43,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _volumeButtonSubscription = HardwareButtons.volumeButtonEvents.listen((event) {
+    _volumeButtonSubscription =
+        HardwareButtons.volumeButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = event.toString();
         Constants.sendMessage();
