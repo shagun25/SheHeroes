@@ -61,8 +61,8 @@ class _MyAppState extends State<MyApp> {
     _lockButtonSubscription = HardwareButtons.lockButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = 'LOCK_BUTTON';
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PhotoCapture()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PhotoCapture()));
       });
     });
   }

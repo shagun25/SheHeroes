@@ -22,51 +22,53 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 75.0),
-              child: AvatarGlow(
-                endRadius: 200.0,
-                glowColor: HexColor("#ea6a88"),
-                child: Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(1000)),
-                  child: new Image(
-                      width: 251.0, //250
-                      height: 191.0,
-                      fit: BoxFit.fill,
-                      image: new AssetImage('assets/SheHeroes.png')),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 75.0),
+                child: AvatarGlow(
+                  endRadius: 200.0,
+                  glowColor: HexColor("#ea6a88"),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(1000)),
+                    child: new Image(
+                        width: 251.0, //250
+                        height: 191.0,
+                        fit: BoxFit.fill,
+                        image: new AssetImage('assets/SheHeroes.png')),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: ScaleAnimatedTextKit(
-                  onTap: () {
-                    print("Tap Event");
-                  },
-                  text: [
-                    "SheHeroes",
-                  ],
-                  textStyle: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: "Canterbury",
-                      color: HexColor("#ea6a88"),
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.start,
-                  alignment:
-                      AlignmentDirectional.topStart // or Alignment.topLeft
-                  ),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                child: ScaleAnimatedTextKit(
+                    onTap: () {
+                      print("Tap Event");
+                    },
+                    text: [
+                      "SheHeroes",
+                    ],
+                    textStyle: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: "Canterbury",
+                        color: HexColor("#ea6a88"),
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.start,
+                    alignment:
+                        AlignmentDirectional.topStart // or Alignment.topLeft
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );

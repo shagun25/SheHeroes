@@ -78,108 +78,110 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      key: _scaffoldKey,
-      body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowGlow();
-        },
-        child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height >= 775.0
-                ? MediaQuery.of(context).size.height
-                : 775.0,
-            decoration: new BoxDecoration(color: bg
-                // begin: const FractionalOffset(0.0, 0.0),
-                // end: const FractionalOffset(1.0, 1.0),
-                // stops: [0.0, 1.0],
-                // tileMode: TileMode.clamp),
-                ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 75.0),
-                      child: AvatarGlow(
-                        endRadius: 100.0,
-                        glowColor: HexColor("#ea6a88"),
-                        child: Container(
-                          height: 120,
-                          width: 120,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1000)),
-                          child: new Image(
-                              width: 250.0,
-                              height: 191.0,
-                              fit: BoxFit.fill,
-                              image: new AssetImage('assets/SheHeroes.png')),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: ScaleAnimatedTextKit(
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                          text: [
-                            "SheHeroes",
-                          ],
-                          textStyle: TextStyle(
-                              fontSize: 30.0,
-                              fontFamily: "Canterbury",
-                              color: HexColor("#ea6a88"),
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.start,
-                          alignment: AlignmentDirectional
-                              .topStart // or Alignment.topLeft
+    return SafeArea(
+      child: new Scaffold(
+        key: _scaffoldKey,
+        body: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowGlow();
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height >= 775.0
+                  ? MediaQuery.of(context).size.height
+                  : 775.0,
+              decoration: new BoxDecoration(color: bg
+                  // begin: const FractionalOffset(0.0, 0.0),
+                  // end: const FractionalOffset(1.0, 1.0),
+                  // stops: [0.0, 1.0],
+                  // tileMode: TileMode.clamp),
+                  ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 75.0),
+                        child: AvatarGlow(
+                          endRadius: 100.0,
+                          glowColor: HexColor("#ea6a88"),
+                          child: Container(
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(1000)),
+                            child: new Image(
+                                width: 250.0,
+                                height: 191.0,
+                                fit: BoxFit.fill,
+                                image: new AssetImage('assets/SheHeroes.png')),
                           ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: _buildMenuBar(context),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (i) {
-                      if (i == 0) {
-                        setState(() {
-                          right = Colors.white;
-                          left = Colors.black;
-                        });
-                      } else if (i == 1) {
-                        setState(() {
-                          right = Colors.black;
-                          left = Colors.white;
-                        });
-                      }
-                    },
-                    children: <Widget>[
-                      Center(
-                        child: new ConstrainedBox(
-                          constraints: const BoxConstraints.expand(),
-                          child: _buildSignIn(context),
                         ),
                       ),
-                      Center(
-                        child: new ConstrainedBox(
-                          constraints: const BoxConstraints.expand(),
-                          child: _buildSignUp(context),
-                        ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: ScaleAnimatedTextKit(
+                            onTap: () {
+                              print("Tap Event");
+                            },
+                            text: [
+                              "SheHeroes",
+                            ],
+                            textStyle: TextStyle(
+                                fontSize: 30.0,
+                                fontFamily: "Canterbury",
+                                color: HexColor("#ea6a88"),
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.start,
+                            alignment: AlignmentDirectional
+                                .topStart // or Alignment.topLeft
+                            ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: _buildMenuBar(context),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (i) {
+                        if (i == 0) {
+                          setState(() {
+                            right = Colors.white;
+                            left = Colors.black;
+                          });
+                        } else if (i == 1) {
+                          setState(() {
+                            right = Colors.black;
+                            left = Colors.white;
+                          });
+                        }
+                      },
+                      children: <Widget>[
+                        Center(
+                          child: new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: _buildSignIn(context),
+                          ),
+                        ),
+                        Center(
+                          child: new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: _buildSignUp(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -445,7 +447,7 @@ class _LoginPageState extends State<LoginPage>
 
   Widget _buildSignUp(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 23.0),
+      padding: EdgeInsets.only(top: 0.0),
       child: Column(
         children: <Widget>[
           Stack(
@@ -484,7 +486,8 @@ class _LoginPageState extends State<LoginPage>
                               ),
                               hintText: "Username",
                               hintStyle: TextStyle(
-                                  fontFamily: "WorkSansSemiBold", fontSize: 16.0),
+                                  fontFamily: "WorkSansSemiBold",
+                                  fontSize: 16.0),
                             ),
                           ),
                         ),
@@ -512,7 +515,8 @@ class _LoginPageState extends State<LoginPage>
                               ),
                               hintText: "Email Address",
                               hintStyle: TextStyle(
-                                  fontFamily: "WorkSansSemiBold", fontSize: 16.0),
+                                  fontFamily: "WorkSansSemiBold",
+                                  fontSize: 16.0),
                             ),
                           ),
                         ),
@@ -540,7 +544,8 @@ class _LoginPageState extends State<LoginPage>
                               ),
                               hintText: "Password",
                               hintStyle: TextStyle(
-                                  fontFamily: "WorkSansSemiBold", fontSize: 16.0),
+                                  fontFamily: "WorkSansSemiBold",
+                                  fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignup,
                                 child: Icon(
@@ -577,7 +582,8 @@ class _LoginPageState extends State<LoginPage>
                               ),
                               hintText: "Confirmation",
                               hintStyle: TextStyle(
-                                  fontFamily: "WorkSansSemiBold", fontSize: 16.0),
+                                  fontFamily: "WorkSansSemiBold",
+                                  fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignupConfirm,
                                 child: Icon(
