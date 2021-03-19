@@ -17,6 +17,8 @@ import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
+import 'package:safety/services/googleAuth.dart';
+import 'package:safety/ui/splash.dart';
 
 class Hom extends StatefulWidget {
   static final String route = '/hom';
@@ -68,6 +70,24 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
             child: Column(
               // mainAxisAlignment = MainAxisAlignment.spaceEvenly
               children: [
+                Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: IconButton(
+                    icon: Icon(Icons.exit_to_app_sharp, color: Colors.red, size: 30.0,),
+                    onPressed: ()async{
+                      var _gAuth = GoogleAuthenticate(context);
+                      bool response = await _gAuth.logOut();
+                      if(response){
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => Splash()),
+                              (Route<dynamic> route) => false,
+                        );
+                      }
+                    },
+                  ),
+                ),
                 Container(
                   height: 100,
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),

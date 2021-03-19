@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "528451767481-cfu1hq6trbof4qtpui2ddegn3un88dra.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "shagungoyal.safety",
+            "certificate_hash": "026591a5ef09087a8f36e0991636e4bd40bfd9f2"
+          }
+        },
+        {
           "client_id": "528451767481-3r2nms7jl6t7jisherin07ggjbgeagf9.apps.googleusercontent.com",
           "client_type": 3
         }
