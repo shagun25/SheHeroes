@@ -15,6 +15,7 @@ import 'package:safety/shared/theme.dart' as Theme;
 import 'notes.dart';
 
 class LoginPage extends StatefulWidget {
+  static final String route = '/loginPage';
   LoginPage({Key key}) : super(key: key);
 
   @override

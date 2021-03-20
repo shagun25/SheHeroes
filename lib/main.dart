@@ -11,9 +11,9 @@ import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   setupLocator();
   runApp(MyApp());
 }
