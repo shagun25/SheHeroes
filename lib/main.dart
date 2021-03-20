@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
@@ -10,9 +11,9 @@ import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   setupLocator();
   runApp(MyApp());
 }

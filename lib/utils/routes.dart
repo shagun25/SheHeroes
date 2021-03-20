@@ -5,6 +5,7 @@ import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_dashboard.dart';
 import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/emergency_people_list.dart';
+import 'package:safety/pages/login_page.dart';
 import 'package:safety/pages/main_dashboard.dart';
 import 'package:safety/pages/nearby_places.dart';
 import 'package:safety/pages/photo_capture.dart';
@@ -27,6 +28,7 @@ class Routes {
     HomePage.route: (BuildContext context) => HomePage(),
     SpeechScreen.route: (BuildContext context) => SpeechScreen(),
     NearbyPlaces.route: (BuildContext context) => NearbyPlaces(),
+    LoginPage.route: (BuildContext context) => LoginPage(),
   };
 
   Map<String, WidgetBuilder> getRoutes() {
