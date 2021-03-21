@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
@@ -13,14 +14,15 @@ import 'package:safety/utils/routes.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path;
 
-void main() async {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-
+  
   // Initialise HiveDB in the directory of the app
   Directory appDocDir = await path.getApplicationDocumentsDirectory();
   Hive.init(appDocDir.path);
-
+  
+  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
   setupLocator();
   runApp(MyApp());
 }
