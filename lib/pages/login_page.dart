@@ -447,7 +447,6 @@ class _LoginPageState extends State<LoginPage>
 
   Widget _buildSignUp(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 0.0),
       child: Column(
         children: <Widget>[
           Stack(
