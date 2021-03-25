@@ -6,7 +6,6 @@ import 'package:safety/pages/switcher.dart';
 
 
 class GoogleAuthenticate {
-  final _scaffoldKey=GlobalKey<ScaffoldState>();
   var googleSignIn;
   BuildContext _context;
 
@@ -32,8 +31,6 @@ class GoogleAuthenticate {
           var registeredUser =
               await FirebaseAuth.instance.signInWithCredential(credential);
 
-          // SnackBar snackBar= SnackBar(content: Text('Wait.... Process is going on'));
-          // _scaffoldKey.currentState.showSnackBar(snackBar);
           ScaffoldMessenger.of(this._context).showSnackBar(
               SnackBar(content: Text('Wait.... Process is going on')));
 

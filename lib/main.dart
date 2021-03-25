@@ -30,9 +30,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _latestHardwareButtonEvent;
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
-  String shortcut = "no action set";
   final String number = "123456789";
-  final String email = "dancamdev@example.com";
 
 
   StreamSubscription<HardwareButtons.VolumeButtonEvent> _volumeButtonSubscription;
@@ -53,11 +51,7 @@ class _MyAppState extends State<MyApp> {
       } else {
       _service.call(number);
       }
-      setState(() {
-        if (shortcutType != null) {
-          shortcut = shortcutType;
-        }
-      });
+
     });
 
     quickActions.setShortcutItems(<ShortcutItem>[
@@ -75,9 +69,6 @@ class _MyAppState extends State<MyApp> {
           localizedTitle: 'Emergency Call',
           icon: 'AppIcon'),
     ]).then((value) {
-      setState(() {
-        shortcut = "actions ready";
-      });
     });
     _volumeButtonSubscription = HardwareButtons.volumeButtonEvents.listen((event) {
       setState(() {
