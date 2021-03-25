@@ -1,15 +1,19 @@
 import 'dart:async';
-
+import 'package:quick_actions/quick_actions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
+import 'package:safety/services/calls_and_messages_service.dart';
+import 'package:safety/services/service_locator.dart';
+import 'package:safety/shared/constants.dart';
 import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/providers/profile_provider.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +29,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _latestHardwareButtonEvent;
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
+  final String number = "123456789";
+
 
   StreamSubscription<HardwareButtons.VolumeButtonEvent> _volumeButtonSubscription;
 
@@ -35,6 +42,34 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    final QuickActions quickActions = QuickActions();
+    quickActions.initialize((String shortcutType) {
+
+      if (shortcutType == 'action_one') {
+        _service.sendSms(number);
+      } else {
+      _service.call(number);
+      }
+
+    });
+
+    quickActions.setShortcutItems(<ShortcutItem>[
+      // NOTE: This first action icon will only work on iOS.
+      // In a real world project keep the same file name for both platforms.
+      const ShortcutItem(
+        type: 'action_one',
+        localizedTitle: 'Emergency Message',
+        icon: 'AppIcon',
+      ),
+      // NOTE: This second action icon will only work on Android.
+      // In a real world project keep the same file name for both platforms.
+      const ShortcutItem(
+          type: 'action_two',
+          localizedTitle: 'Emergency Call',
+          icon: 'AppIcon'),
+    ]).then((value) {
+    });
     _volumeButtonSubscription = HardwareButtons.volumeButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = event.toString();
