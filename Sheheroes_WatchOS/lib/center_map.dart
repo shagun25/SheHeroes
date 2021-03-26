@@ -68,23 +68,23 @@ import 'dart:convert';
 
 //---------------------------------API-----------------------------------------
 
-double lat;
-double lon;
+double? lat;
+double? lon;
 
 class CityData {
-  int totalIncidents;
-  int totalPages;
-  List<Incidents> incidents;
+  int? totalIncidents;
+  int? totalPages;
+  List<Incidents>? incidents;
 
-  CityData({this.totalIncidents, this.totalPages, this.incidents});
+  CityData({required this.totalIncidents, required this.totalPages, required this.incidents});
 
   CityData.fromJson(Map<String, dynamic> json) {
     totalIncidents = json['total_incidents'];
     totalPages = json['total_pages'];
     if (json['incidents'] != null) {
-      incidents = new List<Incidents>();
+      incidents = <Incidents>[];
       json['incidents'].forEach((v) {
-        incidents.add(new Incidents.fromJson(v));
+        incidents!.add(new Incidents.fromJson(v));
       });
     }
   }
@@ -94,37 +94,37 @@ class CityData {
     data['total_incidents'] = this.totalIncidents;
     data['total_pages'] = this.totalPages;
     if (this.incidents != null) {
-      data['incidents'] = this.incidents.map((v) => v.toJson()).toList();
+      data['incidents'] = this.incidents!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Incidents {
-  String incidentCode;
-  String incidentDate;
-  String incidentOffense;
-  String incidentOffenseCode;
-  String incidentOffenseDescription;
-  String incidentOffenseDetailDescription;
-  String incidentOffenseCrimeAgainst;
-  String incidentOffenseAction;
-  String incidentSourceName;
-  double incidentLatitude;
-  double incidentLongitude;
+  String? incidentCode;
+  String? incidentDate;
+  String? incidentOffense;
+  String? incidentOffenseCode;
+  String? incidentOffenseDescription;
+  String? incidentOffenseDetailDescription;
+  String? incidentOffenseCrimeAgainst;
+  String? incidentOffenseAction;
+  String? incidentSourceName;
+  double? incidentLatitude;
+  double? incidentLongitude;
 
   Incidents(
-      {this.incidentCode,
-      this.incidentDate,
-      this.incidentOffense,
-      this.incidentOffenseCode,
-      this.incidentOffenseDescription,
-      this.incidentOffenseDetailDescription,
-      this.incidentOffenseCrimeAgainst,
-      this.incidentOffenseAction,
-      this.incidentSourceName,
-      this.incidentLatitude,
-      this.incidentLongitude});
+      {required this.incidentCode,
+      required this.incidentDate,
+      required this.incidentOffense,
+      required this.incidentOffenseCode,
+      required this.incidentOffenseDescription,
+      required this.incidentOffenseDetailDescription,
+      required this.incidentOffenseCrimeAgainst,
+      required this.incidentOffenseAction,
+      required this.incidentSourceName,
+      required this.incidentLatitude,
+      required this.incidentLongitude});
 
   Incidents.fromJson(Map<String, dynamic> json) {
     incidentCode = json['incident_code'];
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Iterable markers = [];
-  CityData cd;
+  late CityData cd;
   getData() async {
     log('data recieved');
     var res = await http.get(url);
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
-  GoogleMapController _controller;
+  late GoogleMapController _controller;
   Location _location = Location();
 
   MapType _defaultMapType = MapType.normal;
