@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:safety/pages/switcher.dart';
 
+
 class GoogleAuthenticate {
   var googleSignIn;
   BuildContext _context;
