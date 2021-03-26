@@ -12,6 +12,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:safety/pages/Voice.dart';
 import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_map.dart';
+import 'package:safety/pages/fake_call_support.dart';
 import 'package:safety/pages/nearby_places.dart';
 import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
@@ -69,7 +70,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                   radius: 1.5)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
+            child: ListView(
               // mainAxisAlignment = MainAxisAlignment.spaceEvenly
               children: [
                 Container(
@@ -94,7 +95,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                 ),
                 Container(
                   height: 100,
-                  margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                  //margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -443,47 +444,53 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                               //(Police)
-                              // AvatarGlow(
-                              //   endRadius: 70.0,
-                              //   glowColor: Colors.pink,
-                              //   child: Container(
-                              //     padding: EdgeInsets.all(0),
-                              //     width: 80,
-                              //     height: 80,
-                              //     decoration: BoxDecoration(
-                              //         borderRadius: BorderRadius.circular(100),
-                              //         // color: Colors.transparent,
-                              //         border: Border.all(
-                              //             color: HexColor("#ea6a88"),
-                              //             width: 3)),
-                              //     child: RaisedButton(
-                              //       elevation: 1,
-                              //       color: Colors.white70,
-                              //       onPressed: Constants.taxiButton,
-                              //       shape: RoundedRectangleBorder(
-                              //           borderRadius:
-                              //               BorderRadius.circular(100)),
-                              //       child: Column(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceEvenly,
-                              //         children: [
-                              //           Icon(
-                              //             Icons.local_taxi,
-                              //             size: 40,
-                              //             color: HexColor("#b72334"),
-                              //           ),
-                              //           Text(
-                              //             'Taxi',
-                              //             style: TextStyle(
-                              //                 color: HexColor("#b72334"),
-                              //                 fontSize: 12,
-                              //                 fontWeight: FontWeight.bold),
-                              //           )
-                              //         ],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ), //(Taxi)
+                              AvatarGlow(
+                                endRadius: 70.0,
+                                glowColor: Colors.pink,
+                                child: Container(
+                                  padding: EdgeInsets.all(0),
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      // color: Colors.transparent,
+                                      border: Border.all(
+                                          color: HexColor("#ea6a88"),
+                                          width: 3)),
+                                  child: RaisedButton(
+                                    elevation: 1,
+                                    color: Colors.white70,
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  InstructionScreen()));
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(
+                                          Icons.phone_callback_rounded,
+                                          size: 40,
+                                          color: HexColor("#b72334"),
+                                        ),
+                                        Text(
+                                          'Fake Call',
+                                          style: TextStyle(
+                                              color: HexColor("#b72334"),
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ), //(Taxi)
                               AvatarGlow(
                                 endRadius: 70.0,
                                 glowColor: Colors.pink,

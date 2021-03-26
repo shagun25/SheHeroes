@@ -122,7 +122,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                 radius: 1.5)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
             // mainAxisAlignment = MainAxisAlignment.spaceEvenly
             children: [
               Container(
@@ -147,7 +147,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
               ),
               Container(
                 height: 100,
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                //margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
