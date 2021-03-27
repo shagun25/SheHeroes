@@ -34,8 +34,8 @@ class _FakeCallScreenState extends State<FakeCallScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
     FlutterRingtonePlayer.stop();
+    super.dispose();
   }
 
   @override

@@ -71,6 +71,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(
+              shrinkWrap: true,
               // mainAxisAlignment = MainAxisAlignment.spaceEvenly
               children: [
                 Container(

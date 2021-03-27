@@ -38,8 +38,8 @@ class _InstructionScreenState extends State<InstructionScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
     wakelockToggling();
+    super.dispose();
   }
 
   Future<void> wakelockToggling() async {
@@ -57,6 +57,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
                   fit: BoxFit.cover),
             ),
             child: ListView(
+              shrinkWrap: true,
               children: <Widget>[
                 SizedBox(
                   height: 25.0,

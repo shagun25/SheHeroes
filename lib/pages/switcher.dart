@@ -21,6 +21,7 @@ class Switcher extends StatelessWidget {
                 begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
         child: SafeArea(
           child: ListView(
+            shrinkWrap: true,
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
