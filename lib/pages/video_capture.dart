@@ -7,8 +7,6 @@ import 'package:path_provider/path_provider.dart';
 class VideoCapture extends StatefulWidget {
   static final String route = '/videoCapture';
 
-  VideoCapture();
-
   @override
   _VideoScreenState createState() => _VideoScreenState();
 }
@@ -42,9 +40,6 @@ class _VideoScreenState extends State<VideoCapture> {
   }
 
   Future _initCameraController(CameraDescription cameraDescription) async {
-    if (controller != null) {
-      await controller.dispose();
-    }
 
     controller = CameraController(cameraDescription, ResolutionPreset.high);
 
@@ -199,6 +194,7 @@ class _VideoScreenState extends State<VideoCapture> {
         if (path != null) {
           GallerySaver.saveVideo(path, albumName: albumName).then((
               bool success) {
+              _disposeCameraController();
             setState(() {
 
             });
@@ -213,6 +209,10 @@ class _VideoScreenState extends State<VideoCapture> {
     }
   }
 
+  void _disposeCameraController(){
+      await controller.dispose();
+  }
+  
   void _showCameraException(CameraException e) {
     String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
     print(errorText);
