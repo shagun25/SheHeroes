@@ -1,14 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'fake_incoming_call_screen.dart';
 
 class InstructionScreen extends StatefulWidget {
+  static final String route = '/fakeCallSupport';
+
   @override
   _InstructionScreenState createState() => _InstructionScreenState();
 }
 
 class _InstructionScreenState extends State<InstructionScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool _activateBtnStatus;
+
   static const values = <int>[0, 1, 2, 3];
   static const textValues = <String>["Now", "1 min", "3 min", "5 min"];
   int selectedValue = values.first;
@@ -23,50 +32,31 @@ class _InstructionScreenState extends State<InstructionScreen> {
     // TODO: implement initState
     super.initState();
     _fakeName = TextEditingController();
+    _activateBtnStatus = true;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    wakelockToggling();
+  }
+
+  Future<void> wakelockToggling() async {
+    if (await Wakelock.enabled) Wakelock.disable();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        key: _scaffoldKey,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.phone_callback_rounded,
-            size: 30.0,
-          ),
-          backgroundColor: Color.fromRGBO(0, 230, 0, 1),
-          onPressed: () {
-            if (_fakeName.text.length > 0) {
-              Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FakeCallScreen(
-                            fakeCallerName: _fakeName.text,
-                          )));
-            } else {
-              showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        backgroundColor: Colors.black54,
-                        title: Text(
-                          "Fake caller Name Empty",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        content: Text(
-                          "Enter a Fake Caller Name",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ));
-            }
-          },
-        ),
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: ExactAssetImage("assets/mapImage.jpg"),
                   fit: BoxFit.cover),
             ),
-            child: Column(
+            child: ListView(
               children: <Widget>[
                 SizedBox(
                   height: 25.0,
@@ -144,8 +134,8 @@ class _InstructionScreenState extends State<InstructionScreen> {
                 ),
                 Container(
                   margin: EdgeInsets.only(
-                    left: 50.0,
-                    right: 50.0,
+                    left: 20.0,
+                    right: 20.0,
                     top: 20.0,
                   ),
                   child: Row(
@@ -154,6 +144,27 @@ class _InstructionScreenState extends State<InstructionScreen> {
                         child: buildRadios(context),
                       )
                     ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 20.0),
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    child: Text(
+                      "Activate",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                    onPressed: _activateBtnStatus ? readyForCall : null,
                   ),
                 ),
               ],
@@ -192,4 +203,41 @@ class _InstructionScreenState extends State<InstructionScreen> {
           ).toList(),
         ),
       );
+
+  void readyForCall() {
+    if (_fakeName.text.length > 0) {
+      setState(() {
+        _activateBtnStatus = false;
+      });
+      Wakelock.enable();
+
+      if (this.selectedValue > 0) {
+        ScaffoldMessenger.of(_scaffoldKey.currentContext).showSnackBar(SnackBar(
+            duration: Duration(seconds: 10),
+            content: Text(
+                "Wait for ${textValues[selectedValue]} ... Don't switch to other screen")));
+      }
+      Future.delayed(Duration(minutes: this.selectedValue), () {
+        Navigator.pop(_scaffoldKey.currentContext);
+        Navigator.pushNamed(context, FakeCallScreen.route,
+            arguments: this._fakeName.text);
+      });
+
+      Wakelock.disable();
+    } else {
+      showDialog<String>(
+          context: _scaffoldKey.currentContext,
+          builder: (context) => AlertDialog(
+                backgroundColor: Colors.black54,
+                title: Text(
+                  "Fake caller Name Empty",
+                  style: TextStyle(color: Colors.white),
+                ),
+                content: Text(
+                  "Enter a Fake Caller Name",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ));
+    }
+  }
 }

@@ -1,10 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
-class FakeCallScreen extends StatelessWidget {
+class FakeCallScreen extends StatefulWidget {
+  static final String route = '/fakeCallScreen';
+
   String fakeCallerName;
 
   FakeCallScreen({@required this.fakeCallerName});
+
+  @override
+  _FakeCallScreenState createState() =>
+      _FakeCallScreenState(fakeCallerName: this.fakeCallerName);
+}
+
+class _FakeCallScreenState extends State<FakeCallScreen> {
+  String fakeCallerName;
+
+  _FakeCallScreenState({@required this.fakeCallerName});
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FlutterRingtonePlayer.play(
+      android: AndroidSounds.ringtone,
+      ios: IosSounds.glass,
+      looping: true, // Android only - API >= 28
+      volume: 10.0, // Android only - API >= 28
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    FlutterRingtonePlayer.stop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +51,10 @@ class FakeCallScreen extends StatelessWidget {
             child: Icon(
               Icons.call_end_rounded,
             ),
-            onPressed: () {},
+            onPressed: () {
+              FlutterRingtonePlayer.stop();
+              Navigator.pop(context);
+            },
           ),
           FloatingActionButton(
             heroTag: 2,

@@ -5,6 +5,8 @@ import 'package:safety/pages/center_map.dart';
 import 'package:safety/pages/emergency_dashboard.dart';
 import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/emergency_people_list.dart';
+import 'package:safety/pages/fake_call_support.dart';
+import 'package:safety/pages/fake_incoming_call_screen.dart';
 import 'package:safety/pages/login_page.dart';
 import 'package:safety/pages/main_dashboard.dart';
 import 'package:safety/pages/nearby_places.dart';
@@ -24,13 +26,16 @@ class Routes {
     Hom.route: (BuildContext context) => Hom(),
     ARDetectionPage.route: (BuildContext context) => ARDetectionPage(),
     PhotoCapture.route: (BuildContext context) => PhotoCapture(),
-	VideoCapture.route: (BuildContext context) => VideoCapture(),
+    VideoCapture.route: (BuildContext context) => VideoCapture(),
     EmergencyPeopleList.route: (BuildContext context) => EmergencyPeopleList(),
     MyHomePage.route: (BuildContext context) => MyHomePage(),
     HomePage.route: (BuildContext context) => HomePage(),
     SpeechScreen.route: (BuildContext context) => SpeechScreen(),
     NearbyPlaces.route: (BuildContext context) => NearbyPlaces(),
     LoginPage.route: (BuildContext context) => LoginPage(),
+    FakeCallScreen.route: (BuildContext context) => FakeCallScreen(
+        fakeCallerName: ModalRoute.of(context).settings.arguments),
+    InstructionScreen.route: (BuildContext context) => InstructionScreen(),
   };
 
   Map<String, WidgetBuilder> getRoutes() {

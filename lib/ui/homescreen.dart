@@ -22,9 +22,9 @@ import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/pages/video_capture.dart';
 import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
+import 'package:safety/services/googleAuth.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
-import 'package:safety/services/googleAuth.dart';
 
 class Homes extends StatefulWidget {
   // static AudioCache player = AudioCache();

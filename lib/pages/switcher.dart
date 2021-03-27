@@ -20,8 +20,8 @@ class Switcher extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: ListView(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 height: 20,

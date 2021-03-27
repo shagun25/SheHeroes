@@ -220,9 +220,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                            return ListView(
                                               children: [
                                                 Dialog(
                                                   shape: RoundedRectangleBorder(
@@ -461,11 +459,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                     elevation: 1,
                                     color: Colors.white70,
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  InstructionScreen()));
+                                      Navigator.pushNamed(
+                                          context, InstructionScreen.route);
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
