@@ -9,6 +9,7 @@ import 'package:safety/pages/login_page.dart';
 import 'package:safety/pages/main_dashboard.dart';
 import 'package:safety/pages/nearby_places.dart';
 import 'package:safety/pages/photo_capture.dart';
+import 'package:safety/pages/video_capture.dart';
 import 'package:safety/pages/sos.dart';
 import 'package:safety/pages/switcher.dart';
 import 'package:safety/ui/splash.dart';
@@ -23,6 +24,7 @@ class Routes {
     Hom.route: (BuildContext context) => Hom(),
     ARDetectionPage.route: (BuildContext context) => ARDetectionPage(),
     PhotoCapture.route: (BuildContext context) => PhotoCapture(),
+	VideoCapture.route: (BuildContext context) => VideoCapture(),
     EmergencyPeopleList.route: (BuildContext context) => EmergencyPeopleList(),
     MyHomePage.route: (BuildContext context) => MyHomePage(),
     HomePage.route: (BuildContext context) => HomePage(),

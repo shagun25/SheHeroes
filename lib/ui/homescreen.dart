@@ -19,6 +19,7 @@ import 'package:safety/pages/emergency_map.dart';
 import 'package:safety/pages/login_page.dart';
 import 'package:safety/pages/nearby_places.dart';
 import 'package:safety/pages/photo_capture.dart';
+import 'package:safety/pages/video_capture.dart';
 import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
 import 'package:safety/services/service_locator.dart';
@@ -831,6 +832,14 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                     bottomNavigationKey.currentState;
                 fState.setPage(2);
                 Navigator.pushNamed(context, PhotoCapture.route);
+              }),
+			  TabData(
+              iconData: Icons.video_call,
+              title: "Video",
+              onclick: () {
+                //final FancyBottomNavigationState fState = bottomNavigationKey.currentState;
+                //fState.setPage(2);
+                Navigator.pushNamed(context, VideoCapture.route);
               }),
           TabData(
             iconData: Icons.keyboard_voice,
