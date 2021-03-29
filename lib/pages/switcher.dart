@@ -12,17 +12,20 @@ class Switcher extends StatelessWidget {
     gradient: LinearGradient(colors: [Colors.red, Colors.blue]),
     child: Text('Hi'),
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [HexColor('#FFC3CF'), HexColor('#F7BB97')])),
         child: SafeArea(
           child: ListView(
             shrinkWrap: true,
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 height: 20,
@@ -30,13 +33,15 @@ class Switcher extends StatelessWidget {
 
               FlatButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Homes()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Homes()));
                 },
                 child: Stack(
                   children: [
                     Center(
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 15, 0, 0),
+                        margin: EdgeInsets.fromLTRB(
+                            0, MediaQuery.of(context).size.width / 15, 0, 0),
                         child: AvatarGlow(
                           endRadius: 130.0,
                           glowColor: Colors.blueAccent,
@@ -62,10 +67,14 @@ class Switcher extends StatelessWidget {
                     Center(
                         child: Container(
                             padding: EdgeInsets.all(20),
-                            margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 3.5, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0,
+                                MediaQuery.of(context).size.width / 3.5, 0, 0),
                             child: Text(
                               'Safe',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black54),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                  color: Colors.black54),
                             ))),
                   ],
                 ),
@@ -123,7 +132,8 @@ class Switcher extends StatelessWidget {
                   children: [
                     Center(
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 15, 0, 0),
+                        margin: EdgeInsets.fromLTRB(
+                            0, MediaQuery.of(context).size.width / 15, 0, 0),
                         child: AvatarGlow(
                           endRadius: 130.0,
                           glowColor: Colors.deepOrange,
@@ -148,10 +158,14 @@ class Switcher extends StatelessWidget {
                     ),
                     Center(
                         child: Container(
-                            margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.width / 3.5, 0, 0),
+                            margin: EdgeInsets.fromLTRB(0,
+                                MediaQuery.of(context).size.width / 3.5, 0, 0),
                             child: Text(
                               'Danger',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black54),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                  color: Colors.black54),
                             ))),
                   ],
                 ),

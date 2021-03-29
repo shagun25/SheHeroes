@@ -49,8 +49,8 @@ class _InstructionScreenState extends State<InstructionScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         key: _scaffoldKey,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Container(
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: ExactAssetImage("assets/mapImage.jpg"),
