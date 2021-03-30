@@ -209,7 +209,7 @@ class _VideoScreenState extends State<VideoCapture> {
     }
   }
 
-  void _disposeCameraController(){
+  void _disposeCameraController() async{
       await controller.dispose();
   }
   

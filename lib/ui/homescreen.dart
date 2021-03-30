@@ -22,9 +22,9 @@ import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/pages/video_capture.dart';
 import 'package:safety/pages/self_defence.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
+import 'package:safety/services/googleAuth.dart';
 import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
-import 'package:safety/services/googleAuth.dart';
 
 class Homes extends StatefulWidget {
   // static AudioCache player = AudioCache();
@@ -123,7 +123,8 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
                 radius: 1.5)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             // mainAxisAlignment = MainAxisAlignment.spaceEvenly
             children: [
               Container(
@@ -148,7 +149,7 @@ class _HomesState extends State<Homes> with SingleTickerProviderStateMixin {
               ),
               Container(
                 height: 100,
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                //margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
