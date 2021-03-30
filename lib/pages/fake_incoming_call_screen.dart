@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
+// ignore: must_be_immutable
 class FakeCallScreen extends StatefulWidget {
   static final String route = '/fakeCallScreen';
 
@@ -11,7 +12,7 @@ class FakeCallScreen extends StatefulWidget {
 
   @override
   _FakeCallScreenState createState() =>
-      _FakeCallScreenState(fakeCallerName: this.fakeCallerName);
+      _FakeCallScreenState(fakeCallerName: fakeCallerName);
 }
 
 class _FakeCallScreenState extends State<FakeCallScreen> {
@@ -48,28 +49,28 @@ class _FakeCallScreenState extends State<FakeCallScreen> {
           FloatingActionButton(
             heroTag: 1,
             backgroundColor: Colors.redAccent,
-            child: Icon(
-              Icons.call_end_rounded,
-            ),
             onPressed: () {
               FlutterRingtonePlayer.stop();
               Navigator.pop(context);
             },
+            child: Icon(
+              Icons.call_end_rounded,
+            ),
           ),
           FloatingActionButton(
             heroTag: 2,
             backgroundColor: Color.fromRGBO(0, 250, 0, 0.9),
+            onPressed: () {},
             child: Icon(
               Icons.phone,
             ),
-            onPressed: () {},
           ),
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: ExactAssetImage("assets/fakeCallBG.jpg"),
+              image: ExactAssetImage('assets/fakeCallBG.jpg'),
               fit: BoxFit.cover),
         ),
         child: Column(
@@ -94,7 +95,7 @@ class _FakeCallScreenState extends State<FakeCallScreen> {
               alignment: Alignment.center,
               margin: EdgeInsets.only(top: 10.0),
               child: Text(
-                this.fakeCallerName,
+                fakeCallerName,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25.0,
