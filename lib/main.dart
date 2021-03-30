@@ -14,8 +14,7 @@ import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
@@ -32,8 +31,8 @@ class _MyAppState extends State<MyApp> {
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   final String number = "123456789";
 
-
-  StreamSubscription<HardwareButtons.VolumeButtonEvent> _volumeButtonSubscription;
+  StreamSubscription<HardwareButtons.VolumeButtonEvent>
+      _volumeButtonSubscription;
 
   StreamSubscription<HardwareButtons.HomeButtonEvent> _homeButtonSubscription;
 
@@ -45,13 +44,13 @@ class _MyAppState extends State<MyApp> {
 
     final QuickActions quickActions = QuickActions();
     quickActions.initialize((String shortcutType) {
-
       if (shortcutType == 'action_one') {
         _service.sendSms(number);
+      } else if (shortcutType == 'action_three') {
+        _service.takePhoto();
       } else {
-      _service.call(number);
+        _service.call(number);
       }
-
     });
 
     quickActions.setShortcutItems(<ShortcutItem>[
@@ -68,9 +67,13 @@ class _MyAppState extends State<MyApp> {
           type: 'action_two',
           localizedTitle: 'Emergency Call',
           icon: 'AppIcon'),
-    ]).then((value) {
-    });
-    _volumeButtonSubscription = HardwareButtons.volumeButtonEvents.listen((event) {
+      const ShortcutItem(
+          type: 'action_three',
+          localizedTitle: 'Immediate Capture',
+          icon: 'AppIcon'),
+    ]).then((value) {});
+    _volumeButtonSubscription =
+        HardwareButtons.volumeButtonEvents.listen((event) {
       setState(() {
         // _latestHardwareButtonEvent = event.toString();
         Constants.sendMessage();
