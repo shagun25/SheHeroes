@@ -29,6 +29,7 @@ class _MyAppState extends State<MyApp> {
               flex: 1,
               child: Container(
                 child: SizedBox.expand(
+                  // ignore: deprecated_member_use
                   child: RaisedButton(
                     color: Colors.blue,
                     onPressed: _takePhoto,
@@ -40,8 +41,10 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             Flexible(
+              flex: 1,
               child: Container(
                   child: SizedBox.expand(
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                   color: Colors.white,
                   onPressed: _recordVideo,
@@ -50,7 +53,6 @@ class _MyAppState extends State<MyApp> {
                           fontSize: textSize, color: Colors.blueGrey)),
                 ),
               )),
-              flex: 1,
             )
           ],
         ),
@@ -59,7 +61,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _takePhoto() async {
-    ImagePicker.pickImage(source: ImageSource.camera)
+    // ignore: deprecated_member_use
+    await ImagePicker.pickImage(source: ImageSource.camera)
         .then((File recordedImage) {
       if (recordedImage != null && recordedImage.path != null) {
         setState(() {
@@ -76,7 +79,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _recordVideo() async {
-    ImagePicker.pickVideo(source: ImageSource.camera)
+    // ignore: deprecated_member_use
+    await ImagePicker.pickVideo(source: ImageSource.camera)
         .then((File recordedVideo) {
       if (recordedVideo != null && recordedVideo.path != null) {
         setState(() {
@@ -94,9 +98,9 @@ class _MyAppState extends State<MyApp> {
 
   // ignore: unused_element
   void _saveNetworkVideo() async {
-    String path =
+    var path =
         'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4';
-    GallerySaver.saveVideo(path, albumName: albumName).then((bool success) {
+    await GallerySaver.saveVideo(path, albumName: albumName).then((bool success) {
       setState(() {
         print('Video is saved');
       });
@@ -105,9 +109,9 @@ class _MyAppState extends State<MyApp> {
 
   // ignore: unused_element
   void _saveNetworkImage() async {
-    String path =
+    var path =
         'https://image.shutterstock.com/image-photo/montreal-canada-july-11-2019-600w-1450023539.jpg';
-    GallerySaver.saveImage(path, albumName: albumName).then((bool success) {
+    await GallerySaver.saveImage(path, albumName: albumName).then((bool success) {
       setState(() {
         print('Image is saved');
       });
