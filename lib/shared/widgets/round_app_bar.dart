@@ -29,6 +29,7 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
                       padding: EdgeInsets.only(
                           bottom: width / 2 - preferredSize.height / 2),
                       child: Container(
+                        child: child,
                         // elevation: 2,
                         // shadowColor: Colors.black45,
                         decoration: BoxDecoration(
@@ -41,7 +42,6 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
                                   color: Colors.black38)
                             ]),
                         margin: EdgeInsets.only(bottom: margin),
-                        child: child,
                         // shape: CircleBorder(),
                       ),
                     ),
@@ -55,7 +55,6 @@ class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
           right: 0,
           top: 5,
           child: SafeArea(
-            // ignore: deprecated_member_use
             child: FlatButton(
               splashColor: Colors.transparent,
               // hoverColor: Colors.transparent,

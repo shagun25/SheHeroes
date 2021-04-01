@@ -52,7 +52,6 @@ class _SOSButtonState extends State<SOSButton> {
 
               // duration: Duration(seconds: 1),
 
-              // ignore: deprecated_member_use
               child: FlatButton(
                 shape: CircleBorder(),
                 onPressed: widget.onPressed,
@@ -66,7 +65,6 @@ class _SOSButtonState extends State<SOSButton> {
                             ? [widget.startColor, widget.endColor]
                             : [value.get('color1'), value.get('color2')]),
                   ),
-                  // ignore: deprecated_member_use
                   child: FlatButton(
                       shape: CircleBorder(),
                       onPressed: widget.onPressed,

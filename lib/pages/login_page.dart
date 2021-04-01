@@ -19,12 +19,12 @@ class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageState createState() => new _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final FocusNode myFocusNodeEmailLogin = FocusNode();
   final FocusNode myFocusNodePasswordLogin = FocusNode();
@@ -33,24 +33,24 @@ class _LoginPageState extends State<LoginPage>
   final FocusNode myFocusNodeEmail = FocusNode();
   final FocusNode myFocusNodeName = FocusNode();
 
-  TextEditingController loginEmailController = TextEditingController();
-  TextEditingController loginPasswordController = TextEditingController();
+  TextEditingController loginEmailController = new TextEditingController();
+  TextEditingController loginPasswordController = new TextEditingController();
 
   bool _obscureTextLogin = true;
   bool _obscureTextSignup = true;
   bool _obscureTextSignupConfirm = true;
 
-  TextEditingController signupEmailController = TextEditingController();
-  TextEditingController signupNameController = TextEditingController();
-  TextEditingController signupPasswordController = TextEditingController();
+  TextEditingController signupEmailController = new TextEditingController();
+  TextEditingController signupNameController = new TextEditingController();
+  TextEditingController signupPasswordController = new TextEditingController();
   TextEditingController signupConfirmPasswordController =
-      TextEditingController();
+      new TextEditingController();
 
   PageController _pageController;
 
   Future<void> signup() async {
     try {
-      var userCredential =
+      UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signupEmailController.text,
         password: signupPasswordController.text,
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage>
 
   Future<void> signin(BuildContext context) async {
     try {
-      var userCredential =
+      UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: loginEmailController.text,
         password: loginPasswordController.text,
@@ -70,9 +70,9 @@ class _LoginPageState extends State<LoginPage>
     } catch (e) {
       print(e);
     }
-    print('signin successfully!!');
+    print("signin successfully!!");
 
-    await Navigator.pushNamed(context, Switcher.route);
+    Navigator.pushNamed(context, Switcher.route);
   }
 
   Color left = Colors.black;
@@ -80,10 +80,9 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       key: _scaffoldKey,
       body: NotificationListener<OverscrollIndicatorNotification>(
-        // ignore: missing_return
         onNotification: (overscroll) {
           overscroll.disallowGlow();
         },
@@ -93,7 +92,7 @@ class _LoginPageState extends State<LoginPage>
             height: MediaQuery.of(context).size.height >= 775.0
                 ? MediaQuery.of(context).size.height
                 : 775.0,
-            decoration: BoxDecoration(color: bg
+            decoration: new BoxDecoration(color: bg
                 // begin: const FractionalOffset(0.0, 0.0),
                 // end: const FractionalOffset(1.0, 1.0),
                 // stops: [0.0, 1.0],
@@ -109,18 +108,18 @@ class _LoginPageState extends State<LoginPage>
                       padding: EdgeInsets.only(top: 75.0),
                       child: AvatarGlow(
                         endRadius: 100.0,
-                        glowColor: HexColor('#ea6a88'),
+                        glowColor: HexColor("#ea6a88"),
                         child: Container(
                           height: 120,
                           width: 120,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(1000)),
-                          child: Image(
+                          child: new Image(
                               width: 250.0,
                               height: 191.0,
                               fit: BoxFit.fill,
-                              image: AssetImage('assets/SheHeroes.png')),
+                              image: new AssetImage('assets/SheHeroes.png')),
                         ),
                       ),
                     ),
@@ -128,15 +127,15 @@ class _LoginPageState extends State<LoginPage>
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: ScaleAnimatedTextKit(
                           onTap: () {
-                            print('Tap Event');
+                            print("Tap Event");
                           },
                           text: [
-                            'SheHeroes',
+                            "SheHeroes",
                           ],
                           textStyle: TextStyle(
                               fontSize: 30.0,
-                              fontFamily: 'Canterbury',
-                              color: HexColor('#ea6a88'),
+                              fontFamily: "Canterbury",
+                              color: HexColor("#ea6a88"),
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
                           alignment: AlignmentDirectional
@@ -168,13 +167,13 @@ class _LoginPageState extends State<LoginPage>
                     },
                     children: <Widget>[
                       Center(
-                        child: ConstrainedBox(
+                        child: new ConstrainedBox(
                           constraints: const BoxConstraints.expand(),
                           child: _buildSignIn(context),
                         ),
                       ),
                       Center(
-                        child: ConstrainedBox(
+                        child: new ConstrainedBox(
                           constraints: const BoxConstraints.expand(),
                           child: _buildSignUp(context),
                         ),
@@ -212,18 +211,16 @@ class _LoginPageState extends State<LoginPage>
   }
 
   void showInSnackBar(String value) {
-    FocusScope.of(context).requestFocus(FocusNode());
-    // ignore: deprecated_member_use
+    FocusScope.of(context).requestFocus(new FocusNode());
     _scaffoldKey.currentState?.removeCurrentSnackBar();
-    // ignore: deprecated_member_use
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
         value,
         textAlign: TextAlign.center,
         style: TextStyle(
             color: Colors.white,
             fontSize: 16.0,
-            fontFamily: 'WorkSansSemiBold'),
+            fontFamily: "WorkSansSemiBold"),
       ),
       backgroundColor: Colors.blue,
       duration: Duration(seconds: 3),
@@ -244,33 +241,31 @@ class _LoginPageState extends State<LoginPage>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
-              // ignore: deprecated_member_use
               child: FlatButton(
                 splashColor: bg,
                 highlightColor: Colors.red,
                 onPressed: _onSignInButtonPress,
                 child: Text(
-                  'Existing',
+                  "Existing",
                   style: TextStyle(
                       color: left,
                       fontSize: 16.0,
-                      fontFamily: 'WorkSansSemiBold'),
+                      fontFamily: "WorkSansSemiBold"),
                 ),
               ),
             ),
             //Container(height: 33.0, width: 1.0, color: Colors.white),
             Expanded(
-              // ignore: deprecated_member_use
               child: FlatButton(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: _onSignUpButtonPress,
                 child: Text(
-                  'New',
+                  "New",
                   style: TextStyle(
                       color: right,
                       fontSize: 16.0,
-                      fontFamily: 'WorkSansSemiBold'),
+                      fontFamily: "WorkSansSemiBold"),
                 ),
               ),
             ),
@@ -308,7 +303,7 @@ class _LoginPageState extends State<LoginPage>
                           controller: loginEmailController,
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
+                              fontFamily: "WorkSansSemiBold",
                               fontSize: 16.0,
                               color: Colors.black),
                           decoration: InputDecoration(
@@ -318,9 +313,9 @@ class _LoginPageState extends State<LoginPage>
                               color: Colors.black,
                               size: 22.0,
                             ),
-                            hintText: 'Username',
+                            hintText: "Username",
                             hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
+                                fontFamily: "WorkSansSemiBold", fontSize: 17.0),
                           ),
                         ),
                       ),
@@ -337,7 +332,7 @@ class _LoginPageState extends State<LoginPage>
                           controller: loginPasswordController,
                           obscureText: _obscureTextLogin,
                           style: TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
+                              fontFamily: "WorkSansSemiBold",
                               fontSize: 16.0,
                               color: Colors.black),
                           decoration: InputDecoration(
@@ -347,9 +342,9 @@ class _LoginPageState extends State<LoginPage>
                               size: 22.0,
                               color: Colors.black,
                             ),
-                            hintText: 'Password',
+                            hintText: "Password",
                             hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
+                                fontFamily: "WorkSansSemiBold", fontSize: 17.0),
                             suffixIcon: GestureDetector(
                               onTap: _toggleLogin,
                               child: Icon(
@@ -369,7 +364,7 @@ class _LoginPageState extends State<LoginPage>
               ),
               Container(
                 margin: EdgeInsets.only(top: 170.0),
-                decoration: BoxDecoration(
+                decoration: new BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
@@ -387,8 +382,20 @@ class _LoginPageState extends State<LoginPage>
                 child: MaterialButton(
                     highlightColor: Colors.transparent,
                     splashColor: Theme.Colors.loginGradientEnd,
+                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 42.0),
+                      child: Text(
+                        "LOGIN",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: "WorkSansBold"),
+                      ),
+                    ),
                     onPressed: () {
-                      if (loginEmailController.text != 'user') {
+                      if (loginEmailController.text != "user") {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -406,33 +413,19 @@ class _LoginPageState extends State<LoginPage>
                                           "Authentication Details didn't match\nPassword didn't match!"),
                                     )));
                       }
-                      if (loginEmailController.text == 'user' &&
-                          loginPasswordController.text == '123') {
-                        showInSnackBar('Signing In.. please wait');
+                      if (loginEmailController.text == "user" &&
+                          loginPasswordController.text == "123") {
+                        showInSnackBar("Signing In.. please wait");
                         Future.delayed(Duration(seconds: 1)).then((value) =>
                             Navigator.pushNamedAndRemoveUntil(
                                 context, Switcher.route, (route) => false));
                       }
-                    },
-
-                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 42.0),
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: 'WorkSansBold'),
-                      ),
-                    ),                    ),
+                    }),
               ),
             ],
           ),
           Padding(
             padding: EdgeInsets.only(top: 5.0),
-            // ignore: deprecated_member_use
             child: FlatButton(
                 minWidth: 20.0,
                 //color: Colors.black12,
@@ -440,18 +433,18 @@ class _LoginPageState extends State<LoginPage>
                     borderRadius: BorderRadius.circular(100)),
                 onPressed: () {},
                 child: Text(
-                  'Forgot Password?',
+                  "Forgot Password?",
                   style: TextStyle(
                       //decoration: TextDecoration.underline,
                       color: Colors.brown,
                       fontSize: 16.0,
-                      fontFamily: 'WorkSansMedium'),
+                      fontFamily: "WorkSansMedium"),
                 )),
           ),
           Container(
             alignment: Alignment.center,
             child: Text(
-              'OR Sign-in With',
+              "OR Sign-in With",
               style: TextStyle(letterSpacing: 1.0),
             ),
           ),
@@ -459,15 +452,15 @@ class _LoginPageState extends State<LoginPage>
             padding: EdgeInsets.only(top: 13.0),
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () async {
-                print('Google Sign in Tapped');
-                var _gAuth = GoogleAuthenticate(context);
-                await _gAuth.loginViaGoogle();
-              },
               child: Image.asset(
                 'assets/google.png',
                 width: 45.0,
               ),
+              onTap: () async {
+                print("Google Sign in Tapped");
+                var _gAuth = GoogleAuthenticate(context);
+                await _gAuth.loginViaGoogle();
+              },
             ),
           ),
           SizedBox(
@@ -508,7 +501,7 @@ class _LoginPageState extends State<LoginPage>
                             keyboardType: TextInputType.text,
                             textCapitalization: TextCapitalization.words,
                             style: TextStyle(
-                                fontFamily: 'WorkSansSemiBold',
+                                fontFamily: "WorkSansSemiBold",
                                 fontSize: 16.0,
                                 color: Colors.black),
                             decoration: InputDecoration(
@@ -517,9 +510,9 @@ class _LoginPageState extends State<LoginPage>
                                 FontAwesomeIcons.user,
                                 color: Colors.black,
                               ),
-                              hintText: 'Username',
+                              hintText: "Username",
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold',
+                                  fontFamily: "WorkSansSemiBold",
                                   fontSize: 16.0),
                             ),
                           ),
@@ -537,7 +530,7 @@ class _LoginPageState extends State<LoginPage>
                             controller: signupEmailController,
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
-                                fontFamily: 'WorkSansSemiBold',
+                                fontFamily: "WorkSansSemiBold",
                                 fontSize: 16.0,
                                 color: Colors.black),
                             decoration: InputDecoration(
@@ -546,9 +539,9 @@ class _LoginPageState extends State<LoginPage>
                                 FontAwesomeIcons.envelope,
                                 color: Colors.black,
                               ),
-                              hintText: 'Email Address',
+                              hintText: "Email Address",
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold',
+                                  fontFamily: "WorkSansSemiBold",
                                   fontSize: 16.0),
                             ),
                           ),
@@ -566,7 +559,7 @@ class _LoginPageState extends State<LoginPage>
                             controller: signupPasswordController,
                             obscureText: _obscureTextSignup,
                             style: TextStyle(
-                                fontFamily: 'WorkSansSemiBold',
+                                fontFamily: "WorkSansSemiBold",
                                 fontSize: 16.0,
                                 color: Colors.black),
                             decoration: InputDecoration(
@@ -575,9 +568,9 @@ class _LoginPageState extends State<LoginPage>
                                 Icons.lock_outline,
                                 color: Colors.black,
                               ),
-                              hintText: 'Password',
+                              hintText: "Password",
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold',
+                                  fontFamily: "WorkSansSemiBold",
                                   fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignup,
@@ -604,7 +597,7 @@ class _LoginPageState extends State<LoginPage>
                             controller: signupConfirmPasswordController,
                             obscureText: _obscureTextSignupConfirm,
                             style: TextStyle(
-                                fontFamily: 'WorkSansSemiBold',
+                                fontFamily: "WorkSansSemiBold",
                                 fontSize: 16.0,
                                 color: Colors.black),
                             decoration: InputDecoration(
@@ -613,9 +606,9 @@ class _LoginPageState extends State<LoginPage>
                                 Icons.lock_outline,
                                 color: Colors.black,
                               ),
-                              hintText: 'Confirmation',
+                              hintText: "Confirmation",
                               hintStyle: TextStyle(
-                                  fontFamily: 'WorkSansSemiBold',
+                                  fontFamily: "WorkSansSemiBold",
                                   fontSize: 16.0),
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSignupConfirm,
@@ -637,7 +630,7 @@ class _LoginPageState extends State<LoginPage>
               ),
               Container(
                 margin: EdgeInsets.only(top: 340.0),
-                decoration: BoxDecoration(
+                decoration: new BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     boxShadow: <BoxShadow>[
                       // BoxShadow(
@@ -655,25 +648,24 @@ class _LoginPageState extends State<LoginPage>
                 child: MaterialButton(
                     highlightColor: Colors.transparent,
                     splashColor: Theme.Colors.loginGradientEnd,
-                    onPressed: () {
-                      showInSnackBar('Signing In.. please wait');
-                      Future.delayed(Duration(seconds: 1)).then((value) =>
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, Switcher.route, (route) => false));
-                    },
-
                     //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 42.0),
                       child: Text(
-                        'SIGN UP',
+                        "SIGN UP",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,
-                            fontFamily: 'WorkSansBold'),
+                            fontFamily: "WorkSansBold"),
                       ),
-                    ),                    ),
+                    ),
+                    onPressed: () {
+                      showInSnackBar("Signing In.. please wait");
+                      Future.delayed(Duration(seconds: 1)).then((value) =>
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, Switcher.route, (route) => false));
+                    }),
               ),
             ],
           ),

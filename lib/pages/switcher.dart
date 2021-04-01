@@ -31,7 +31,6 @@ class Switcher extends StatelessWidget {
                 height: 20,
               ),
 
-              // ignore: deprecated_member_use
               FlatButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -124,7 +123,6 @@ class Switcher extends StatelessWidget {
               //   ),
               // ),
 
-              // ignore: deprecated_member_use
               FlatButton(
                 autofocus: false,
                 onPressed: () {

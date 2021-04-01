@@ -32,8 +32,8 @@ class Hom extends StatefulWidget {
 
 class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
-  final String number = '123456789';
-  final String email = 'dancamdev@example.com';
+  final String number = "123456789";
+  final String email = "dancamdev@example.com";
   int currentPage = 0;
   GlobalKey bottomNavigationKey = GlobalKey();
   AnimationController _animationController;
@@ -56,7 +56,6 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // ignore: missing_return
       onWillPop: () async {
         Navigator.of(context).pop(Hom());
       },
@@ -86,9 +85,9 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                     ),
                     onPressed: () async {
                       var _gAuth = GoogleAuthenticate(context);
-                      var response = await _gAuth.logOut();
+                      bool response = await _gAuth.logOut();
                       if (response) {
-                        await Future.delayed(Duration(milliseconds: 800)).then(
+                        Future.delayed(Duration(milliseconds: 800)).then(
                             (value) => Navigator.pushNamedAndRemoveUntil(
                                 context, LoginPage.route, (route) => false));
                       }
@@ -103,15 +102,15 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                     children: [
                       ScaleAnimatedTextKit(
                           onTap: () {
-                            print('Tap Event');
+                            print("Tap Event");
                           },
                           text: [
-                            'Emergency',
+                            "Emergency",
                           ],
                           textStyle: TextStyle(
                               fontSize: 50.0,
-                              fontFamily: 'Canterbury',
-                              color: HexColor('#ea6a88'),
+                              fontFamily: "Canterbury",
+                              color: HexColor("#ea6a88"),
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
                           alignment: AlignmentDirectional
@@ -160,11 +159,11 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                             ],
                             borderRadius: BorderRadius.circular(1000),
                             gradient: RadialGradient(radius: 0.7, colors: [
-                              HexColor('#DD5E89'),
-                              HexColor('#F7BB97'),
+                              HexColor("#DD5E89"),
+                              HexColor("#F7BB97"),
                             ]),
                             border: Border.all(
-                                color: HexColor('#ea6a88'), width: 2)),
+                                color: HexColor("#ea6a88"), width: 2)),
                         child: AvatarGlow(
                           endRadius: 200.0,
                           startDelay: Duration(seconds: 1),
@@ -213,9 +212,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
                                       border: Border.all(
-                                          color: HexColor('#ea6a88'),
+                                          color: HexColor("#ea6a88"),
                                           width: 3)),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -241,7 +239,6 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                                           BorderRadius.circular(
                                                               3000.0),
                                                     ),
-                                                    // ignore: deprecated_member_use
                                                     child: RaisedButton(
                                                       color: Colors.white,
                                                       shape: RoundedRectangleBorder(
@@ -316,7 +313,6 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                                           BorderRadius.circular(
                                                               3000.0),
                                                     ),
-                                                    // ignore: deprecated_member_use
                                                     child: RaisedButton(
                                                       color: Colors.white,
                                                       shape: RoundedRectangleBorder(
@@ -390,12 +386,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         Icon(
                                           Icons.call,
                                           size: 40,
-                                          color: HexColor('#b72334'),
+                                          color: HexColor("#b72334"),
                                         ),
                                         Text(
                                           'SOS',
                                           style: TextStyle(
-                                              color: HexColor('#b72334'),
+                                              color: HexColor("#b72334"),
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -416,9 +412,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
                                       border: Border.all(
-                                          color: HexColor('#ea6a88'),
+                                          color: HexColor("#ea6a88"),
                                           width: 3)),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -433,12 +428,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         Icon(
                                           Icons.local_parking,
                                           size: 40,
-                                          color: HexColor('#b72334'),
+                                          color: HexColor("#b72334"),
                                         ),
                                         Text(
                                           'Police',
                                           style: TextStyle(
-                                              color: HexColor('#b72334'),
+                                              color: HexColor("#b72334"),
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -459,9 +454,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
                                       border: Border.all(
-                                          color: HexColor('#ea6a88'),
+                                          color: HexColor("#ea6a88"),
                                           width: 3)),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -479,12 +473,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         Icon(
                                           Icons.phone_callback_rounded,
                                           size: 40,
-                                          color: HexColor('#b72334'),
+                                          color: HexColor("#b72334"),
                                         ),
                                         Text(
                                           'Fake Call',
                                           style: TextStyle(
-                                              color: HexColor('#b72334'),
+                                              color: HexColor("#b72334"),
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -504,9 +498,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
                                       border: Border.all(
-                                          color: HexColor('#ea6a88'),
+                                          color: HexColor("#ea6a88"),
                                           width: 3)),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -534,7 +527,6 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                                           BorderRadius.circular(
                                                               3000.0),
                                                     ),
-                                                    // ignore: deprecated_member_use
                                                     child: RaisedButton(
                                                       color: Colors.white,
                                                       shape: RoundedRectangleBorder(
@@ -561,7 +553,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                                           assetsAudioPlayer
                                                               .open(
                                                             Audio(
-                                                                'music/police.mp3'),
+                                                                "music/police.mp3"),
                                                           );
                                                         }),
                                                       },
@@ -630,12 +622,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         Icon(
                                           Icons.speaker_phone,
                                           size: 40,
-                                          color: HexColor('#b72334'),
+                                          color: HexColor("#b72334"),
                                         ),
                                         Text(
                                           'Siren',
                                           style: TextStyle(
-                                              color: HexColor('#b72334'),
+                                              color: HexColor("#b72334"),
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -656,9 +648,8 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(100),
                                       // color: Colors.transparent,
                                       border: Border.all(
-                                          color: HexColor('#ea6a88'),
+                                          color: HexColor("#ea6a88"),
                                           width: 3)),
-                                  // ignore: deprecated_member_use
                                   child: RaisedButton(
                                     elevation: 1,
                                     color: Colors.white70,
@@ -720,12 +711,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         Icon(
                                           Icons.vibration,
                                           size: 40,
-                                          color: HexColor('#b72334'),
+                                          color: HexColor("#b72334"),
                                         ),
                                         Text(
                                           'Shake',
                                           style: TextStyle(
-                                              color: HexColor('#b72334'),
+                                              color: HexColor("#b72334"),
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -754,7 +745,7 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
           tabs: [
             TabData(
                 iconData: Icons.camera,
-                title: 'Camera',
+                title: "Camera",
                 onclick: () {
                   final FancyBottomNavigationState fState =
                       bottomNavigationKey.currentState;
@@ -763,12 +754,12 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                 }),
             TabData(
               iconData: Icons.keyboard_voice,
-              title: 'Voice',
+              title: "Voice",
               onclick: () => Navigator.pushNamed(context, SpeechScreen.route),
             ),
             TabData(
               iconData: Icons.place,
-              title: 'Nearby',
+              title: "Nearby",
               onclick: () => Navigator.pushNamed(context, NearbyPlaces.route),
             ),
           ],

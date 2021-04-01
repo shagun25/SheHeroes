@@ -32,7 +32,6 @@ class PersonTileEmergency extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // ignore: deprecated_member_use
       child: FlatButton(
         onPressed: () {
           Navigator.of(context).pushNamed('Emergency_Map');

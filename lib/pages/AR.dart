@@ -41,7 +41,7 @@ class _ARDetectionPageState extends State<ARDetectionPage> {
     // 6
     try {
       await controller.initialize();
-    } on CameraException {
+    } on CameraException catch (e) {
       // _showCameraException(e);
     }
 
@@ -55,7 +55,7 @@ class _ARDetectionPageState extends State<ARDetectionPage> {
     super.initState();
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
-      if (cameras.isNotEmpty) {
+      if (cameras.length > 0) {
         setState(() {
           // 2
           selectedCameraIdx = 0;
@@ -63,7 +63,7 @@ class _ARDetectionPageState extends State<ARDetectionPage> {
 
         _initCameraController(cameras[selectedCameraIdx]).then((void v) {});
       } else {
-        print('No camera available');
+        print("No camera available");
       }
     }).catchError((err) {
       // 3

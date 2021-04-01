@@ -7,7 +7,7 @@ import 'package:safety/pages/switcher.dart';
 
 class GoogleAuthenticate {
   var googleSignIn;
-  final BuildContext _context;
+  BuildContext _context;
 
   GoogleAuthenticate(this._context) {
     googleSignIn = GoogleSignIn();
@@ -19,7 +19,7 @@ class GoogleAuthenticate {
         // Checking If Already Sign In With Google
         final user = await googleSignIn.signIn();
         if (user == null) {
-          print('Google Sign In Not Completed');
+          print("Google Sign In Not Completed");
         } else {
           final googleAuth = await user.authentication;
 
@@ -31,23 +31,23 @@ class GoogleAuthenticate {
           var registeredUser =
               await FirebaseAuth.instance.signInWithCredential(credential);
 
-          ScaffoldMessenger.of(_context).showSnackBar(
+          ScaffoldMessenger.of(this._context).showSnackBar(
               SnackBar(content: Text('Wait.... Process is going on')));
 
-          print('Log In Successful ' + registeredUser.user.displayName);
-          await Future.delayed(Duration(milliseconds: 800)).then((value) =>
+          print("Log In Successful " + registeredUser.user.displayName);
+          Future.delayed(Duration(milliseconds: 800)).then((value) =>
               Navigator.pushNamedAndRemoveUntil(
-                  _context, Switcher.route, (route) => false));
+                  this._context, Switcher.route, (route) => false));
         }
       } else {
-        print('Already Signed In');
-        await Future.delayed(Duration(milliseconds: 800)).then((value) =>
+        print("Already Signed In");
+        Future.delayed(Duration(milliseconds: 800)).then((value) =>
             Navigator.pushNamedAndRemoveUntil(
-                _context, Switcher.route, (route) => false));
+                this._context, Switcher.route, (route) => false));
       }
     } catch (e) {
-      await messageShow(_context, 'Log In Error',
-          'Log-in not Completed or\nEmail of this Account Already Present With Other Credentials');
+      messageShow(this._context, "Log In Error",
+          "Log-in not Completed or\nEmail of this Account Already Present With Other Credentials");
     }
   }
 
@@ -55,7 +55,7 @@ class GoogleAuthenticate {
     try {
       googleSignIn.disconnect();
       googleSignIn.signOut();
-      await FirebaseAuth.instance.signOut();
+      FirebaseAuth.instance.signOut();
       return true;
     } catch (e) {
       return false;

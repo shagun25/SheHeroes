@@ -59,11 +59,11 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
               ),
               Center(
                 child: GradientWidget(
-                  gradient: Gradients.dashboardButtonGradient,
                   child: Text(
                     'SELECT AN OPTION',
                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                   ),
+                  gradient: Gradients.dashboardButtonGradient,
                 ),
               ),
               SizedBox(
@@ -113,7 +113,6 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
                           try {
                             // MainDashboard.player.clearCache();
                             // MainDashboard.player.play('siren.mp3');
-                          // ignore: empty_catches
                           } catch (e) {}
                           Gradients.showMyDialog(
                             context,
@@ -145,7 +144,6 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
                               try {
                                 // MainDashboard.player.clearCache();
                                 // MainDashboard.player.play('siren.mp3');
-                              // ignore: empty_catches
                               } catch (e) {}
                             },
                           );
@@ -156,7 +154,7 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
                         icon: Constants.firIcon,
                         text: 'FIR',
                         onPressed: () async {
-                          await Navigator.of(context).pushNamed('Emergency_List');
+                          Navigator.of(context).pushNamed('Emergency_List');
                           // List<Placemark> placemark = await Geolocator()
                           //     .placemarkFromCoordinates(28.686503, 77.364235);
                           // print(placemark[0].subLocality);
@@ -251,7 +249,6 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
         children: [
           BottomTimeBar(
             child: Container(
-              height: 100,
               child: Row(
                 children: [
                   Expanded(
@@ -281,10 +278,6 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
                   )),
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              stops: [0.6, 1], colors: [Color.fromRGBO(244, 102, 65, 1), Color.fromRGBO(253, 137, 1, 1)]),
-                          color: Colors.red),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -309,10 +302,15 @@ class _MainDashboardState extends State<MainDashboard> with SingleTickerProvider
                           ],
                         ),
                       ),
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              stops: [0.6, 1], colors: [Color.fromRGBO(244, 102, 65, 1), Color.fromRGBO(253, 137, 1, 1)]),
+                          color: Colors.red),
                     ),
                   ),
                 ],
               ),
+              height: 100,
               // color: Colors.red,
             ),
           ),

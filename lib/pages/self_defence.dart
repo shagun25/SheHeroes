@@ -8,7 +8,7 @@ class Ho extends StatefulWidget {
 
 class _HoState extends State<Ho> {
   YoutubePlayerController _controller;
-  final List<YoutubePlayerController> _controllers = [];
+  List<YoutubePlayerController> _controllers = [];
   List<String> urls = [
     'https://youtu.be/tD9JPEq0lJ0',
     'https://youtu.be/T7aNSRoDCmg',
@@ -41,7 +41,7 @@ class _HoState extends State<Ho> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Youtube Player'),
+        title: Text("Youtube Player"),
       ),
       body: Container(
         child: SingleChildScrollView(

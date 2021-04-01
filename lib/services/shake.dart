@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:sensors/sensors.dart';
 
 /// Callback for phone shakes
-typedef PhoneShakeCallback = Null Function();
+typedef Null PhoneShakeCallback();
 
 /// ShakeDetector class for phone shake functionality
 class ShakeDetector {
@@ -44,16 +44,16 @@ class ShakeDetector {
   /// Starts listening to accerelometer events
   void startListening() {
     streamSubscription = accelerometerEvents.listen((AccelerometerEvent event) {
-      var x = event.x;
-      var y = event.y;
-      var z = event.z;
+      double x = event.x;
+      double y = event.y;
+      double z = event.z;
 
-      var gX = x / 9.80665;
-      var gY = y / 9.80665;
-      var gZ = z / 9.80665;
+      double gX = x / 9.80665;
+      double gY = y / 9.80665;
+      double gZ = z / 9.80665;
 
       // gForce will be close to 1 when there is no movement.
-      var gForce = sqrt(gX * gX + gY * gY + gZ * gZ);
+      double gForce = sqrt(gX * gX + gY * gY + gZ * gZ);
 
       if (gForce > shakeThresholdGravity) {
         var now = DateTime.now().millisecondsSinceEpoch;

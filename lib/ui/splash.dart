@@ -34,16 +34,16 @@ class _SplashState extends State<Splash> {
               padding: EdgeInsets.only(top: 75.0),
               child: AvatarGlow(
                 endRadius: 200.0,
-                glowColor: HexColor('#ea6a88'),
+                glowColor: HexColor("#ea6a88"),
                 child: Container(
                   height: 200,
                   width: 200,
                   decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(1000)),
-                  child: Image(
+                  child: new Image(
                       width: 251.0, //250
                       height: 191.0,
                       fit: BoxFit.fill,
-                      image: AssetImage('assets/SheHeroes.png')),
+                      image: new AssetImage('assets/SheHeroes.png')),
                 ),
               ),
             ),
@@ -51,13 +51,13 @@ class _SplashState extends State<Splash> {
               margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
               child: ScaleAnimatedTextKit(
                   onTap: () {
-                    print('Tap Event');
+                    print("Tap Event");
                   },
                   text: [
-                    'SheHeroes',
+                    "SheHeroes",
                   ],
                   textStyle: TextStyle(
-                      fontSize: 30.0, fontFamily: 'Canterbury', color: HexColor('#ea6a88'), fontWeight: FontWeight.bold),
+                      fontSize: 30.0, fontFamily: "Canterbury", color: HexColor("#ea6a88"), fontWeight: FontWeight.bold),
                   textAlign: TextAlign.start,
                   alignment: AlignmentDirectional.topStart // or Alignment.topLeft
                   ),

@@ -17,7 +17,7 @@ class _VideoScreenState extends State<VideoCapture> {
   int selectedCameraIdx;
   String videoPath;
   String albumName = 'Media';
-  String path;
+  String path = null;
 
   @override
   void initState() {
@@ -25,14 +25,14 @@ class _VideoScreenState extends State<VideoCapture> {
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
 
-      if (cameras.isNotEmpty) {
+      if (cameras.length > 0) {
         setState(() {
           selectedCameraIdx = 0;
         });
 
         _initCameraController(cameras[selectedCameraIdx]).then((void v) {});
       } else {
-        print('No camera available');
+        print("No camera available");
       }
     }).catchError((err) {
       print('Error: $err.code\nError Message: $err.message');
@@ -123,13 +123,11 @@ class _VideoScreenState extends State<VideoCapture> {
           mainAxisSize: MainAxisSize.max,
           children: [
             FloatingActionButton(
+                child: controller.value.isRecordingVideo?Icon(Icons.stop_circle):Icon(Icons.video_call),
                 backgroundColor: Color(0xffb72334),
-
                 onPressed: () {
                   _onCapturePressed(context);
-                },
-                child: controller.value.isRecordingVideo?Icon(Icons.stop_circle):Icon(Icons.video_call),
-    )
+                })
           ],
         ),
       ),
@@ -143,12 +141,11 @@ class _VideoScreenState extends State<VideoCapture> {
     }
 
     CameraDescription selectedCamera = cameras[selectedCameraIdx];
-    var lensDirection = selectedCamera.lensDirection;
+    CameraLensDirection lensDirection = selectedCamera.lensDirection;
 
     return Expanded(
       child: Align(
         alignment: Alignment.centerLeft,
-        // ignore: deprecated_member_use
         child: FlatButton.icon(
             onPressed: _onSwitchCamera,
             icon: Icon(_getCameraLensIcon(lensDirection)),
@@ -195,7 +192,7 @@ class _VideoScreenState extends State<VideoCapture> {
         await controller.stopVideoRecording();
         print(path);
         if (path != null) {
-          await GallerySaver.saveVideo(path, albumName: albumName).then((
+          GallerySaver.saveVideo(path, albumName: albumName).then((
               bool success) {
               _disposeCameraController();
             setState(() {
@@ -217,7 +214,7 @@ class _VideoScreenState extends State<VideoCapture> {
   }
   
   void _showCameraException(CameraException e) {
-    var errorText = 'Error: ${e.code}\nError Message: ${e.description}';
+    String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
     print(errorText);
 
     print('Error: ${e.code}\n${e.description}');

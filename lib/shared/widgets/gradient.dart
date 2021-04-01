@@ -7,6 +7,7 @@ class GradientWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
+        child: child,
         shaderCallback: (Rect bounds) {
           return gradient.createShader(bounds);
         });

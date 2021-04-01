@@ -6,13 +6,11 @@ class ProfileProvider with ChangeNotifier {
 
   ProfileProvider();
 
-  // ignore: always_declare_return_types
   openProfile() {
     isProfileOpened = true;
     notifyListeners();
   }
 
-  // ignore: always_declare_return_types
   closeProfile() {
     isProfileOpened = false;
 

@@ -32,7 +32,7 @@ class Gradients {
   static const Color mainColor = Color(0xffff9100);
 
   static void _sendSMS(String message, List<String> recipents) async {
-    var _result = await sendSMS(message: message, recipients: recipents)
+    String _result = await sendSMS(message: message, recipients: recipents)
         .catchError((onError) {
       print(onError);
     });
@@ -40,7 +40,7 @@ class Gradients {
   }
 
   static Future<Position> _getCurrentPosition() async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     return position;
@@ -53,7 +53,6 @@ class Gradients {
               transitionBuilder: (context, a1, a2, widget) {
                 Constants.listenShake();
                 return WillPopScope(
-                  // ignore: missing_return
                   onWillPop: () {},
                   child: Transform.scale(
                     scale: a1.value,
@@ -91,7 +90,6 @@ class Gradients {
                               //       Color(0xffe72d88)
                               //     ]),
                             ),
-                            // ignore: deprecated_member_use
                             child: FlatButton(
                                 shape: CircleBorder(),
                                 onPressed: onPressed,
@@ -107,7 +105,6 @@ class Gradients {
               barrierDismissible: true,
               barrierLabel: '',
               context: context,
-              // ignore: missing_return
               pageBuilder: (context, animation1, animation2) {});
 }
 
@@ -122,13 +119,13 @@ class Constants {
   static IconData firIcon = Icons.find_in_page;
 
   static Function taxiButton = () async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    final url = 'http://book.olacabs.com/?lat=' +
+    final url = "http://book.olacabs.com/?lat=" +
         position.latitude.toString() +
-        '&lng=' +
+        "&lng=" +
         position.longitude.toString() +
-        '&category=compact&utm_source=12343&drop_lat=28682640&drop_lng=77.370486&dsw=yes';
+        "&category=compact&utm_source=12343&drop_lat=28682640&drop_lng=77.370486&dsw=yes";
 
     if (await canLaunch(url)) {
       await launch(url);
@@ -137,37 +134,45 @@ class Constants {
     }
   };
   static Function policeStaionFunction = () async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
-    await MapsLauncher.launchQuery('police station');
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('police station');
 
     // MapsLauncher.launchQuery(
     //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
   };
   static Function hospitalFunction = () async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
-    await MapsLauncher.launchQuery('hospital');
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('hospital');
 
     // MapsLauncher.launchQuery(
     //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
   };
   static Function ngoFunction = () async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
-    await MapsLauncher.launchQuery('women ngo');
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('women ngo');
 
     // MapsLauncher.launchQuery(
     //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
   };
   static Function publicParkingAreasFunction = () async {
-    var position = await Geolocator()
+    Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
-    await MapsLauncher.launchQuery('Public Parking Areas');
+    String s = MapsLauncher.createCoordinatesUrl(
+        position.latitude, position.longitude);
+    MapsLauncher.launchQuery('Public Parking Areas');
 
     // MapsLauncher.launchQuery(
     //     '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
@@ -182,15 +187,15 @@ class Constants {
   };
 
   static Function sendMessage = () async {
-    var position = await Gradients._getCurrentPosition();
-    final coordinates = Coordinates(position.latitude, position.longitude);
+    Position position = await Gradients._getCurrentPosition();
+    final coordinates = new Coordinates(position.latitude, position.longitude);
     var addresses =
         await Geocoder.local.findAddressesFromCoordinates(coordinates);
     var first = addresses.first;
-    print('${first.featureName} : ${first.addressLine}');
-    var message =
+    print("${first.featureName} : ${first.addressLine}");
+    String message =
         "Help! I'm in an emergency. I'm at (${first.featureName}, ${first.addressLine}).";
-    var recipents = <String>['8920532416'];
+    List<String> recipents = ["8920532416"];
 
     Gradients._sendSMS(message, recipents);
   };

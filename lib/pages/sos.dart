@@ -108,7 +108,6 @@ class SOSPage extends StatelessWidget {
             // border: Border.all(width: 1),
             color: Colors.white,
           ),
-          // ignore: deprecated_member_use
           child: FlatButton(
             onPressed: Constants.policeStaionFunction,
             child: GradientWidget(

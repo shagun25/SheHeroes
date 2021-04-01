@@ -16,7 +16,6 @@ class CircularButtonDashboard extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
       ),
-      // ignore: deprecated_member_use
       child: FlatButton(
         shape: CircleBorder(),
         onPressed: onPressed,
@@ -26,7 +25,7 @@ class CircularButtonDashboard extends StatelessWidget {
             Icon(
               icon,
               color:
-                  fromEmergency == true ? Colors.red : Color(0xffffc400),
+                  this.fromEmergency == true ? Colors.red : Color(0xffffc400),
               size: fromEmergency == true
                   ? MediaQuery.of(context).size.height / 15
                   : MediaQuery.of(context).size.width / 8,

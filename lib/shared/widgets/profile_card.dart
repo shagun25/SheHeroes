@@ -25,7 +25,6 @@ class ProfileCard extends StatelessWidget {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState ==
                     ConnectionState
-                        // ignore: curly_braces_in_flow_control_structures
                         .done) if (profileProvider.isProfileOpened == true) {
                   return LayoutBuilder(builder: (context, constraints) {
                     return Container(
@@ -49,7 +48,7 @@ class ProfileCard extends StatelessWidget {
                                 height: 10.0,
                               ),
                               Text(
-                                'Aberle Abner',
+                                "Aberle Abner",
                                 style: TextStyle(
                                   fontSize: 12.0,
                                   color: Colors.white,
@@ -73,7 +72,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'Height',
+                                              "Height",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -84,7 +83,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              '177 cm',
+                                              "177 cm",
                                               style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.pinkAccent,
@@ -97,7 +96,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'Weight',
+                                              "Weight",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -108,7 +107,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              '28.5 kg',
+                                              "28.5 kg",
                                               style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.pinkAccent,
@@ -121,7 +120,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'Blood Group',
+                                              "Blood Group",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -132,7 +131,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              'B+',
+                                              "B+",
                                               style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.pinkAccent,
@@ -160,7 +159,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'City',
+                                              "City",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -171,7 +170,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              'Ghaziabad',
+                                              "Ghaziabad",
                                               style: TextStyle(
                                                 fontSize: 17.5,
                                                 color: Colors.pinkAccent,
@@ -184,7 +183,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'Phone',
+                                              "Phone",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -195,7 +194,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              '91\n1234567890',
+                                              "91\n1234567890",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontSize: 12.0,
@@ -209,7 +208,7 @@ class ProfileCard extends StatelessWidget {
                                         child: Column(
                                           children: <Widget>[
                                             Text(
-                                              'Age',
+                                              "Age",
                                               style: TextStyle(
                                                 color: Colors.redAccent,
                                                 fontSize: 12.0,
@@ -220,7 +219,7 @@ class ProfileCard extends StatelessWidget {
                                               height: 5.0,
                                             ),
                                             Text(
-                                              '12 y',
+                                              "12 y",
                                               style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.pinkAccent,

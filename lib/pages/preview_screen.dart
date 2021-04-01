@@ -34,7 +34,6 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
               flex: 1,
               child: Container(
                 padding: EdgeInsets.all(60.0),
-                // ignore: deprecated_member_use
                 child: RaisedButton(
                   onPressed: () {
                     getBytesFromFile().then((bytes) {
@@ -53,7 +52,7 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
   }
 
   Future<ByteData> getBytesFromFile() async {
-    var bytes = File(widget.imagePath).readAsBytesSync();
+    Uint8List bytes = File(widget.imagePath).readAsBytesSync();
     return ByteData.view(bytes.buffer);
   }
 }

@@ -24,7 +24,10 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
 
   @override
   Widget build(BuildContext context) {
-    var albumName = 'Media';
+    String firstButtonText = 'Take photo';
+    String secondButtonText = 'Record video';
+    double textSize = 20;
+    String albumName = 'Media';
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -38,16 +41,16 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
                 height: 20,
               ),
 
-              // ignore: deprecated_member_use
               FlatButton(
                 onPressed: () {
-                  // ignore: deprecated_member_use
                   ImagePicker.pickImage(source: ImageSource.camera).then((File recordedImage) {
                     if (recordedImage != null && recordedImage.path != null) {
                       setState(() {
+                        firstButtonText = 'saving in progress...';
                       });
                       GallerySaver.saveImage(recordedImage.path, albumName: albumName).then((bool success) {
                         setState(() {
+                          firstButtonText = 'image saved!';
                         });
                       });
                     }
@@ -132,7 +135,6 @@ class _CameraSwitcherState extends State<CameraSwitcher> {
               //   ),
               // ),
 
-              // ignore: deprecated_member_use
               FlatButton(
                 autofocus: false,
                 onPressed: () {
