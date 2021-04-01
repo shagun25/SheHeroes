@@ -64,7 +64,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   String _text = 'Press the button and start speaking';
   double _confidence = 1.0;
   final CallsAndMessagesService service = locator<CallsAndMessagesService>();
-  final String number = "123456789";
+  final String number = '123456789';
   final assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
@@ -115,7 +115,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   void _listen() async {
     if (!_isListening) {
-      bool available = await _speech.initialize(
+      var available = await _speech.initialize(
         onStatus: (val) => print('onStatus: $val'),
         onError: (val) => print('onError: $val'),
       );
@@ -123,7 +123,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         setState(() => _isListening = true);
         await _speech.listen(
           onResult: (val) async {
-            _text = await val.recognizedWords;
+            _text = val.recognizedWords;
             if (_text == 'news' || _text == 'NEWS') {
               Ho();
             }
@@ -147,7 +147,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                   print('stop');
                 });
                 assetsAudioPlayer.open(
-                  Audio("music/police.mp3"),
+                  Audio('music/police.mp3'),
                 );
               });
             }
@@ -166,7 +166,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         _isListening = false;
         Navigator.of(context).pop(Homes());
       });
-      _speech.stop();
+      await _speech.stop();
     }
   }
 }

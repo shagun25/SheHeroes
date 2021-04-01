@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
 class CallsAndMessagesService {
-  void call(String number) => launch("tel://$number");
+  void call(String number) => launch('tel://$number');
 
-  void sendSms(String number) => launch("sms:$number");
+  void sendSms(String number) => launch('sms:$number');
 
   void sendEmail(String email) => launch("mailto:$email");
 

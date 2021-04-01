@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _latestHardwareButtonEvent;
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
-  final String number = "123456789";
+  final String number = '123456789';
 
   StreamSubscription<HardwareButtons.VolumeButtonEvent>
       _volumeButtonSubscription;
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    final QuickActions quickActions = QuickActions();
+    final quickActions = QuickActions();
     quickActions.initialize((String shortcutType) {
       if (shortcutType == 'action_one') {
         _service.sendSms(number);
