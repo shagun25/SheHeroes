@@ -48,6 +48,7 @@ class MyDrawer extends StatelessWidget {
               //   fit: BoxFit.fill,
               // ),
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               padding: EdgeInsets.zero,
               onPressed: () {},
@@ -70,6 +71,7 @@ class MyDrawer extends StatelessWidget {
               thickness: 1.2,
               color: Colors.grey,
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               padding: EdgeInsets.zero,
               onPressed: () {},
@@ -92,6 +94,7 @@ class MyDrawer extends StatelessWidget {
               thickness: 1.2,
               color: Colors.grey,
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               padding: EdgeInsets.zero,
               onPressed: () {},
@@ -114,6 +117,7 @@ class MyDrawer extends StatelessWidget {
               thickness: 1.2,
               color: Colors.grey,
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               padding: EdgeInsets.zero,
               onPressed: () {
@@ -138,6 +142,7 @@ class MyDrawer extends StatelessWidget {
               thickness: 1.2,
               color: Colors.grey,
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               padding: EdgeInsets.zero,
               onPressed: () {},

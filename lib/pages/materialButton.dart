@@ -60,7 +60,7 @@ class MaterialButtonX extends StatelessWidget {
                     bottomRight: Radius.circular(width)),
               ),
               child: Text(
-                "${message}",
+                '$message',
                 style: Theme.of(context)
                     .textTheme
                     .headline6

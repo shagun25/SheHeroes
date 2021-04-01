@@ -19,7 +19,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
   bool _activateBtnStatus;
 
   static const values = <int>[0, 1, 2, 3];
-  static const textValues = <String>["Now", "1 min", "3 min", "5 min"];
+  static const textValues = <String>['Now', '1 min', '3 min', '5 min'];
   int selectedValue = values.first;
 
   final selectedColor = Colors.green;
@@ -43,7 +43,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
   }
 
   Future<void> wakelockToggling() async {
-    if (await Wakelock.enabled) Wakelock.disable();
+    if (await Wakelock.enabled) await Wakelock.disable();
   }
 
   @override
@@ -53,7 +53,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: ExactAssetImage("assets/mapImage.jpg"),
+                  image: ExactAssetImage('assets/mapImage.jpg'),
                   fit: BoxFit.cover),
             ),
             child: ListView(
@@ -65,6 +65,9 @@ class _InstructionScreenState extends State<InstructionScreen> {
                 Container(
                   alignment: Alignment.centerLeft,
                   child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: Row(
                       children: <Widget>[
                         Icon(
@@ -73,21 +76,18 @@ class _InstructionScreenState extends State<InstructionScreen> {
                           color: Colors.amber,
                         ),
                         Text(
-                          "Back",
+                          'Back',
                           style: TextStyle(fontSize: 25.0, color: Colors.amber),
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
                   ),
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: 15.0, top: 10.0),
                   child: Text(
-                    "Fake Call",
+                    'Fake Call',
                     style: TextStyle(color: Colors.white, fontSize: 25.0),
                   ),
                 ),
@@ -129,7 +129,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
                     controller: _fakeName,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Enter Fake Caller Name",
+                      hintText: 'Enter Fake Caller Name',
                     ),
                   ),
                 ),
@@ -158,14 +158,14 @@ class _InstructionScreenState extends State<InstructionScreen> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
+                    onPressed: _activateBtnStatus ? readyForCall : null,
                     child: Text(
-                      "Activate",
+                      'Activate',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 25.0,
                       ),
                     ),
-                    onPressed: _activateBtnStatus ? readyForCall : null,
                   ),
                 ),
               ],
@@ -188,7 +188,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
                         groupValue: selectedValue,
                         activeColor: selectedColor,
                         onChanged: (value) =>
-                            setState(() => this.selectedValue = value),
+                            setState(() => selectedValue = value),
                       ),
                     ),
                     Expanded(
@@ -206,22 +206,22 @@ class _InstructionScreenState extends State<InstructionScreen> {
       );
 
   void readyForCall() {
-    if (_fakeName.text.length > 0) {
+    if (_fakeName.text.isNotEmpty) {
       setState(() {
         _activateBtnStatus = false;
       });
       Wakelock.enable();
 
-      if (this.selectedValue > 0) {
+      if (selectedValue > 0) {
         ScaffoldMessenger.of(_scaffoldKey.currentContext).showSnackBar(SnackBar(
             duration: Duration(seconds: 10),
             content: Text(
                 "Wait for ${textValues[selectedValue]} ... Don't switch to other screen")));
       }
-      Future.delayed(Duration(minutes: this.selectedValue), () {
+      Future.delayed(Duration(minutes: selectedValue), () {
         Navigator.pop(_scaffoldKey.currentContext);
         Navigator.pushNamed(context, FakeCallScreen.route,
-            arguments: this._fakeName.text);
+            arguments: _fakeName.text);
       });
 
       Wakelock.disable();
@@ -231,11 +231,11 @@ class _InstructionScreenState extends State<InstructionScreen> {
           builder: (context) => AlertDialog(
                 backgroundColor: Colors.black54,
                 title: Text(
-                  "Fake caller Name Empty",
+                  'Fake caller Name Empty',
                   style: TextStyle(color: Colors.white),
                 ),
                 content: Text(
-                  "Enter a Fake Caller Name",
+                  'Enter a Fake Caller Name',
                   style: TextStyle(color: Colors.white),
                 ),
               ));

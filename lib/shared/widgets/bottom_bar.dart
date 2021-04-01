@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomShape extends CustomClipper<Path> {
   @override
-  getClip(Size size) {
-    double height = size.height;
-    double width = size.width;
+  Path getClip(Size size) {
+    var height = size.height;
+    var width = size.width;
     var path = Path()
       ..moveTo(0, height)
       ..lineTo(0, height - 3 * height / 4)

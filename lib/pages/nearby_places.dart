@@ -14,13 +14,13 @@ class NearbyPlaces extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xfffcbeac),
-        appBar: AppBar(title: Text("Nearby Places"), backgroundColor: Color(0xffb72334), centerTitle: true),
+        appBar: AppBar(title: Text('Nearby Places'), backgroundColor: Color(0xffb72334), centerTitle: true),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButtonX(
-                message: "Police",
+                message: 'Police',
                 height: 70.0,
                 width: 250.0,
                 color: Color(0xffb72334),
@@ -33,7 +33,7 @@ class NearbyPlaces extends StatelessWidget {
                 },
               ),
               MaterialButtonX(
-                message: "NGO",
+                message: 'NGO',
                 height: 70.0,
                 width: 250.0,
                 color: Color(0xffb72334),
@@ -45,7 +45,7 @@ class NearbyPlaces extends StatelessWidget {
                 },
               ),
               MaterialButtonX(
-                message: "Hospitals",
+                message: 'Hospitals',
                 height: 70.0,
                 width: 250.0,
                 color: Color(0xffb72334),
@@ -57,7 +57,7 @@ class NearbyPlaces extends StatelessWidget {
                 },
               ),
               MaterialButtonX(
-                message: "Public Parking",
+                message: 'Public Parking',
                 height: 70.0,
                 width: 250.0,
                 color: Color(0xffb72334),
