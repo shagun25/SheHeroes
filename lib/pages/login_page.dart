@@ -44,14 +44,14 @@ class _LoginPageState extends State<LoginPage>
   TextEditingController signupNameController = TextEditingController();
   TextEditingController signupPasswordController = TextEditingController();
   TextEditingController signupConfirmPasswordController =
-      TextEditingController();
+  TextEditingController();
 
   PageController _pageController;
 
   Future<void> signup() async {
     try {
       var userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signupEmailController.text,
         password: signupPasswordController.text,
       );
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage>
   Future<void> signin(BuildContext context) async {
     try {
       var userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: loginEmailController.text,
         password: loginPasswordController.text,
       );
@@ -94,11 +94,11 @@ class _LoginPageState extends State<LoginPage>
                 ? MediaQuery.of(context).size.height
                 : 775.0,
             decoration: BoxDecoration(color: bg
-                // begin: const FractionalOffset(0.0, 0.0),
-                // end: const FractionalOffset(1.0, 1.0),
-                // stops: [0.0, 1.0],
-                // tileMode: TileMode.clamp),
-                ),
+              // begin: const FractionalOffset(0.0, 0.0),
+              // end: const FractionalOffset(1.0, 1.0),
+              // stops: [0.0, 1.0],
+              // tileMode: TileMode.clamp),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage>
                           textAlign: TextAlign.start,
                           alignment: AlignmentDirectional
                               .topStart // or Alignment.topLeft
-                          ),
+                      ),
                     ),
                   ],
                 ),
@@ -373,60 +373,60 @@ class _LoginPageState extends State<LoginPage>
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          // color: Theme.Colors.loginGradientStart,
-                          // offset: Offset(1.0, 6.0),
-                          // blurRadius: 20.0,
-                          ),
+                        // color: Theme.Colors.loginGradientStart,
+                        // offset: Offset(1.0, 6.0),
+                        // blurRadius: 20.0,
+                      ),
                       BoxShadow(
-                          // color: Theme.Colors.loginGradientEnd,
-                          // offset: Offset(1.0, 7.0),
-                          // blurRadius: 20.0,
-                          ),
+                        // color: Theme.Colors.loginGradientEnd,
+                        // offset: Offset(1.0, 7.0),
+                        // blurRadius: 20.0,
+                      ),
                     ],
                     gradient: but),
                 child: MaterialButton(
-                    highlightColor: Colors.transparent,
-                    splashColor: Theme.Colors.loginGradientEnd,
-                    onPressed: () {
-                      if (loginEmailController.text != 'user') {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Dialog(
-                                      child: Text(
-                                          "Authentication Details didn't match\nEmain didn't match!"),
-                                    )));
-                      }
-                      if (loginPasswordController.text != '123') {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Dialog(
-                                      child: Text(
-                                          "Authentication Details didn't match\nPassword didn't match!"),
-                                    )));
-                      }
-                      if (loginEmailController.text == 'user' &&
-                          loginPasswordController.text == '123') {
-                        showInSnackBar('Signing In.. please wait');
-                        Future.delayed(Duration(seconds: 1)).then((value) =>
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, Switcher.route, (route) => false));
-                      }
-                    },
+                  highlightColor: Colors.transparent,
+                  splashColor: Theme.Colors.loginGradientEnd,
+                  onPressed: () {
+                    if (loginEmailController.text != 'user') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Dialog(
+                                child: Text(
+                                    "Authentication Details didn't match\nEmain didn't match!"),
+                              )));
+                    }
+                    if (loginPasswordController.text != '123') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Dialog(
+                                child: Text(
+                                    "Authentication Details didn't match\nPassword didn't match!"),
+                              )));
+                    }
+                    if (loginEmailController.text == 'user' &&
+                        loginPasswordController.text == '123') {
+                      showInSnackBar('Signing In.. please wait');
+                      Future.delayed(Duration(seconds: 1)).then((value) =>
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, Switcher.route, (route) => false));
+                    }
+                  },
 
-                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 42.0),
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: 'WorkSansBold'),
-                      ),
-                    ),                    ),
+                  //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 42.0),
+                    child: Text(
+                      'LOGIN',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontFamily: 'WorkSansBold'),
+                    ),
+                  ),                    ),
               ),
             ],
           ),
@@ -442,7 +442,7 @@ class _LoginPageState extends State<LoginPage>
                 child: Text(
                   'Forgot Password?',
                   style: TextStyle(
-                      //decoration: TextDecoration.underline,
+                    //decoration: TextDecoration.underline,
                       color: Colors.brown,
                       fontSize: 16.0,
                       fontFamily: 'WorkSansMedium'),
@@ -479,7 +479,8 @@ class _LoginPageState extends State<LoginPage>
   }
 
   Widget _buildSignUp(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+      child: Container(
         padding: EdgeInsets.only(top: 23.0),
         child: Column(
           children: <Widget>[
@@ -501,7 +502,7 @@ class _LoginPageState extends State<LoginPage>
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 12.0, bottom: 12.0, left: 25.0, right: 25.0),
+                                top: 11.0, bottom: 11.0, left: 25.0, right: 25.0),
                             child: TextField(
                               focusNode: myFocusNodeName,
                               controller: signupNameController,
@@ -653,34 +654,34 @@ class _LoginPageState extends State<LoginPage>
                       ],
                       gradient: but),
                   child: MaterialButton(
-                      highlightColor: Colors.transparent,
-                      splashColor: Theme.Colors.loginGradientEnd,
-                      onPressed: () {
-                        showInSnackBar('Signing In.. please wait');
-                        Future.delayed(Duration(seconds: 1)).then((value) =>
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, Switcher.route, (route) => false));
-                      },
+                    highlightColor: Colors.transparent,
+                    splashColor: Theme.Colors.loginGradientEnd,
+                    onPressed: () {
+                      showInSnackBar('Signing In.. please wait');
+                      Future.delayed(Duration(seconds: 1)).then((value) =>
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, Switcher.route, (route) => false));
+                    },
 
-                      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 42.0),
-                        child: Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25.0,
-                              fontFamily: 'WorkSansBold'),
-                        ),
-                      ),                    ),
+                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 42.0),
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontFamily: 'WorkSansBold'),
+                      ),
+                    ),                    ),
                 ),
               ],
             ),
           ],
         ),
-      )
-    ;
+      ),
+    );
   }
 
   void _onSignInButtonPress() {
