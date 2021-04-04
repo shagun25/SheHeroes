@@ -10,6 +10,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:safety/pages/switcher.dart';
 import 'package:safety/services/googleAuth.dart';
 import 'package:safety/shared/bubble_indication_painter.dart';
+// ignore: library_prefixes
 import 'package:safety/shared/theme.dart' as Theme;
 
 import 'notes.dart';
@@ -50,6 +51,7 @@ class _LoginPageState extends State<LoginPage>
 
   Future<void> signup() async {
     try {
+      // ignore: unused_local_variable
       var userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signupEmailController.text,
@@ -62,6 +64,7 @@ class _LoginPageState extends State<LoginPage>
 
   Future<void> signin(BuildContext context) async {
     try {
+      // ignore: unused_local_variable
       var userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: loginEmailController.text,
@@ -287,6 +290,7 @@ class _LoginPageState extends State<LoginPage>
         children: <Widget>[
           Stack(
             alignment: Alignment.topCenter,
+            // ignore: deprecated_member_use
             overflow: Overflow.visible,
             children: <Widget>[
               Card(
@@ -485,6 +489,7 @@ class _LoginPageState extends State<LoginPage>
         children: <Widget>[
           Stack(
             alignment: Alignment.topCenter,
+            // ignore: deprecated_member_use
             overflow: Overflow.visible,
             children: <Widget>[
               Card(

@@ -9,17 +9,18 @@ class CallsAndMessagesService {
 
   void sendSms(String number) => launch('sms:$number');
 
-  void sendEmail(String email) => launch("mailto:$email");
+  void sendEmail(String email) => launch('mailto:$email');
 
   void takePhoto() async {
-    print("Take Image");
-    ImagePicker.pickImage(source: ImageSource.camera)
+    print('Take Image');
+    // ignore: deprecated_member_use
+    await ImagePicker.pickImage(source: ImageSource.camera)
         .then((File recordedImage) {
       if (recordedImage != null && recordedImage.path != null) {
         GallerySaver.saveImage(
           recordedImage.path,
         ).then((bool success) {
-          print("Capture Status is: $success");
+          print('Capture Status is: $success');
         });
       }
     });

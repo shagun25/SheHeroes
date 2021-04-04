@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:sheheroes_watchos/emergency_map.dart';
+
 
 class SafeHome extends StatefulWidget {
   @override
@@ -35,7 +35,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -51,7 +52,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Icon(
                         Icons.keyboard_voice,
                         size: 10,
-                        color: HexColor("#b72334"),
+                        color: HexColor('#b72334'),
                       ),
                     ],
                   ),
@@ -66,7 +67,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -82,7 +84,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Icon(
                         Icons.local_taxi,
                         size: 10,
-                        color: HexColor("#b72334"),
+                        color: HexColor('#b72334'),
                       ),
                     ],
                   ),
@@ -97,7 +99,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -113,7 +116,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Icon(
                         Icons.vibration,
                         size: 10,
-                        color: HexColor("#b72334"),
+                        color: HexColor('#b72334'),
                       ),
                     ],
                   ),
@@ -128,7 +131,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -144,7 +148,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Icon(
                         Icons.speaker_phone,
                         size: 10,
-                        color: HexColor("#b72334"),
+                        color: HexColor('#b72334'),
                       ),
                     ],
                   ),
@@ -159,7 +163,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -175,7 +180,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Text(
                         'SOS',
                         style: TextStyle(
-                          color: HexColor("#b72334"),
+                          color: HexColor('#b72334'),
                           fontSize: 6,
                         ),
                       )
@@ -192,7 +197,8 @@ class _SafeHomeState extends State<SafeHome> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 // color: Colors.transparent,
-                border: Border.all(color: HexColor("#ea6a88"), width: 3)),
+                border: Border.all(color: HexColor('#ea6a88'), width: 3)),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               elevation: 1,
               color: Colors.white70,
@@ -208,7 +214,7 @@ class _SafeHomeState extends State<SafeHome> {
                       Icon(
                         Icons.local_parking,
                         size: 10,
-                        color: HexColor("#b72334"),
+                        color: HexColor('#b72334'),
                       ),
                     ],
                   ),
