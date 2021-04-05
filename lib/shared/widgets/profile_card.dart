@@ -237,129 +237,129 @@ class ProfileCard extends StatelessWidget {
                           ),
                         ));
                   });
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: Column(
-                                  // mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Jason Smith',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 25),
-                                    ),
-                                    Text(
-                                      'Age: 17 years',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Height: ',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20),
-                                      children: [
-                                        TextSpan(
-                                          text: '177 cm',
-                                        )
-                                      ]),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Blood Group: ',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20),
-                                      children: [
-                                        TextSpan(
-                                          text: 'B+',
-                                        )
-                                      ]),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: CircleAvatar(
-                                  radius: MediaQuery.of(context).size.width / 8,
-                                  child: Icon(
-                                    Icons.person,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'Weight: ',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20),
-                                      children: [
-                                        TextSpan(
-                                          text: '67 kg',
-                                        )
-                                      ]),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'City: ',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 20),
-                                      children: [
-                                        TextSpan(
-                                          text: 'Ghaziabad',
-                                        )
-                                      ]),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  );
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: Column(
+                  //                 // mainAxisSize: MainAxisSize.max,
+                  //                 mainAxisAlignment:
+                  //                     MainAxisAlignment.spaceBetween,
+                  //                 children: [
+                  //                   Text(
+                  //                     'Jason Smith',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 25),
+                  //                   ),
+                  //                   Text(
+                  //                     'Age: 17 years',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 20),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: RichText(
+                  //                 text: TextSpan(
+                  //                     text: 'Height: ',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 20),
+                  //                     children: [
+                  //                       TextSpan(
+                  //                         text: '177 cm',
+                  //                       )
+                  //                     ]),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: RichText(
+                  //                 text: TextSpan(
+                  //                     text: 'Blood Group: ',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 20),
+                  //                     children: [
+                  //                       TextSpan(
+                  //                         text: 'B+',
+                  //                       )
+                  //                     ]),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //         crossAxisAlignment: CrossAxisAlignment.center,
+                  //         children: [
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: CircleAvatar(
+                  //                 radius: MediaQuery.of(context).size.width / 8,
+                  //                 child: Icon(
+                  //                   Icons.person,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: RichText(
+                  //                 text: TextSpan(
+                  //                     text: 'Weight: ',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 20),
+                  //                     children: [
+                  //                       TextSpan(
+                  //                         text: '67 kg',
+                  //                       )
+                  //                     ]),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             child: Center(
+                  //               child: RichText(
+                  //                 text: TextSpan(
+                  //                     text: 'City: ',
+                  //                     style: TextStyle(
+                  //                         color: Colors.grey,
+                  //                         fontWeight: FontWeight.w300,
+                  //                         fontSize: 20),
+                  //                     children: [
+                  //                       TextSpan(
+                  //                         text: 'Ghaziabad',
+                  //                       )
+                  //                     ]),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     )
+                  //   ],
+                  // );
                 } else {
                   return SizedBox();
                 }

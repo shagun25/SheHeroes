@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Image.asset(
+              Image.asset(
                 'assets/SheHeroes.png',
                 width: MediaQuery.of(context).size.width / 2,
                 height: MediaQuery.of(context).size.height / 2,

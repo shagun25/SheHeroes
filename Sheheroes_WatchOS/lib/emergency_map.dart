@@ -8,9 +8,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
+  final LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
   GoogleMapController _controller;
-  Location _location = Location();
+  final Location _location = Location();
 
   MapType _defaultMapType = MapType.normal;
 
@@ -63,13 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.topRight,
               child: Column(children: <Widget>[
                 FloatingActionButton(
-                    child: Icon(Icons.layers),
                     elevation: 5,
                     backgroundColor: Colors.teal[200],
                     onPressed: () {
                       _changeMapType();
                       print('Changing the Map Type');
-                    }),
+                    },
+                    child: Icon(Icons.layers),),
               ]),
             ),
           ],

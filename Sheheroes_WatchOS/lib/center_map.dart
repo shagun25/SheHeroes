@@ -62,7 +62,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'emergency_map.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -82,19 +81,20 @@ class CityData {
     totalIncidents = json['total_incidents'];
     totalPages = json['total_pages'];
     if (json['incidents'] != null) {
-      incidents = new List<Incidents>();
+      incidents =  <Incidents>[];
       json['incidents'].forEach((v) {
-        incidents.add(new Incidents.fromJson(v));
+        incidents.add(Incidents.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final data = <String, dynamic>{};
+    // ignore: unnecessary_this
     data['total_incidents'] = this.totalIncidents;
-    data['total_pages'] = this.totalPages;
-    if (this.incidents != null) {
-      data['incidents'] = this.incidents.map((v) => v.toJson()).toList();
+    data['total_pages'] = totalPages;
+    if (incidents != null) {
+      data['incidents'] = incidents.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -142,19 +142,21 @@ class Incidents {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['incident_code'] = this.incidentCode;
-    data['incident_date'] = this.incidentDate;
-    data['incident_offense'] = this.incidentOffense;
+    // ignore: prefer_collection_literals
+    final data = Map<String, dynamic>();
+    data['incident_code'] = incidentCode;
+    data['incident_date'] = incidentDate;
+    data['incident_offense'] = incidentOffense;
+    // ignore: unnecessary_this
     data['incident_offense_code'] = this.incidentOffenseCode;
-    data['incident_offense_description'] = this.incidentOffenseDescription;
+    data['incident_offense_description'] = incidentOffenseDescription;
     data['incident_offense_detail_description'] =
-        this.incidentOffenseDetailDescription;
-    data['incident_offense_crime_against'] = this.incidentOffenseCrimeAgainst;
-    data['incident_offense_action'] = this.incidentOffenseAction;
-    data['incident_source_name'] = this.incidentSourceName;
-    data['incident_latitude'] = this.incidentLatitude;
-    data['incident_longitude'] = this.incidentLongitude;
+        incidentOffenseDetailDescription;
+    data['incident_offense_crime_against'] = incidentOffenseCrimeAgainst;
+    data['incident_offense_action'] = incidentOffenseAction;
+    data['incident_source_name'] = incidentSourceName;
+    data['incident_latitude'] = incidentLatitude;
+    data['incident_longitude'] = incidentLongitude;
     return data;
   }
 }
@@ -179,7 +181,7 @@ class _HomePageState extends State<HomePage> {
 
   Iterable markers = [];
   CityData cd;
-  getData() async {
+  Future getData() async {
     log('data recieved');
     var res = await http.get(url);
     //log(res.statusCode.toString());
@@ -190,22 +192,15 @@ class _HomePageState extends State<HomePage> {
     log(data.toString());
     print(
         '\nhello: ' + data[0]['incidents'][0]['incident_longitude'].toString());
-    Iterable markers = Iterable.generate(10, (index) {
-      //Map result = data[index];
-      // Map location = ;
-      LatLng latLngMarker = LatLng(data["incidents"]["incident_latitude"],
-          data["incidents"]["incident_longitude"]);
-
-      return Marker(markerId: MarkerId("marker$index"), position: latLngMarker);
-    });
+    // ignore: omit_local_variable_types
     return data;
   }
 
-  LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
+  final LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
   GoogleMapController _controller;
-  Location _location = Location();
+  final Location _location = Location();
 
-  MapType _defaultMapType = MapType.normal;
+  final MapType _defaultMapType = MapType.normal;
 
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
@@ -254,13 +249,14 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder(
       future: getData(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData)
+        if (!snapshot.hasData) {
           return Container(
             constraints: BoxConstraints.expand(),
             child: Center(
               child: CircularProgressIndicator(),
             ),
           );
+        }
         return Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

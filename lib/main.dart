@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// ignore: library_prefixes
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
 import 'package:safety/services/calls_and_messages_service.dart';
@@ -9,8 +10,6 @@ import 'package:safety/services/service_locator.dart';
 import 'package:safety/shared/constants.dart';
 import 'package:safety/pages/photo_capture.dart';
 import 'package:safety/providers/profile_provider.dart';
-import 'package:safety/services/service_locator.dart';
-import 'package:safety/shared/constants.dart';
 import 'package:safety/ui/splash.dart';
 import 'package:safety/utils/routes.dart';
 
@@ -27,6 +26,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // ignore: unused_field
   String _latestHardwareButtonEvent;
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   final String number = '123456789';
