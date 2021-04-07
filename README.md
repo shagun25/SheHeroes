@@ -297,6 +297,7 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 
  <img  width="50%" height="20%" src="https://raw.githubusercontent.com/GirlScriptSummerOfCode/MentorshipProgram/master/GSsoc%20Type%20Logo%20Black.png">
 
+
 ## Contributors:
 ### Credit goes to these wonderfull people: ✨
 
