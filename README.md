@@ -34,12 +34,6 @@
 ```
 <br><br><br><br><br><br><br><br>
 
-<h2 align="center" id="CrossWinterOfCode21"> :trophy: We are a part of Cross WinterOfCode 21'</h2>
-
-<img align="center" src="cross.png" width=100%>
-
-<br><br><br><br><br><br><br><br>
-
 <h2 align="center" id="Inspiration"> :label: Inspiration</h2>
 
 Considering the safety and security of women in India in the recent times, We wanted to give a try from our end to address the issue in a simpler and safer way.
@@ -294,6 +288,15 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 <i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
 
 <br><br><br><br><br><br><br><br>
+
+## Open Source programs that Sheheroes is a part of:
+
+<p align="center">
+ <a>
+ <img  width="50%" height="20%" src="https://github.com/anirudhsai20/SheHeroes/raw/main/cross.png">
+
+ <img  width="50%" height="20%" src="https://raw.githubusercontent.com/GirlScriptSummerOfCode/MentorshipProgram/master/GSsoc%20Type%20Logo%20Black.png">
+
 ## Contributors:
 ### Credit goes to these wonderfull people: ✨
 
