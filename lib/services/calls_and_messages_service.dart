@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -26,4 +27,15 @@ class CallsAndMessagesService {
     });
   }
 
+  void takeVideo() async {
+    print('Take Video');
+    // ignore: deprecated_member_use
+    await ImagePicker.pickVideo(source: ImageSource.camera)
+        .then((File recordedVideo) {
+      if (recordedVideo != null && recordedVideo.path != null) {
+        GallerySaver.saveVideo(recordedVideo.path)
+            .then((bool success) => print('Video Record Status is: $success'));
+      }
+    });
+  }
 }

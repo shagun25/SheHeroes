@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 // ignore: library_prefixes
 import 'package:hardware_buttons/hardware_buttons.dart' as HardwareButtons;
 import 'package:provider/provider.dart';
@@ -46,10 +47,12 @@ class _MyAppState extends State<MyApp> {
     quickActions.initialize((String shortcutType) {
       if (shortcutType == 'action_one') {
         _service.sendSms(number);
+      } else if (shortcutType == 'action_two') {
+        _service.call(number);
       } else if (shortcutType == 'action_three') {
         _service.takePhoto();
       } else {
-        _service.call(number);
+        _service.takeVideo();
       }
     });
 
@@ -71,6 +74,8 @@ class _MyAppState extends State<MyApp> {
           type: 'action_three',
           localizedTitle: 'Immediate Capture',
           icon: 'AppIcon'),
+      const ShortcutItem(
+          type: 'action_four', localizedTitle: 'Record Video', icon: 'AppIcon'),
     ]).then((value) {});
     _volumeButtonSubscription =
         HardwareButtons.volumeButtonEvents.listen((event) {
