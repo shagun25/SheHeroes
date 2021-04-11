@@ -478,7 +478,11 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                         if (mounted) {
                                           setState(() {
                                             assetsAudioPlayer.stop();
-                                            Flashlight.lightOff();
+                                            try {
+                                              Flashlight.lightOff();
+                                            } catch (e) {
+                                              print('Flash Not Present');
+                                            }
                                           });
                                         }
                                       });
