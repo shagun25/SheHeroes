@@ -7,6 +7,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:circle_list/circle_list.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+import 'package:flashlight/flashlight.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:safety/pages/Voice.dart';
@@ -448,6 +449,68 @@ class _HomState extends State<Hom> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                               //(Police)
+                              AvatarGlow(
+                                endRadius: 70.0,
+                                glowColor: Colors.pink,
+                                child: Container(
+                                  padding: EdgeInsets.all(0),
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      // color: Colors.transparent,
+                                      border: Border.all(
+                                          color: HexColor('#ea6a88'),
+                                          width: 3)),
+                                  // ignore: deprecated_member_use
+                                  child: RaisedButton(
+                                    elevation: 1,
+                                    color: Colors.white70,
+                                    onPressed: () async {
+                                      print('Emergency Hooter');
+                                      await assetsAudioPlayer.open(
+                                        Audio('music/emergency.mp3'),
+                                      );
+                                      if (await Flashlight.hasFlashlight) {
+                                        await Flashlight.lightOn();
+                                      }
+                                      Timer(Duration(minutes: 1), () {
+                                        if (mounted) {
+                                          setState(() {
+                                            assetsAudioPlayer.stop();
+                                            try {
+                                              Flashlight.lightOff();
+                                            } catch (e) {
+                                              print('Flash Not Present');
+                                            }
+                                          });
+                                        }
+                                      });
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(
+                                          Icons.notification_important_rounded,
+                                          size: 40,
+                                          color: HexColor('#b72334'),
+                                        ),
+                                        Text(
+                                          'Hooter',
+                                          style: TextStyle(
+                                              color: HexColor('#b72334'),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               AvatarGlow(
                                 endRadius: 70.0,
                                 glowColor: Colors.pink,
