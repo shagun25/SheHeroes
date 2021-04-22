@@ -2,7 +2,6 @@
 
 <h1 align="center"><img width=50% height=50% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"></h1>
 <h1 align="center">🅂🄷🄴🄷🄴🅁🄾🄴🅂 - Women Safety App</h1>
-
 <!--[![All Contributors](https://img.shields.io/badge/all_contributors-04-orange.svg?style=flat-square)](#contributors-)-->
 
 [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
@@ -311,4 +310,11 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 	</tr>
 </table>
 
-<h1 align="center"><img width=2% height=2% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"> 🅂🄷🄴🄷🄴🅁🄾🄴🅂</h1>
+<h1 align="center"><img width=2% height=2% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"> 🅂🄷🄴🄷🄴🅁🄾🄴🅂
+
+![Issues](https://img.shields.io/github/issues/threefreespirited/Jssconnect)
+![Pull Requests](https://img.shields.io/github/issues-pr/threefreespirited/Jssconnect)
+![Forks](https://img.shields.io/github/forks/threefreespirited/Jssconnect)
+![Stars](https://img.shields.io/github/stars/threefreespirited/Jssconnect)
+![](https://img.shields.io/github/repo-size/threefreespirited/Jssconnect.svg?label=Repo%20size&style=flat-square)&nbsp;
+</h1>
