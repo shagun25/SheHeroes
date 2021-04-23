@@ -1,6 +1,14 @@
 
 
 <h1 align="center"><img width=50% height=50% alt="SheHeroes" src="https://user-images.githubusercontent.com/56549294/108184515-5054c100-7131-11eb-83f8-fba6530601d9.png"></h1>
+
+![Issues](https://img.shields.io/github/issues/shagun25/SheHeroes)
+![Pull Requests](https://img.shields.io/github/issues-pr/shagun25/SheHeroes)
+![Forks](https://img.shields.io/github/forks/shagun25/SheHeroes)
+![Stars](https://img.shields.io/github/stars/shagun25/SheHeroes)
+![](https://img.shields.io/github/repo-size/shagun25/SheHeroes.svg?label=Repo%20size&style=flat-square)&nbsp;
+
+
 <h1 align="center">🅂🄷🄴🄷🄴🅁🄾🄴🅂 - Women Safety App</h1>
 <!--[![All Contributors](https://img.shields.io/badge/all_contributors-04-orange.svg?style=flat-square)](#contributors-)-->
 
