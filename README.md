@@ -43,9 +43,9 @@
 
 <h2 align="center" id="Inspiration"> :label: Inspiration</h2>
 
-Considering the safety and security of women in India in the recent times, We wanted to give a try from our end to address the issue in a simpler and safer way.
+Considering the safety and security of women in India in recent times, We wanted to give it a try from our end to address the issue in a simpler and safer way.
 
-Looking at the recent trends and the most powerful weapon with the humanity - technology, we planned to use the same to give access to women in serious or dangerous situations to address the issue in a fast and easier way to ensure their security.
+Looking at the recent trends and the most powerful weapon with humanity - technology, we planned to use the same to give access to women in serious or dangerous situations to address the issue in a fast and easier way to ensure their security.
 
 
  [Video Description](https://drive.google.com/file/d/1IqV4nTDAD8PjvhigO-51IQvEWMNxjqUw)
@@ -121,15 +121,15 @@ You can get your own fork/copy of [SheHeroes](https://github.com/shagun25/SheHer
 
 ### 2️⃣ Clone it :busts_in_silhouette:
 
-You need to clone (download) it to local machine using
+You need to clone (download) it to a local machine using
 
 ```sh
 $ git clone https://github.com/Your_Username/SheHeroes.git
 ```
 
-> This makes a local copy of repository in your machine.
+> This makes a local copy of the repository in your machine.
 
-Once you have cloned the `SheHeroes` repository in Github, move to that folder first using change directory command on linux and Mac.
+Once you have cloned the `SheHeroes` repository in Github, move to that folder first using the change directory command on Linux and Mac.
 
 ```sh
 # This will change directory to a folder SheHeroes
@@ -151,7 +151,7 @@ $ git remote -v
 origin  https://github.com/Your_Username/SheHeroes.git (fetch)
 origin  https://github.com/Your_Username/SheHeroes.git (push)
 ```
-Now, lets add a reference to the original [SheHeroes](https://github.com/shagun25/SheHeroes) repository using
+Now, let’s add a reference to the original [SheHeroes](https://github.com/shagun25/SheHeroes) repository using
 
 ```sh
 $ git remote add upstream https://github.com/shagun25/SheHeroes.git
@@ -175,7 +175,7 @@ upstream  https://github.com/shagun25/SheHeroes.git (push)
 
 ### 4️⃣ Sync it :recycle:
 
-Always keep your local copy of repository updated with the original repository.
+Always keep your local copy of the repository updated with the original repository.
 Before making any changes and/or in an appropriate interval, run the following commands *carefully* to update your local repository.
 
 ```sh
@@ -204,16 +204,16 @@ Once you have completed these steps, you are ready to start contributing by chec
 
 ### 6️⃣ Create a new branch :bangbang:
 
-Whenever you are going to make contribution. Please create seperate branch using command and keep your `master` branch clean (i.e. synced with remote branch).
+Whenever you are going to make a contribution. Please create a separate branch using command and keep your `master` branch clean (i.e. synced with remote branch).
 
 ```sh
-# It will create a new branch with name Branch_Name and switch to branch Folder_Name
+# It will create a new branch with the name Branch_Name and switch to branch Folder_Name
 $ git checkout -b Folder_Name
 ```
 
-Create a seperate branch for contibution and try to use same name of branch as of folder.
+Create a separate branch for contribution and try to use the same name of the branch as in the folder.
 
-To switch to desired branch
+To switch to the desired branch
 
 ```sh
 # To switch from one folder to other
@@ -227,7 +227,7 @@ To add the changes to the branch. Use
 $ git add .
 ```
 
-Type in a message relevant for the code reveiwer using
+Type in a message relevant for the code reviewer using
 
 ```sh
 # This message get associated with all files you have changed
@@ -246,7 +246,7 @@ Now, Push your awesome work to your remote repository using
 $ git push -u origin Folder_Name
 ```
 
-Then, go to your repository in browser and click on `compare and pull requests`.
+Then, go to your repository in the browser and click on `compare and pull requests.
 Then add a title and description to your pull request that explains your precious effort.
 
 <i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
@@ -284,12 +284,12 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 
 |<h2> 1️⃣ AUTOMATION : Perform Tasks In Background</h2>|
 |---|
-|To make the app robust and self alarming, make it **`auto reactive`** according to some of the **`factors`** depending on `surroundings` listed below:|
-|🔘 Make it **`more active in a particular time range`**(ask usr to set the more cautious timings).|
-|🔘 Consider the situation as **`emergency`** as **`if the shake and vibrations around the device exceeds the fixed limit`**.|
-|🔘 **`SOS without opening app`** in emergency(provide shortcut or gesture)|
-|🔘 **`Auto share sms & mails & WhatsApp messages & live location`** to saved contacts while in emergency|
-|🔘 While the emergency detected **`record the path of the user until situation gets safe`** afterwards and **`keep sharing the location checkpoints in that timespan with the saved contacts`**(like within 5 mins refresh location to generate checkpoint and share automatically)|
+|To make the app robust and self alarming, make it **`auto reactive`** according to some of the **` factors`** depending on `surroundings` listed below:|
+|🔘 Make it **`more active in a particular time range`**(ask us to set the more cautious timings).|
+|🔘 Consider the situation as **`emergency`** as **` if the shake and vibrations around the device exceed the fixed limit`**.|
+|🔘 **`SOS without opening app`** in an emergency(provide shortcut or gesture)|
+|🔘 **`Auto share SMS & mails & WhatsApp messages & live location`** to saved contacts while in emergency|
+|🔘 While the emergency detected **`record the path of the user until the situation gets safe`** afterward and **`keep sharing the location checkpoints in that timespan with the saved contacts`**(like within 5 mins refresh location to generate checkpoint and share automatically)|
 |🔘 **`Auto image capture`** while in emergency and share and save too.|
 
 <i><p align="center"><a href="#content">⬆️ BACK TO CONTENT</a></p></i><br>
@@ -306,7 +306,7 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 
 
 ## Contributors:
-### Credit goes to these wonderfull people: ✨
+### Credit goes to these wonderful people: ✨
 
 <table>
 	<tr>
@@ -326,3 +326,5 @@ Look into [Contributing Guidelines](https://github.com/kavania2002/MobiMart/blob
 ![Stars](https://img.shields.io/github/stars/threefreespirited/Jssconnect)
 ![](https://img.shields.io/github/repo-size/threefreespirited/Jssconnect.svg?label=Repo%20size&style=flat-square)&nbsp;
 </h1>
+
+
